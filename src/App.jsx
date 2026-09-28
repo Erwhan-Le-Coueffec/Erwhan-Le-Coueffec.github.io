@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { motion as Motion, useReducedMotion } from 'motion/react'
-import { ArrowLeft, ArrowRight, Download, Github, Languages, Mail, MapPin, Menu, Microscope, MoveRight, Ruler, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Download, Languages, Mail, MapPin, Menu, Microscope, MoveRight, Ruler, Sparkles, X } from 'lucide-react'
 import { copy, EMAIL } from './copy'
 
 const ids = ['about','projects','experience','skills','contact']
@@ -59,5 +59,5 @@ function CasePage({t,type}) {
 export default function App(){
   const [lang,setLang]=useState(()=>localStorage.getItem('portfolio-language')||'en'); const t=copy[lang]||copy.en
   useEffect(()=>{localStorage.setItem('portfolio-language',lang);document.documentElement.lang=lang},[lang])
-  return <div className="min-h-screen overflow-hidden bg-[#061018] text-slate-50"><Header lang={lang} setLang={setLang} t={t}/><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer"><Github size={15}/>GitHub</a></footer></div>
+  return <div className="min-h-screen overflow-hidden bg-[#061018] text-slate-50"><Header lang={lang} setLang={setLang} t={t}/><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
 }
