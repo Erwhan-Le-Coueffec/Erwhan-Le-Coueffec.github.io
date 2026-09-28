@@ -12,13 +12,13 @@ function Header({ lang, setLang, t }) {
   const [open,setOpen] = useState(false)
   const location = useLocation()
   const home = location.pathname === '/'
-  return <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#061018]/80 backdrop-blur-xl">
+  return <header aria-label="Primary navigation" className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#061018]/80 backdrop-blur-xl">
     <div className={`${shell} flex h-[70px] items-center justify-between gap-4`}>
       <Link to="/" className="flex items-center gap-2 font-semibold"><i className="h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_18px_#54d6ff]"/>Erwhan Le Coueffec</Link>
       <nav className="hidden gap-6 text-sm text-slate-400 lg:flex">{ids.map((id,i)=><a key={id} href={`${home?'':'/'}#${id}`} className="hover:text-white">{t.nav[i]}</a>)}</nav>
       <div className="flex items-center gap-2">
-        <label className="flex h-9 items-center gap-2 rounded-full border border-cyan-100/10 px-3 text-xs text-slate-300"><Languages size={15}/><select className="bg-transparent outline-none" value={lang} onChange={e=>setLang(e.target.value)}><option className="bg-[#061018]" value="en">EN</option><option className="bg-[#061018]" value="fr">FR</option><option className="bg-[#061018]" value="de">DE</option></select></label>
-        <button className="grid h-9 w-9 place-items-center rounded-full border border-cyan-100/10 lg:hidden" onClick={()=>setOpen(!open)}>{open?<X size={19}/>:<Menu size={19}/>}</button>
+        <label className="flex h-9 items-center gap-2 rounded-full border border-cyan-100/10 px-3 text-xs text-slate-300"><Languages size={15}/><select aria-label="Language" className="bg-transparent outline-none" value={lang} onChange={e=>setLang(e.target.value)}><option className="bg-[#061018]" value="en">EN</option><option className="bg-[#061018]" value="fr">FR</option><option className="bg-[#061018]" value="de">DE</option></select></label>
+        <button aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} className="grid h-9 w-9 place-items-center rounded-full border border-cyan-100/10 lg:hidden" onClick={()=>setOpen(!open)}>{open?<X size={19}/>:<Menu size={19}/>}</button>
       </div>
     </div>
     {open&&<div className={`${shell} grid pb-4 lg:hidden`}>{ids.map((id,i)=><a key={id} href={`${home?'':'/'}#${id}`} className="border-b border-white/5 py-3 text-sm text-slate-300" onClick={()=>setOpen(false)}>{t.nav[i]}</a>)}</div>}
@@ -59,5 +59,5 @@ function CasePage({t,type}) {
 export default function App(){
   const [lang,setLang]=useState(()=>localStorage.getItem('portfolio-language')||'en'); const t=copy[lang]||copy.en
   useEffect(()=>{localStorage.setItem('portfolio-language',lang);document.documentElement.lang=lang},[lang])
-  return <div className="min-h-screen overflow-hidden bg-[#061018] text-slate-50"><Header lang={lang} setLang={setLang} t={t}/><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
+  return <div className="min-h-screen overflow-hidden bg-[#061018] text-slate-50"><a href="#main-content" className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-cyan-100 px-3 py-2 text-sm font-bold text-[#041019] focus:translate-y-0">Skip to content</a><Header lang={lang} setLang={setLang} t={t}/><div id="main-content"><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes></div><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
 }
