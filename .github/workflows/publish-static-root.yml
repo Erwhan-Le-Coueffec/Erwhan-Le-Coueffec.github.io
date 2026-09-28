@@ -1,0 +1,52 @@
+name: Publish compiled static site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: static-pages-root
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[static-pages]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
+      - name: Copy compiled site to repository root
+        run: |
+          rm -rf assets
+          cp dist/index.html index.html
+          cp dist/404.html 404.html
+          cp -R dist/assets assets
+          touch .nojekyll
+
+      - name: Commit compiled site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html 404.html assets .nojekyll
+          if git diff --cached --quiet; then
+            echo "No compiled changes to publish."
+            exit 0
+          fi
+          git commit -m "chore: refresh compiled Pages site [static-pages]"
+          git push
