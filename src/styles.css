@@ -7,3 +7,17 @@ a { color:inherit; text-decoration:none; }
 button,select { font:inherit; color:inherit; }
 ::selection { background:rgba(84,214,255,.25); color:white; }
 @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} }
+
+.primary-cta {
+  background: #c9f7ff;
+  color: #041019 !important;
+  border: 1px solid rgba(201,247,255,.95);
+  box-shadow: 0 8px 28px rgba(84,214,255,.12);
+}
+.primary-cta:hover {
+  background: #e2fbff;
+  border-color: #e2fbff;
+}
+.primary-cta svg {
+  color: #041019 !important;
+}
