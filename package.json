@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "predev": "node scripts/prepare-index.mjs",
-    "prebuild": "node scripts/prepare-index.mjs"
+    "predev": "node scripts/prepare-index.mjs && node scripts/generate-cvs.mjs",
+    "prebuild": "node scripts/prepare-index.mjs && node scripts/generate-cvs.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -18,7 +18,8 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "pdf-lib": "^1.17.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
