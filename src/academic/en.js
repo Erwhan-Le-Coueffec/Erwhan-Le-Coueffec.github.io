@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const en = {
   kicker: 'CentraleSupélec · Final year, Photonics & Nano-systems · 2025–2026',
   title: 'Lab work and design projects',
-  lead: 'What I built, measured and simulated during my specialisation year: five optical-bench experiments and six numerical-simulation projects. Group work is marked as such.',
+  lead: 'What I built, measured and simulated during my specialisation year: four optical-bench experiments and five numerical-simulation projects. Group work is marked as such.',
   groups: { lab: 'Optical-bench experiments', sim: 'Numerical simulation' },
   labels: { date: 'Date', team: 'Team', tools: 'Equipment & tools' },
   solo: 'Individual',
@@ -81,14 +81,14 @@ export const en = {
       ],
     },
     {
-      id: 'gaussien', kind: 'lab', title: 'Gaussian beams and polarisation', date: 'January 2026', team: 'group',
-      tools: '10 mW laser · polariser on rotation mount · power meter · razor blade on a motorised stage · camera · two-lens telescope',
-      summary: 'Three optical arms: checking Malus’s law, measuring a beam size with the knife-edge method, aligning an afocal telescope.',
+      id: 'photorefractif', kind: 'sim', title: 'Laser propagation in a photorefractive medium', date: '2025–2026', team: 'solo',
+      tools: 'MATLAB / Python · finite differences · implicit Runge-Kutta · split-step Fourier BPM',
+      summary: 'Two linked projects: formation of the space-charge field in a crystal (Kukhtarev model), then nonlinear propagation of the beam.',
       body: [
         { ul: [
-          'Malus’s law measured over 180° in 5° steps (power from 0.008 to 0.519 mW) and compared with I = I₀ cos²θ, accounting for the real extinction of the polariser. A faulty camera was replaced by a power meter.',
-          'Knife-edge method: blade positions at 12% and 88% of the power. For a Gaussian beam cut by a blade, 76% of the power lies within the full width at half maximum.',
-          'Afocal telescope (G = f₂/f₁): moving lens adjusted by watching the beam at the output and in the far field, 2 m away.',
+          'Insulating medium (single carrier type): finite-difference discretisation, tridiagonal system solved at each time step, mesh convergence study (from 40 × 50 to 4,000 × 5,000 points) and influence of beam size, intensity and pulse length.',
+          'InP:Fe semiconductor (electrons and holes): stiff system solved with implicit Runge-Kutta, compared with an analytical solution, maximum relative deviation 0.025%.',
+          'Refractive-index change through the Pockels effect, then propagation with the beam propagation method (diffraction in Fourier space, nonlinearity in real space): self-collimation of the beam in the crystal.',
         ]},
       ],
     },
@@ -103,32 +103,6 @@ export const en = {
           'Pre-processing: zero-order hold then a random ±1 mask with θ = 50 ns steps, i.e. 100 time-multiplexed virtual nodes.',
           'Channel model: 10-tap linear filter, cubic nonlinearity and white Gaussian noise from 12 to 32 dB SNR, symbols ±1, ±3.',
           'Output layer trained by Moore-Penrose pseudo-inverse (3,000 training symbols, 10,000 test symbols, 100 washout), assessed by symbol error rate.',
-        ]},
-      ],
-    },
-    {
-      id: 'ising', kind: 'sim', title: 'Photonic Ising machine', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Simulation of a network of coupled optoelectronic oscillators, inspired by Böhm et al. (Nature Communications, 2019), to solve a combinatorial optimisation problem (max-cut).',
-      body: [
-        { eq: 'x(k+1) = cos²(α·x(k) + β·Σ J·x(k) − π/4 + ζ(k)) − 1/2' },
-        { ul: [
-          'Bifurcation diagram of a single oscillator: pitchfork bifurcation at α = 1, beyond which two stable states represent a ±1 spin.',
-          'Network of N oscillators coupled through an interaction matrix J, conversion to spins by thresholding, Ising energy computation.',
-          'Annealing by decreasing noise (standard deviation from 0.3 to 0.01) to escape local minima, the physical dynamics replacing the Metropolis rule.',
-          'Applied to the max-cut of a 4-node cycle, with an exhaustive check of all 16 configurations.',
-        ]},
-      ],
-    },
-    {
-      id: 'chua', kind: 'sim', title: 'Coherence resonance in Chua’s chaotic circuit', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Comparison of deterministic and stochastic integration schemes on a chaotic system, and study of noise-induced jumps between attractors.',
-      body: [
-        { ul: [
-          'Euler, Heun (RK2) and 4th-order Runge-Kutta schemes: two distinct chaotic attractors depending on the initial condition (±2, 0, 0), with no switching between them.',
-          'Euler-Maruyama and stochastic Heun schemes, first validated at zero noise, then for D² = 0.0004, 0.0064 and 0.0256: noise triggers jumps between attractors.',
-          'Robust transition detection with hysteresis thresholds (±0.5) after an initial settling phase.',
         ]},
       ],
     },
@@ -148,14 +122,14 @@ export const en = {
       ],
     },
     {
-      id: 'photorefractif', kind: 'sim', title: 'Laser propagation in a photorefractive medium', date: '2025–2026', team: 'solo',
-      tools: 'MATLAB / Python · finite differences · implicit Runge-Kutta · split-step Fourier BPM',
-      summary: 'Two linked projects: formation of the space-charge field in a crystal (Kukhtarev model), then nonlinear propagation of the beam.',
+      id: 'chua', kind: 'sim', title: 'Coherence resonance in Chua’s chaotic circuit', date: '2025–2026', team: 'solo',
+      tools: 'Python · NumPy · Matplotlib',
+      summary: 'Comparison of deterministic and stochastic integration schemes on a chaotic system, and study of noise-induced jumps between attractors.',
       body: [
         { ul: [
-          'Insulating medium (single carrier type): finite-difference discretisation, tridiagonal system solved at each time step, mesh convergence study (from 40 × 50 to 4,000 × 5,000 points) and influence of beam size, intensity and pulse length.',
-          'InP:Fe semiconductor (electrons and holes): stiff system solved with implicit Runge-Kutta, compared with an analytical solution, maximum relative deviation 0.025%.',
-          'Refractive-index change through the Pockels effect, then propagation with the beam propagation method (diffraction in Fourier space, nonlinearity in real space): self-collimation of the beam in the crystal.',
+          'Euler, Heun (RK2) and 4th-order Runge-Kutta schemes: two distinct chaotic attractors depending on the initial condition (±2, 0, 0), with no switching between them.',
+          'Euler-Maruyama and stochastic Heun schemes, first validated at zero noise, then for D² = 0.0004, 0.0064 and 0.0256: noise triggers jumps between attractors.',
+          'Robust transition detection with hysteresis thresholds (±0.5) after an initial settling phase.',
         ]},
       ],
     },

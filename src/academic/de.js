@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const de = {
   kicker: 'CentraleSupélec · Abschlussjahr Photonik & Nanosysteme · 2025–2026',
   title: 'Laborpraktika und Simulationsprojekte',
-  lead: 'Was ich in meinem Spezialisierungsjahr aufgebaut, gemessen und simuliert habe: fünf Versuche am optischen Tisch und sechs Projekte zur numerischen Simulation. Gruppenarbeiten sind entsprechend gekennzeichnet.',
+  lead: 'Was ich in meinem Spezialisierungsjahr aufgebaut, gemessen und simuliert habe: vier Versuche am optischen Tisch und fünf Projekte zur numerischen Simulation. Gruppenarbeiten sind entsprechend gekennzeichnet.',
   groups: { lab: 'Versuche am optischen Tisch', sim: 'Numerische Simulation' },
   labels: { date: 'Datum', team: 'Team', tools: 'Ausrüstung & Werkzeuge' },
   solo: 'Einzelarbeit',
@@ -81,14 +81,14 @@ export const de = {
       ],
     },
     {
-      id: 'gaussien', kind: 'lab', title: 'Gaußstrahlen und Polarisation', date: 'Januar 2026', team: 'group',
-      tools: '10-mW-Laser · Polarisator auf Drehhalterung · Leistungsmesser · Rasierklinge auf motorisiertem Verschiebetisch · Kamera · Zwei-Linsen-Teleskop',
-      summary: 'Drei optische Arme: Überprüfung des Malus-Gesetzes, Messung des Strahldurchmessers mit der Schneidenmethode, Justage eines afokalen Teleskops.',
+      id: 'photorefractif', kind: 'sim', title: 'Laserausbreitung in einem photorefraktiven Medium', date: '2025–2026', team: 'solo',
+      tools: 'MATLAB / Python · finite Differenzen · implizites Runge-Kutta · Split-Step-Fourier-BPM',
+      summary: 'Zwei aufeinander aufbauende Projekte: Entstehung des Raumladungsfeldes in einem Kristall (Kukhtarev-Modell) und nichtlineare Ausbreitung des Strahls.',
       body: [
         { ul: [
-          'Malus-Gesetz über 180° in 5°-Schritten gemessen (Leistung von 0,008 bis 0,519 mW) und mit I = I₀ cos²θ verglichen, unter Berücksichtigung der realen Auslöschung des Polarisators. Eine defekte Kamera wurde durch einen Leistungsmesser ersetzt.',
-          'Schneidenmethode: Klingenpositionen bei 12 % und 88 % der Leistung. Bei einem von einer Klinge geschnittenen Gaußstrahl liegen 76 % der Leistung innerhalb der Halbwertsbreite.',
-          'Afokales Teleskop (G = f₂/f₁): bewegliche Linse justiert, indem der Strahl am Ausgang und im Fernfeld in 2 m Entfernung beobachtet wurde.',
+          'Isolierendes Medium (ein Ladungsträgertyp): Diskretisierung mit finiten Differenzen, tridiagonales System in jedem Zeitschritt gelöst, Konvergenzstudie des Gitters (von 40 × 50 bis 4 000 × 5 000 Punkte) und Einfluss von Strahlgröße, Intensität und Pulsdauer.',
+          'Halbleiter InP:Fe (Elektronen und Löcher): steifes System mit implizitem Runge-Kutta gelöst und mit einer analytischen Lösung verglichen, maximale relative Abweichung 0,025 %.',
+          'Brechungsindexänderung über den Pockels-Effekt, dann Ausbreitung mit der Beam Propagation Method (Beugung im Fourier-Raum, Nichtlinearität im Ortsraum): Selbstkollimation des Strahls im Kristall.',
         ]},
       ],
     },
@@ -103,32 +103,6 @@ export const de = {
           'Vorverarbeitung: Halteglied nullter Ordnung, dann zufällige ±1-Maske mit θ = 50 ns, also 100 zeitlich gemultiplexte virtuelle Knoten.',
           'Kanalmodell: lineares Filter mit 10 Koeffizienten, kubische Nichtlinearität und weißes Gaußrauschen von 12 bis 32 dB SNR, Symbole ±1, ±3.',
           'Training der Ausgabeschicht per Moore-Penrose-Pseudoinverse (3 000 Trainings-, 10 000 Testsymbole, 100 Einschwingsymbole), Bewertung über die Symbolfehlerrate.',
-        ]},
-      ],
-    },
-    {
-      id: 'ising', kind: 'sim', title: 'Photonische Ising-Maschine', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Simulation eines Netzes gekoppelter optoelektronischer Oszillatoren nach Böhm et al. (Nature Communications, 2019) zur Lösung eines kombinatorischen Optimierungsproblems (Max-Cut).',
-      body: [
-        { eq: 'x(k+1) = cos²(α·x(k) + β·Σ J·x(k) − π/4 + ζ(k)) − 1/2' },
-        { ul: [
-          'Bifurkationsdiagramm eines einzelnen Oszillators: Pitchfork-Bifurkation bei α = 1, oberhalb derer zwei stabile Zustände einen ±1-Spin darstellen.',
-          'Netz aus N Oszillatoren, gekoppelt über eine Wechselwirkungsmatrix J, Umwandlung in Spins per Schwellwert, Berechnung der Ising-Energie.',
-          'Annealing durch abnehmendes Rauschen (Standardabweichung von 0,3 auf 0,01), um lokale Minima zu verlassen; die physikalische Dynamik ersetzt die Metropolis-Regel.',
-          'Anwendung auf den Max-Cut eines Zyklus mit 4 Knoten, mit vollständiger Prüfung aller 16 Konfigurationen.',
-        ]},
-      ],
-    },
-    {
-      id: 'chua', kind: 'sim', title: 'Kohärenzresonanz im chaotischen Chua-Schaltkreis', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Vergleich deterministischer und stochastischer Integrationsverfahren an einem chaotischen System und Untersuchung rauschinduzierter Sprünge zwischen Attraktoren.',
-      body: [
-        { ul: [
-          'Euler-, Heun- (RK2) und Runge-Kutta-Verfahren 4. Ordnung: zwei getrennte chaotische Attraktoren je nach Anfangsbedingung (±2, 0, 0), ohne Wechsel zwischen ihnen.',
-          'Euler-Maruyama- und stochastisches Heun-Verfahren, zunächst ohne Rauschen validiert, dann für D² = 0,0004, 0,0064 und 0,0256: Das Rauschen löst Sprünge zwischen den Attraktoren aus.',
-          'Robuste Erkennung der Übergänge mit Hysterese-Schwellen (±0,5) nach einer anfänglichen Einschwingphase.',
         ]},
       ],
     },
@@ -148,14 +122,14 @@ export const de = {
       ],
     },
     {
-      id: 'photorefractif', kind: 'sim', title: 'Laserausbreitung in einem photorefraktiven Medium', date: '2025–2026', team: 'solo',
-      tools: 'MATLAB / Python · finite Differenzen · implizites Runge-Kutta · Split-Step-Fourier-BPM',
-      summary: 'Zwei aufeinander aufbauende Projekte: Entstehung des Raumladungsfeldes in einem Kristall (Kukhtarev-Modell) und nichtlineare Ausbreitung des Strahls.',
+      id: 'chua', kind: 'sim', title: 'Kohärenzresonanz im chaotischen Chua-Schaltkreis', date: '2025–2026', team: 'solo',
+      tools: 'Python · NumPy · Matplotlib',
+      summary: 'Vergleich deterministischer und stochastischer Integrationsverfahren an einem chaotischen System und Untersuchung rauschinduzierter Sprünge zwischen Attraktoren.',
       body: [
         { ul: [
-          'Isolierendes Medium (ein Ladungsträgertyp): Diskretisierung mit finiten Differenzen, tridiagonales System in jedem Zeitschritt gelöst, Konvergenzstudie des Gitters (von 40 × 50 bis 4 000 × 5 000 Punkte) und Einfluss von Strahlgröße, Intensität und Pulsdauer.',
-          'Halbleiter InP:Fe (Elektronen und Löcher): steifes System mit implizitem Runge-Kutta gelöst und mit einer analytischen Lösung verglichen, maximale relative Abweichung 0,025 %.',
-          'Brechungsindexänderung über den Pockels-Effekt, dann Ausbreitung mit der Beam Propagation Method (Beugung im Fourier-Raum, Nichtlinearität im Ortsraum): Selbstkollimation des Strahls im Kristall.',
+          'Euler-, Heun- (RK2) und Runge-Kutta-Verfahren 4. Ordnung: zwei getrennte chaotische Attraktoren je nach Anfangsbedingung (±2, 0, 0), ohne Wechsel zwischen ihnen.',
+          'Euler-Maruyama- und stochastisches Heun-Verfahren, zunächst ohne Rauschen validiert, dann für D² = 0,0004, 0,0064 und 0,0256: Das Rauschen löst Sprünge zwischen den Attraktoren aus.',
+          'Robuste Erkennung der Übergänge mit Hysterese-Schwellen (±0,5) nach einer anfänglichen Einschwingphase.',
         ]},
       ],
     },

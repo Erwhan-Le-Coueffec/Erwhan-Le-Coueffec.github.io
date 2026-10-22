@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const fr = {
   kicker: 'CentraleSupélec · 3e année Photonique & Nano-systèmes · 2025–2026',
   title: 'Travaux pratiques et bureaux d’études',
-  lead: 'Ce que j’ai monté, mesuré et simulé pendant mon année de spécialisation : cinq manipulations sur banc optique et six bureaux d’études de simulation numérique. Les travaux de groupe sont signalés comme tels.',
+  lead: 'Ce que j’ai monté, mesuré et simulé pendant mon année de spécialisation : quatre manipulations sur banc optique et cinq bureaux d’études de simulation numérique. Les travaux de groupe sont signalés comme tels.',
   groups: { lab: 'Manipulations sur banc optique', sim: 'Simulation numérique' },
   labels: { date: 'Date', team: 'Équipe', tools: 'Matériel & outils' },
   solo: 'Individuel',
@@ -81,14 +81,14 @@ export const fr = {
       ],
     },
     {
-      id: 'gaussien', kind: 'lab', title: 'Faisceaux gaussiens et polarisation', date: 'Janvier 2026', team: 'group',
-      tools: 'Laser 10 mW · polariseur sur monture rotative · puissance-mètre · lame de rasoir sur platine motorisée · caméra · télescope à deux lentilles',
-      summary: 'Trois bras optiques : vérification de la loi de Malus, mesure de la taille d’un faisceau par la méthode du couteau, réglage d’un télescope afocal.',
+      id: 'photorefractif', kind: 'sim', title: 'Propagation laser dans un milieu photoréfractif', date: '2025–2026', team: 'solo',
+      tools: 'MATLAB / Python · différences finies · Runge-Kutta implicite · BPM split-step Fourier',
+      summary: 'Deux bureaux d’études enchaînés : formation du champ de charge d’espace dans un cristal (modèle de Kukhtarev), puis propagation non linéaire du faisceau.',
       body: [
         { ul: [
-          'Loi de Malus mesurée sur 180° par pas de 5° (puissance de 0,008 à 0,519 mW) et comparée à I = I₀ cos²θ en tenant compte de l’extinction réelle du polariseur. Une caméra défaillante a été remplacée par un puissance-mètre.',
-          'Méthode du couteau : positions de la lame à 12 % et 88 % de la puissance. Pour un faisceau gaussien coupé par une lame, 76 % de la puissance est comprise dans la largeur à mi-hauteur.',
-          'Télescope afocal (G = f₂/f₁) : réglage de la lentille mobile en observant le faisceau en sortie et en champ lointain, à 2 m.',
+          'Milieu isolant (un seul type de porteurs) : discrétisation par différences finies, système tridiagonal résolu à chaque pas de temps, étude de convergence du maillage (de 40 × 50 à 4 000 × 5 000 points) et de l’influence de la taille du faisceau, de l’intensité et de la durée d’impulsion.',
+          'Semi-conducteur InP:Fe (électrons et trous) : système raide résolu par Runge-Kutta implicite, comparé à une solution analytique avec un écart relatif maximal de 0,025 %.',
+          'Variation d’indice par effet Pockels, puis propagation par méthode BPM (diffraction dans l’espace de Fourier, non-linéarité dans l’espace réel) : autocollimation du faisceau dans le cristal.',
         ]},
       ],
     },
@@ -103,32 +103,6 @@ export const fr = {
           'Prétraitement : maintien d’ordre zéro puis masque aléatoire ±1 de pas θ = 50 ns, soit 100 nœuds virtuels multiplexés dans le temps.',
           'Modèle de canal : filtre linéaire à 10 coefficients, non-linéarité cubique et bruit blanc gaussien de 12 à 32 dB de SNR, symboles ±1, ±3.',
           'Apprentissage de la couche de sortie par pseudo-inverse de Moore-Penrose (3 000 symboles d’apprentissage, 10 000 de test, 100 de mise en régime), évaluation par taux d’erreur symbole.',
-        ]},
-      ],
-    },
-    {
-      id: 'ising', kind: 'sim', title: 'Machine d’Ising photonique', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Simulation d’un réseau d’oscillateurs optoélectroniques couplés, inspiré de Böhm et al. (Nature Communications, 2019), pour résoudre un problème d’optimisation combinatoire (max-cut).',
-      body: [
-        { eq: 'x(k+1) = cos²(α·x(k) + β·Σ J·x(k) − π/4 + ζ(k)) − 1/2' },
-        { ul: [
-          'Diagramme de bifurcation de l’oscillateur isolé : bifurcation fourche en α = 1, au-delà de laquelle deux états stables représentent un spin ±1.',
-          'Réseau de N oscillateurs couplés par une matrice d’interaction J, conversion en spins par seuillage et calcul de l’énergie d’Ising.',
-          'Recuit par bruit décroissant (écart-type de 0,3 à 0,01) pour échapper aux minima locaux, la dynamique physique remplaçant la règle de Metropolis.',
-          'Application au max-cut d’un cycle à 4 nœuds, avec vérification exhaustive des 16 configurations.',
-        ]},
-      ],
-    },
-    {
-      id: 'chua', kind: 'sim', title: 'Résonance cohérente dans le circuit chaotique de Chua', date: '2025–2026', team: 'solo',
-      tools: 'Python · NumPy · Matplotlib',
-      summary: 'Comparaison de schémas d’intégration déterministes et stochastiques sur un système chaotique, et étude des sauts entre attracteurs induits par le bruit.',
-      body: [
-        { ul: [
-          'Schémas d’Euler, de Heun (RK2) et de Runge-Kutta d’ordre 4 : deux attracteurs chaotiques distincts selon la condition initiale (±2, 0, 0), sans passage de l’un à l’autre.',
-          'Schémas stochastiques d’Euler-Maruyama et de Heun, validés d’abord à bruit nul, puis pour D² = 0,0004, 0,0064 et 0,0256 : le bruit provoque des sauts entre attracteurs.',
-          'Détection robuste des transitions par seuils à hystérésis (±0,5), avec une phase de stabilisation initiale.',
         ]},
       ],
     },
@@ -148,14 +122,14 @@ export const fr = {
       ],
     },
     {
-      id: 'photorefractif', kind: 'sim', title: 'Propagation laser dans un milieu photoréfractif', date: '2025–2026', team: 'solo',
-      tools: 'MATLAB / Python · différences finies · Runge-Kutta implicite · BPM split-step Fourier',
-      summary: 'Deux bureaux d’études enchaînés : formation du champ de charge d’espace dans un cristal (modèle de Kukhtarev), puis propagation non linéaire du faisceau.',
+      id: 'chua', kind: 'sim', title: 'Résonance cohérente dans le circuit chaotique de Chua', date: '2025–2026', team: 'solo',
+      tools: 'Python · NumPy · Matplotlib',
+      summary: 'Comparaison de schémas d’intégration déterministes et stochastiques sur un système chaotique, et étude des sauts entre attracteurs induits par le bruit.',
       body: [
         { ul: [
-          'Milieu isolant (un seul type de porteurs) : discrétisation par différences finies, système tridiagonal résolu à chaque pas de temps, étude de convergence du maillage (de 40 × 50 à 4 000 × 5 000 points) et de l’influence de la taille du faisceau, de l’intensité et de la durée d’impulsion.',
-          'Semi-conducteur InP:Fe (électrons et trous) : système raide résolu par Runge-Kutta implicite, comparé à une solution analytique avec un écart relatif maximal de 0,025 %.',
-          'Variation d’indice par effet Pockels, puis propagation par méthode BPM (diffraction dans l’espace de Fourier, non-linéarité dans l’espace réel) : autocollimation du faisceau dans le cristal.',
+          'Schémas d’Euler, de Heun (RK2) et de Runge-Kutta d’ordre 4 : deux attracteurs chaotiques distincts selon la condition initiale (±2, 0, 0), sans passage de l’un à l’autre.',
+          'Schémas stochastiques d’Euler-Maruyama et de Heun, validés d’abord à bruit nul, puis pour D² = 0,0004, 0,0064 et 0,0256 : le bruit provoque des sauts entre attracteurs.',
+          'Détection robuste des transitions par seuils à hystérésis (±0,5), avec une phase de stabilisation initiale.',
         ]},
       ],
     },
