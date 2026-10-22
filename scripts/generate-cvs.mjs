@@ -129,10 +129,9 @@ const fr = {
   profile: 'Ingénieur généraliste CentraleSupélec spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
   experience: [
     { role: 'Ingénieur R&D en apprentissage', company: 'Holo3 — Saint-Louis (FR), région de Bâle · métrologie optique', dates: '10.2025 – 09.2026', bullets: [
-      'Évaluation du protocole de calibrage du système de mesure 3D HoloScan (projection de franges, 2 caméras + 1 projecteur) : modèle caméra/projecteur, triangulation et propagation des incertitudes.',
-      '5 études comparatives sur les mêmes acquisitions, validées sur une barre à boules certifiée de 250,1097 mm : critère de ±120 µm respecté pour 108 mesures sur 110, ±60 µm atteint dans une partie des cas, fidélité inférieure à 2 µm.',
-      'Mise en évidence de la caractérisation de la mire comme levier principal : mesure sur machines de vision Mitutoyo et Hexagon (courbure de 93 à 155 µm).',
-      'Introduction des plans d’expérience dans l’équipe (216 → 27, puis 432 → 32 configurations) : couleur d’éclairage, exposition, ouverture et angle, tous liés au contraste noir/blanc, identifiés comme facteurs influents.',
+      'Mission 1 · Détection des intersections de mire : étude préliminaire sur 3 mires (~1 300 mesures), puis introduction des plans d’expérience dans l’équipe, à mon initiative (216 → 27, puis 432 → 32 configurations) : couleur d’éclairage, exposition, ouverture et angle identifiés comme facteurs influents.',
+      'Mission 2 · Calibrage du système 3D HoloScan (mémoire) : théorie et propagation des incertitudes, puis 5 études comparatives (projection de franges, 2 caméras + 1 projecteur), validées sur barre à boules certifiée de 250,1097 mm : critère de ±120 µm respecté pour 108 mesures sur 110, fidélité < 2 µm.',
+      'Mission 3 · Machines de mesure par vision, en parallèle : qualification de la Mitutoyo sur mire étalon (répétabilité ~1 µm), comparaison avec une Hexagon (courbure de mire de 93 vs 155 µm) ; caractérisation de la mire identifiée comme principal levier de qualité du calibrage.',
     ]},
     { role: 'Ingénieur WCM / amélioration continue en apprentissage', company: 'Placoplatre (groupe Saint-Gobain) — Chambéry (FR) · production de plaques de plâtre', dates: '10.2023 – 06.2025', bullets: [
       'Déploiement de standards World Class Manufacturing : maintenance autonome et 5S.',
@@ -178,10 +177,9 @@ const en = {
   profile: 'Generalist engineer from CentraleSupélec specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
   experience: [
     { role: 'R&D Engineer (apprenticeship)', company: 'Holo3 — Saint-Louis (FR), Basel area · optical metrology', dates: '10.2025 – 09.2026', bullets: [
-      'Assessed the calibration protocol of the HoloScan 3D measurement system (fringe projection, 2 cameras + 1 projector): camera/projector model, triangulation and uncertainty propagation.',
-      '5 comparative studies on identical acquisitions, validated with a certified 250.1097 mm ball bar: ±120 µm criterion met in 108 of 110 measurements, ±60 µm reached in part of the cases, repeatability below 2 µm.',
-      'Identified target characterisation as the main lever: target measured on Mitutoyo and Hexagon vision machines (93 to 155 µm curvature).',
-      'Introduced Design of Experiments to the team (216 → 27, then 432 → 32 configurations): light colour, exposure, aperture and angle, all linked to black/white contrast, identified as influential factors.',
+      'Mission 1 · Calibration-target detection: preliminary study on 3 targets (~1,300 measurements), then introduced Design of Experiments to the team on my own initiative (216 → 27, then 432 → 32 configurations): light colour, exposure, aperture and angle identified as influential factors.',
+      'Mission 2 · HoloScan 3D system calibration (thesis): theory and uncertainty propagation, then 5 comparative studies (fringe projection, 2 cameras + 1 projector), validated on a certified 250.1097 mm ball bar: ±120 µm criterion met in 108 of 110 measurements, repeatability < 2 µm.',
+      'Mission 3 · Vision measuring machines, in parallel: Mitutoyo qualified on a reference target (repeatability ~1 µm), compared with a Hexagon (target curvature 93 vs 155 µm); target characterisation identified as the main lever for calibration quality.',
     ]},
     { role: 'WCM / Continuous Improvement Engineer (apprenticeship)', company: 'Placoplatre (Saint-Gobain group) — Chambéry (FR) · plasterboard manufacturing', dates: '10.2023 – 06.2025', bullets: [
       'Deployed World Class Manufacturing standards: autonomous maintenance and 5S.',

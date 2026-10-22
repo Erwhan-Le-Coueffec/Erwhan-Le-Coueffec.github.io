@@ -12,7 +12,7 @@ export const de = {
     brief: ['Holo3 wollte wissen, ob das Kalibrierprotokoll von HoloScan robust ist und ob sich die Messunsicherheit verringern lässt.', 'Ich habe die gesamte Kette modelliert (Kamera, Projektor, Triangulation, Unsicherheiten) und 5 Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.', 'Protokoll als solide bestätigt: 108 von 110 Messungen innerhalb des Kriteriums von ±120 µm, Wiederholpräzision < 2 µm. Die Charakterisierung des Kalibrierziels ist der wichtigste Hebel.'],
     lead: 'Ein industrielles 3D-Messsystem mit Streifenprojektion. Ich habe die gesamte Kalibrierkette aufgearbeitet, von der optischen Theorie bis zur Unsicherheitsfortpflanzung, und anschließend fünf Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.',
     meta: [
-      ['Zeitraum', 'Okt. 2025 – Sep. 2026 · Verteidigung am 17.09.2026'],
+      ['Zeitraum', '2026, nach dem Projekt zu den Erkennungsparametern · Verteidigung am 17.09.2026'],
       ['Rolle', 'F&E-Ingenieur im dualen Studium, mit großer Eigenständigkeit'],
       ['Werkzeuge', 'MATLAB · Excel · 3D-Inspektionssoftware GOM · CalibTool · SensorPhase · Basler-Kameras · Bildmessgeräte von Mitutoyo und Hexagon'],
     ],
@@ -91,11 +91,7 @@ export const de = {
       ]},
       { title: 'Studie 2 · Die Kenntnis des Kalibrierziels', body: [
         'Die Kalibrierung stützt sich auf eine „Zieldatei“, die die Position jeder Kreuzung beschreibt. Ich habe das Ziel PC-B (Rastermaß 20 mm) auf zwei Bildmessgeräten vermessen lassen, Mitutoyo und Hexagon, und das System dann mit jeder der beiden Dateien kalibriert.',
-        { ul: [
-          'Vorherige Qualifizierung des Mitutoyo-Geräts an einem Keramikziel: 0,5 µm in X, 0,7 µm in Y, 1,4 µm in Z.',
-          'In X und Y stimmen beide Geräte überein: Standardabweichung von 5 µm in X und 2 µm in Y.',
-          'In Z ist das Ziel nicht eben, sondern gekrümmt: Amplitude z_max − z_min von 93 µm (Mitutoyo) bzw. 155 µm (Hexagon).',
-        ]},
+        'Die beiden Geräte, im Projekt „Charakterisierung der Bildmessgeräte“ ausführlich verglichen, stimmen in X und Y überein, nicht aber in Z: Das Ziel ist gekrümmt, mit einer Amplitude von 93 µm (Mitutoyo) bzw. 155 µm (Hexagon). Hier geht es um die Auswirkung dieser Abweichung auf die Kalibrierung.',
         { chart: { c: 'Abweichung je nach Zieldatei', series: [['Mitutoyo · Kam. 1', B.mitutoyo.cam1], ['Mitutoyo · Kam. 2', B.mitutoyo.cam2], ['Hexagon · Kam. 1', B.hexagon.cam1], ['Hexagon · Kam. 2', B.hexagon.cam2]] } },
         { table: { c: 'Abweichung zur Referenz (µm)', h: ['', 'Mitutoyo · Kam. 1', 'Mitutoyo · Kam. 2', 'Hexagon · Kam. 1', 'Hexagon · Kam. 2'], r: positionRows(P, K, [['mitutoyo', 'cam1'], ['mitutoyo', 'cam2'], ['hexagon', 'cam1'], ['hexagon', 'cam2']]) } },
         'Ein Wechsel der Zieldatei verschiebt das Ergebnis derselben Aufnahme um bis zu etwa 40 µm. Das Kriterium von ±120 µm bleibt erfüllt, ±60 µm wird für den Großteil der Positionen 1, 2, 3 und 5 erreicht. Position 4 (stark geneigte Stange) bleibt mit rund ±110 µm die schwierigste.',
@@ -240,6 +236,62 @@ export const de = {
           'Eine Kalibrierung auf einem Teil des Feldes funktioniert, vorzugsweise mit stark geneigtem Ziel.',
         ]},
         'Dieses Projekt hat mir gezeigt, wie man eine Versuchskampagne strukturiert: Variablen und Bereiche festlegen, randomisieren, kodieren und einen Effekt an seiner Unsicherheit messen statt an der Intuition. Zudem bereitete es die Abschlussarbeit zu HoloScan vor.',
+      ]},
+    ],
+  },
+  vision: {
+    kicker: 'Holo3 · Parallel zum HoloScan-Projekt · 2026',
+    title: 'Liefern zwei Bildmessgeräte dasselbe Ergebnis?',
+    brief: ['Auf zwei Bildmessgeräten gemessen, lieferte dasselbe Kalibrierziel unterschiedliche Ergebnisse. Welchem Gerät ist zu trauen, und sind die Geräte gleichwertig?', 'Ich habe das Mitutoyo-Gerät an einem Referenzziel qualifiziert und dann beide Geräte Kreuzung für Kreuzung am PC-B-Ziel verglichen, mit dem HoloScan kalibriert wird.', 'Wiederholpräzision der Mitutoyo im Bereich eines Mikrometers. Die Geräte stimmen in X und Y überein, weichen in Z aber bei der Krümmung des Ziels ab: eine Differenz, die sich mit bis zu ~40 µm auf die HoloScan-Kalibrierung auswirkt.'],
+    lead: 'Ein reines Messtechnikprojekt parallel zur HoloScan-Kalibrierung: ein Messgerät prüfen, bevor man ihm vertraut, und verstehen, woher die Abweichungen zwischen zwei Geräten kommen.',
+    meta: [
+      ['Zeitraum', '2026, parallel zum HoloScan-Projekt'],
+      ['Rolle', 'F&E-Ingenieur im dualen Studium'],
+      ['Werkzeuge', 'Bildmessgeräte von Mitutoyo und Hexagon · keramisches Referenzziel · PC-B-Ziel · MATLAB · Excel'],
+    ],
+    facts: [
+      ['~1 µm', 'Wiederholpräzision der Mitutoyo am Referenzziel'],
+      ['±20 nm', 'Toleranz des Rastermaßes des Referenzziels (7 mm)'],
+      ['5 / 2 µm', 'Standardabweichung zwischen den Geräten in X / Y'],
+      ['93 vs 155 µm', 'Krümmung des Ziels laut Mitutoyo / Hexagon'],
+      ['~40 µm', 'maximale Auswirkung auf die HoloScan-Kalibrierung'],
+    ],
+    sections: [
+      { title: 'Kontext und Fragestellung', body: [
+        'Die Kalibrierung von HoloScan stützt sich auf eine Datei mit der tatsächlichen Position jeder Zielkreuzung. Diese Datei stammt aus einer Messung auf einem Bildmessgerät. Dasselbe Ziel lieferte jedoch auf zwei Geräten (Mitutoyo und Hexagon) unterschiedliche Ergebnisse.',
+        'Die Frage: Sind die beiden Geräte gleichwertig, und welche Messung des Ziels sollte verwendet werden?',
+      ]},
+      { title: 'Schritt 1 · Qualifizierung des Mitutoyo-Geräts', body: [
+        'Bevor man zwei Geräte vergleicht, muss man die Leistung jedes einzelnen kennen. Ich habe ein keramisches Referenzziel vermessen, dessen Rastermaß von 7 mm auf ±20 nm bekannt ist, also eine Referenz, die weit genauer ist als das Gerät selbst.',
+        { ul: [
+          'Kreuzungen des Referenzziels 10-mal gemessen.',
+          'Wiederholpräzision für jede Achse berechnet.',
+        ]},
+        { table: { c: 'Wiederholunsicherheit der Mitutoyo (10 Messungen)', h: ['Achse', 'X', 'Y', 'Z'], r: [['Unsicherheit (µm)', 0.5, 0.7, 1.4]] } },
+        'Das Mitutoyo-Gerät misst also mit einer Wiederholpräzision im Bereich eines Mikrometers, mehr als ausreichend, um ein Kalibrierziel zu charakterisieren.',
+      ]},
+      { title: 'Schritt 2 · Vergleich der beiden Geräte', body: [
+        'Anschließend habe ich die Messungen des PC-B-Ziels (Rastermaß 20 mm) beider Geräte Kreuzung für Kreuzung verglichen.',
+        { ul: [
+          'In X und Y stimmen die Geräte überein: Standardabweichung von 5 µm in X und 2 µm in Y.',
+          'In Z ist das Ziel nicht eben, sondern gekrümmt, und die Geräte messen nicht dieselbe Amplitude: 93 µm (Mitutoyo), 155 µm (Hexagon) (z_max − z_min).',
+        ]},
+        'In der Ebene sind die Geräte also gleichwertig; den Unterschied macht die Messung der Krümmung.',
+      ]},
+      { title: 'Schritt 3 · Auswirkung auf die Kalibrierung', body: [
+        'Um zu prüfen, ob diese Abweichung in der Praxis zählt, habe ich HoloScan mit beiden Dateien auf denselben Aufnahmen kalibriert und das Ergebnis an der zertifizierten Kugelstange überprüft.',
+        'Ein Wechsel der Datei verschiebt die Messung der Kugelstange um bis zu etwa 40 µm. Beide Kalibrierungen bleiben innerhalb des Kriteriums von ±120 µm: Die Abweichung ist real, für die Streifenprojektion aber kein Ausschlusskriterium. Die Detailergebnisse stehen in Studie 2 des HoloScan-Projekts.',
+      ]},
+      { title: 'Fazit und Empfehlungen', body: [
+        { ul: [
+          'Ein Messgerät muss an einem Normal qualifiziert werden, bevor es als Referenz dient.',
+          'Die reale Geometrie des Ziels, vor allem seine Krümmung, ist der wichtigste Hebel für die Kalibrierqualität.',
+          'Empfehlung: Kalibrierziele einmal pro Jahr prüfen und den Einfluss der Temperatur auf ihre Form untersuchen.',
+          'Für empfindlichere Verfahren wie die Deflektometrie würde die Abweichung zwischen den Geräten entscheidend.',
+        ]},
+      ]},
+      { title: 'Was ich gelernt habe', body: [
+        'Einem Messgerät nie ohne Vergleich mit einer Referenz vertrauen und immer herausfinden, auf welcher Achse und warum zwei Messungen abweichen, bevor man Schlüsse zieht.',
       ]},
     ],
   },

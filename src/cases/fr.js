@@ -12,7 +12,7 @@ export const fr = {
     brief: ['Holo3 voulait savoir si son protocole de calibrage HoloScan était robuste, et s’il pouvait réduire l’incertitude de mesure.', 'J’ai modélisé toute la chaîne (caméra, projecteur, triangulation, incertitudes), puis comparé 5 variantes de protocole sur les mêmes acquisitions, validées sur une barre à boules certifiée.', 'Protocole confirmé solide : 108 mesures sur 110 dans le critère de ±120 µm, fidélité < 2 µm. La caractérisation de la mire ressort comme le principal levier d’amélioration.'],
     lead: 'Un système industriel de mesure 3D par projection de franges : j’ai repris toute la chaîne de calibrage, de la théorie optique à la propagation des incertitudes, puis comparé cinq variantes de protocole sur les mêmes acquisitions, validées sur une barre à boules certifiée.',
     meta: [
-      ['Période', 'Oct. 2025 – sept. 2026 · soutenance le 17/09/2026'],
+      ['Période', '2026, après la mission sur les paramètres de détection · soutenance le 17/09/2026'],
       ['Rôle', 'Ingénieur R&D en apprentissage, en grande autonomie'],
       ['Outils', 'MATLAB · Excel · logiciel d’inspection 3D GOM · CalibTool · SensorPhase · caméras Basler · machines de vision Mitutoyo et Hexagon'],
     ],
@@ -91,11 +91,7 @@ export const fr = {
       ]},
       { title: 'Étude 2 · La connaissance de la mire', body: [
         'Le calibrage s’appuie sur un « fichier mire » qui décrit la position de chaque intersection. J’ai fait mesurer la mire PC-B (pas de 20 mm) sur deux machines de vision, Mitutoyo et Hexagon, puis calibré le système avec chacun des deux fichiers.',
-        { ul: [
-          'Qualification préalable de la machine Mitutoyo sur une mire céramique : 0,5 µm en X, 0,7 µm en Y, 1,4 µm en Z.',
-          'En X et Y, les deux machines concordent : écart-type de 5 µm en X et 2 µm en Y.',
-          'En Z, la mire n’est pas plane mais incurvée : amplitude z_max − z_min de 93 µm selon la Mitutoyo et de 155 µm selon l’Hexagon.',
-        ]},
+        'Les deux machines, comparées en détail dans la mission « Caractérisation des machines de vision », concordent en X et Y mais pas en Z : la mire est incurvée, avec une amplitude de 93 µm selon la Mitutoyo et de 155 µm selon l’Hexagon. L’enjeu ici est l’effet de cet écart sur le calibrage.',
         { chart: { c: 'Écarts selon le fichier mire utilisé', series: [['Mitutoyo · cam. 1', B.mitutoyo.cam1], ['Mitutoyo · cam. 2', B.mitutoyo.cam2], ['Hexagon · cam. 1', B.hexagon.cam1], ['Hexagon · cam. 2', B.hexagon.cam2]] } },
         { table: { c: 'Écart à la référence (µm)', h: ['', 'Mitutoyo · cam. 1', 'Mitutoyo · cam. 2', 'Hexagon · cam. 1', 'Hexagon · cam. 2'], r: positionRows(P, K, [['mitutoyo', 'cam1'], ['mitutoyo', 'cam2'], ['hexagon', 'cam1'], ['hexagon', 'cam2']]) } },
         'Changer de fichier mire décale le résultat d’une même acquisition jusqu’à environ 40 µm. Le critère de ±120 µm reste respecté, et ±60 µm l’est pour l’essentiel des positions 1, 2, 3 et 5. La position 4 (barre très inclinée) reste la plus difficile, autour de ±110 µm.',
@@ -240,6 +236,62 @@ export const fr = {
           'Calibrer sur une partie du champ est possible, avec une mire de préférence très inclinée.',
         ]},
         'Ce projet m’a appris à structurer une campagne d’essais : définir les variables et leurs intervalles, randomiser, coder, puis juger un effet à l’aune de son incertitude plutôt qu’à l’intuition. Il a aussi préparé le terrain de la mission de fin d’études sur HoloScan.',
+      ]},
+    ],
+  },
+  vision: {
+    kicker: 'Holo3 · Mission en parallèle de HoloScan · 2026',
+    title: 'Deux machines de vision donnent-elles la même mesure ?',
+    brief: ['Mesurée sur deux machines de vision, la même mire de calibrage donnait des résultats différents. Lesquelles croire, et les machines sont-elles équivalentes ?', 'J’ai qualifié la machine Mitutoyo sur une mire étalon, puis comparé les deux machines intersection par intersection sur la mire PC-B utilisée pour calibrer HoloScan.', 'Répétabilité de la Mitutoyo de l’ordre du micromètre. Les machines concordent en X et Y, mais divergent en Z sur la courbure de la mire : un écart qui se répercute jusqu’à ~40 µm sur le calibrage.'],
+    lead: 'Une mission de métrologie pure, menée en parallèle du calibrage de HoloScan : vérifier un instrument de mesure avant de lui faire confiance, puis comprendre d’où viennent les écarts entre deux instruments.',
+    meta: [
+      ['Période', '2026, en parallèle de la mission HoloScan'],
+      ['Rôle', 'Ingénieur R&D en apprentissage'],
+      ['Outils', 'Machines de mesure par vision Mitutoyo et Hexagon · mire étalon céramique · mire PC-B · MATLAB · Excel'],
+    ],
+    facts: [
+      ['~1 µm', 'répétabilité de la Mitutoyo sur mire étalon'],
+      ['±20 nm', 'tolérance du pas de la mire étalon (7 mm)'],
+      ['5 / 2 µm', 'écart-type entre machines en X / Y'],
+      ['93 vs 155 µm', 'courbure de la mire selon Mitutoyo / Hexagon'],
+      ['~40 µm', 'effet maximal sur le calibrage HoloScan'],
+    ],
+    sections: [
+      { title: 'Contexte et question', body: [
+        'Le calibrage de HoloScan repose sur un fichier qui décrit la position réelle de chaque intersection de la mire. Ce fichier vient d’une mesure sur machine de vision. Or la même mire, mesurée sur deux machines (Mitutoyo et Hexagon), donnait des résultats différents.',
+        'Question posée : les deux machines sont-elles équivalentes, et quelle mesure de la mire faut-il utiliser ?',
+      ]},
+      { title: 'Étape 1 · Qualifier la machine Mitutoyo', body: [
+        'Avant de comparer deux instruments, il faut connaître les performances de chacun. J’ai mesuré une mire étalon en céramique dont le pas de 7 mm est connu à ±20 nm, soit une référence bien plus précise que la machine elle-même.',
+        { ul: [
+          'Mesure des intersections de la mire étalon, répétée 10 fois.',
+          'Calcul de la répétabilité sur chaque axe.',
+        ]},
+        { table: { c: 'Incertitude de répétabilité de la Mitutoyo (10 mesures)', h: ['Axe', 'X', 'Y', 'Z'], r: [['Incertitude (µm)', 0.5, 0.7, 1.4]] } },
+        'La machine Mitutoyo mesure donc avec une répétabilité de l’ordre du micromètre, largement suffisante pour caractériser une mire de calibrage.',
+      ]},
+      { title: 'Étape 2 · Comparer les deux machines', body: [
+        'J’ai ensuite comparé, intersection par intersection, les mesures de la mire PC-B (pas de 20 mm) faites sur les deux machines.',
+        { ul: [
+          'En X et Y, les machines concordent : écart-type de 5 µm en X et 2 µm en Y.',
+          'En Z, la mire n’est pas plane mais incurvée, et les deux machines n’en mesurent pas la même amplitude : 93 µm selon la Mitutoyo, 155 µm selon l’Hexagon (z_max − z_min).',
+        ]},
+        'Les machines sont donc équivalentes dans le plan, et c’est la mesure de la courbure qui fait la différence.',
+      ]},
+      { title: 'Étape 3 · Mesurer l’effet sur le calibrage', body: [
+        'Pour savoir si cet écart compte en pratique, j’ai calibré HoloScan avec chacun des deux fichiers, sur les mêmes acquisitions, puis vérifié le résultat sur la barre à boules certifiée.',
+        'Changer de fichier décale la mesure de la barre jusqu’à environ 40 µm. Les deux calibrages restent dans le critère de ±120 µm : l’écart est réel, mais pas rédhibitoire pour la projection de franges. Le détail des résultats figure dans l’étude 2 de la mission HoloScan.',
+      ]},
+      { title: 'Conclusions et recommandations', body: [
+        { ul: [
+          'Une machine de mesure doit être qualifiée sur un étalon avant de servir de référence.',
+          'La géométrie réelle de la mire, et surtout sa courbure, est le principal levier de qualité du calibrage.',
+          'Recommandation : vérifier les mires une fois par an et étudier l’effet de la température sur leur forme.',
+          'Pour des méthodes plus sensibles comme la déflectométrie, l’écart entre machines deviendrait déterminant.',
+        ]},
+      ]},
+      { title: 'Ce que j’en retiens', body: [
+        'Ne jamais faire confiance à un instrument sans l’avoir comparé à une référence, et toujours chercher sur quel axe, et pourquoi, deux mesures divergent avant de conclure.',
       ]},
     ],
   },

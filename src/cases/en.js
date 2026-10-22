@@ -12,7 +12,7 @@ export const en = {
     brief: ['Holo3 wanted to know whether its HoloScan calibration protocol was robust, and whether measurement uncertainty could be reduced.', 'I modelled the full chain (camera, projector, triangulation, uncertainties), then compared 5 protocol variants on identical acquisitions, validated on a certified ball bar.', 'Protocol confirmed as solid: 108 of 110 measurements within the ±120 µm criterion, repeatability < 2 µm. Target characterisation emerged as the main lever for improvement.'],
     lead: 'An industrial fringe-projection 3D measurement system. I worked through the full calibration chain, from optical theory to uncertainty propagation, then compared five protocol variants on identical acquisitions, validated on a certified ball bar.',
     meta: [
-      ['Period', 'Oct. 2025 – Sep. 2026 · defended on 17 Sep. 2026'],
+      ['Period', '2026, after the detection-parameter project · defended on 17 Sep. 2026'],
       ['Role', 'R&D engineer apprentice, working with a high degree of autonomy'],
       ['Tools', 'MATLAB · Excel · GOM 3D inspection software · CalibTool · SensorPhase · Basler cameras · Mitutoyo and Hexagon vision machines'],
     ],
@@ -91,11 +91,7 @@ export const en = {
       ]},
       { title: 'Study 2 · Knowing the calibration target', body: [
         'Calibration relies on a “target file” that describes the position of every intersection. I had the PC-B target (20 mm pitch) measured on two vision machines, Mitutoyo and Hexagon, then calibrated the system with each file.',
-        { ul: [
-          'Prior qualification of the Mitutoyo machine on a ceramic target: 0.5 µm in X, 0.7 µm in Y, 1.4 µm in Z.',
-          'In X and Y the two machines agree: standard deviation of 5 µm in X and 2 µm in Y.',
-          'In Z the target is not flat but curved: z_max − z_min amplitude of 93 µm on the Mitutoyo and 155 µm on the Hexagon.',
-        ]},
+        'The two machines, compared in detail in the “Vision-machine characterisation” project, agree in X and Y but not in Z: the target is curved, with an amplitude of 93 µm on the Mitutoyo and 155 µm on the Hexagon. The question here is how that gap affects calibration.',
         { chart: { c: 'Deviation by target file', series: [['Mitutoyo · cam. 1', B.mitutoyo.cam1], ['Mitutoyo · cam. 2', B.mitutoyo.cam2], ['Hexagon · cam. 1', B.hexagon.cam1], ['Hexagon · cam. 2', B.hexagon.cam2]] } },
         { table: { c: 'Deviation from reference (µm)', h: ['', 'Mitutoyo · cam. 1', 'Mitutoyo · cam. 2', 'Hexagon · cam. 1', 'Hexagon · cam. 2'], r: positionRows(P, K, [['mitutoyo', 'cam1'], ['mitutoyo', 'cam2'], ['hexagon', 'cam1'], ['hexagon', 'cam2']]) } },
         'Switching target files shifts the result of the same acquisition by up to about 40 µm. The ±120 µm criterion is still met, and ±60 µm is met for most of positions 1, 2, 3 and 5. Position 4 (strongly tilted bar) remains the hardest, around ±110 µm.',
@@ -240,6 +236,62 @@ export const en = {
           'Calibrating on part of the field works, preferably with a strongly tilted target.',
         ]},
         'This project taught me to structure a test campaign: define variables and their ranges, randomise, code, and judge an effect against its uncertainty rather than by intuition. It also laid the groundwork for the HoloScan master’s thesis.',
+      ]},
+    ],
+  },
+  vision: {
+    kicker: 'Holo3 · Run alongside the HoloScan project · 2026',
+    title: 'Do two vision machines give the same measurement?',
+    brief: ['Measured on two vision machines, the same calibration target gave different results. Which one to trust, and are the machines equivalent?', 'I qualified the Mitutoyo machine on a reference target, then compared both machines intersection by intersection on the PC-B target used to calibrate HoloScan.', 'Mitutoyo repeatability around one micrometre. The machines agree in X and Y but differ in Z on the target’s curvature, a gap that carries over to the HoloScan calibration by up to ~40 µm.'],
+    lead: 'A pure metrology project, run alongside the HoloScan calibration: check a measuring instrument before trusting it, then understand where the differences between two instruments come from.',
+    meta: [
+      ['Period', '2026, alongside the HoloScan project'],
+      ['Role', 'R&D engineer apprentice'],
+      ['Tools', 'Mitutoyo and Hexagon vision measuring machines · ceramic reference target · PC-B target · MATLAB · Excel'],
+    ],
+    facts: [
+      ['~1 µm', 'Mitutoyo repeatability on a reference target'],
+      ['±20 nm', 'pitch tolerance of the reference target (7 mm)'],
+      ['5 / 2 µm', 'standard deviation between machines in X / Y'],
+      ['93 vs 155 µm', 'target curvature per Mitutoyo / Hexagon'],
+      ['~40 µm', 'maximum effect on the HoloScan calibration'],
+    ],
+    sections: [
+      { title: 'Context and question', body: [
+        'HoloScan’s calibration relies on a file describing the real position of every target intersection. That file comes from a measurement on a vision machine. Yet the same target, measured on two machines (Mitutoyo and Hexagon), gave different results.',
+        'The question: are the two machines equivalent, and which target measurement should be used?',
+      ]},
+      { title: 'Step 1 · Qualifying the Mitutoyo machine', body: [
+        'Before comparing two instruments, you need to know how each performs. I measured a ceramic reference target whose 7 mm pitch is known to ±20 nm, a reference far more precise than the machine itself.',
+        { ul: [
+          'Intersections of the reference target measured 10 times.',
+          'Repeatability computed on each axis.',
+        ]},
+        { table: { c: 'Mitutoyo repeatability uncertainty (10 measurements)', h: ['Axis', 'X', 'Y', 'Z'], r: [['Uncertainty (µm)', 0.5, 0.7, 1.4]] } },
+        'The Mitutoyo machine therefore measures with a repeatability of around one micrometre, more than enough to characterise a calibration target.',
+      ]},
+      { title: 'Step 2 · Comparing the two machines', body: [
+        'I then compared, intersection by intersection, the measurements of the PC-B target (20 mm pitch) made on both machines.',
+        { ul: [
+          'In X and Y the machines agree: standard deviation of 5 µm in X and 2 µm in Y.',
+          'In Z the target is not flat but curved, and the machines do not measure the same amplitude: 93 µm on the Mitutoyo, 155 µm on the Hexagon (z_max − z_min).',
+        ]},
+        'The machines are therefore equivalent in-plane; the curvature measurement is what makes the difference.',
+      ]},
+      { title: 'Step 3 · Measuring the effect on calibration', body: [
+        'To see whether this gap matters in practice, I calibrated HoloScan with each of the two files, on the same acquisitions, then checked the result on the certified ball bar.',
+        'Switching files shifts the ball-bar measurement by up to about 40 µm. Both calibrations stay within the ±120 µm criterion: the gap is real but not a deal-breaker for fringe projection. Detailed results are in study 2 of the HoloScan project.',
+      ]},
+      { title: 'Conclusions and recommendations', body: [
+        { ul: [
+          'A measuring machine must be qualified on a reference standard before it serves as a reference.',
+          'The real geometry of the target, especially its curvature, is the main lever for calibration quality.',
+          'Recommendation: check targets once a year and study how temperature affects their shape.',
+          'For more sensitive methods such as deflectometry, the gap between machines would become decisive.',
+        ]},
+      ]},
+      { title: 'What I learned', body: [
+        'Never trust an instrument before comparing it with a reference, and always find on which axis, and why, two measurements disagree before drawing conclusions.',
       ]},
     ],
   },
