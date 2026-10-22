@@ -3,6 +3,9 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
 const A4 = [595.28, 841.89]
 const OUT = 'public/cv'
+const LEFT = 42
+const RIGHT = 553
+const BOTTOM = 40
 
 const colors = {
   navy: rgb(0.043, 0.102, 0.141),
@@ -12,174 +15,206 @@ const colors = {
   light: rgb(0.87, 0.91, 0.93),
 }
 
+// Standard PDF fonts only cover WinAnsi: map the few characters outside it.
+const MAP = { '≤': '<=', '≥': '>=', '→': '->', 'λ': 'lambda', '₂': '2', '≈': '~', '·': '·', 'Δ': 'delta', 'σ': 'sigma', '−': '-' }
+const clean = s => [...s].map(c => MAP[c] ?? c).join('')
+
 function wrap(text, font, size, maxWidth) {
-  const words = text.split(/\s+/)
   const lines = []
   let line = ''
-  for (const word of words) {
+  for (const word of clean(text).split(/\s+/)) {
     const test = line ? `${line} ${word}` : word
-    if (font.widthOfTextAtSize(test, size) <= maxWidth) {
-      line = test
-    } else {
-      if (line) lines.push(line)
-      line = word
-    }
+    if (font.widthOfTextAtSize(test, size) <= maxWidth) line = test
+    else { if (line) lines.push(line); line = word }
   }
   if (line) lines.push(line)
   return lines
 }
 
-function drawWrapped(page, text, x, y, maxWidth, font, size = 8, leading = 10, color = colors.text) {
-  page.setFont(font)
-  page.setFontSize(size)
-  page.setFontColor(color)
-  for (const line of wrap(text, font, size, maxWidth)) {
-    page.drawText(line, { x, y, size, font, color })
-    y -= leading
+class Writer {
+  constructor(doc, fonts, footer) { this.doc = doc; this.f = fonts; this.footer = footer; this.pages = []; this.newPage() }
+  newPage() { this.page = this.doc.addPage(A4); this.pages.push(this.page); this.y = 800 }
+  need(h) { if (this.y - h < BOTTOM) this.newPage() }
+  text(t, x, size, font, color, dy) { this.page.drawText(clean(t), { x, y: this.y, size, font, color }); if (dy) this.y -= dy }
+  right(t, size, font, color) { const s = clean(t); this.page.drawText(s, { x: RIGHT - font.widthOfTextAtSize(s, size), y: this.y, size, font, color }) }
+  para(t, x, width, size, leading, font = this.f.regular, color = colors.text) {
+    for (const line of wrap(t, font, size, width)) { this.need(leading); this.page.drawText(line, { x, y: this.y, size, font, color }); this.y -= leading }
   }
-  return y
-}
-
-function section(page, title, y, bold) {
-  page.drawText(title.toUpperCase(), { x: 42, y, size: 8.4, font: bold, color: colors.cyan })
-  page.drawLine({ start: { x: 42, y: y - 5 }, end: { x: 553, y: y - 5 }, thickness: 0.7, color: colors.light })
-  return y - 18
-}
-
-function bullet(page, text, y, regular) {
-  page.drawCircle({ x: 46, y: y + 2.2, size: 1.4, color: colors.cyan })
-  return drawWrapped(page, text, 54, y, 499, regular, 7.55, 9.5) - 3
-}
-
-function experience(page, y, item, regular, bold) {
-  page.drawText(item.company, { x: 42, y, size: 9.2, font: bold, color: colors.navy })
-  const dateWidth = regular.widthOfTextAtSize(item.dates, 7.7)
-  page.drawText(item.dates, { x: 553 - dateWidth, y, size: 7.7, font: regular, color: colors.muted })
-  y -= 12
-  page.drawText(item.role, { x: 42, y, size: 7.9, font: bold, color: colors.text })
-  y -= 13
-  for (const text of item.bullets) y = bullet(page, text, y, regular)
-  return y - 1
-}
-
-function education(page, y, item, regular, bold) {
-  page.drawText(item.school, { x: 42, y, size: 8.4, font: bold, color: colors.navy })
-  const dateWidth = regular.widthOfTextAtSize(item.dates, 7.6)
-  page.drawText(item.dates, { x: 553 - dateWidth, y, size: 7.6, font: regular, color: colors.muted })
-  y -= 11
-  page.drawText(item.degree, { x: 42, y, size: 7.7, font: bold, color: colors.text })
-  y -= 10
-  if (item.detail) y = drawWrapped(page, item.detail, 42, y, 511, regular, 7.1, 8.8, colors.muted)
-  return y - 3
+  section(title) {
+    this.need(40); this.y -= 3
+    this.text(title.toUpperCase(), LEFT, 8.4, this.f.bold, colors.cyan)
+    this.page.drawLine({ start: { x: LEFT, y: this.y - 5 }, end: { x: RIGHT, y: this.y - 5 }, thickness: 0.7, color: colors.light })
+    this.y -= 16
+  }
+  bullet(t) {
+    const lines = wrap(t, this.f.regular, 7.55, RIGHT - 54)
+    this.need(lines.length * 9.1)
+    this.page.drawCircle({ x: 46, y: this.y + 2.2, size: 1.4, color: colors.cyan })
+    for (const line of lines) { this.page.drawText(line, { x: 54, y: this.y, size: 7.55, font: this.f.regular, color: colors.text }); this.y -= 9.1 }
+    this.y -= 1.8
+  }
+  finish() {
+    const n = this.pages.length
+    this.pages.forEach((p, i) => {
+      const s = clean(`${this.footer} · ${i + 1}/${n}`)
+      p.drawText(s, { x: RIGHT - this.f.regular.widthOfTextAtSize(s, 6.8), y: 28, size: 6.8, font: this.f.regular, color: colors.muted })
+    })
+  }
 }
 
 async function buildCv(data, fileName) {
   const doc = await PDFDocument.create()
-  doc.setTitle(data.title)
-  doc.setAuthor('Erwhan Le Coueffec')
-  doc.setSubject('Curriculum Vitae')
-  const page = doc.addPage(A4)
-  const regular = await doc.embedFont(StandardFonts.Helvetica)
-  const bold = await doc.embedFont(StandardFonts.HelveticaBold)
+  doc.setTitle(data.title); doc.setAuthor('Erwhan Le Couëffec'); doc.setSubject('Curriculum Vitae')
+  const f = { regular: await doc.embedFont(StandardFonts.Helvetica), bold: await doc.embedFont(StandardFonts.HelveticaBold) }
+  const w = new Writer(doc, f, 'Erwhan Le Couëffec')
 
-  page.drawText('Erwhan Le Coueffec', { x: 42, y: 790, size: 23, font: bold, color: colors.navy })
-  page.drawText(data.subtitle, { x: 42, y: 771, size: 10.5, font: bold, color: colors.cyan })
-  page.drawText(data.contact, { x: 42, y: 754, size: 7.35, font: regular, color: colors.muted })
-  page.drawLine({ start: { x: 42, y: 743 }, end: { x: 553, y: 743 }, thickness: 1.8, color: colors.cyan })
+  w.y = 792; w.text('Erwhan Le Couëffec', LEFT, 23, f.bold, colors.navy, 20)
+  w.text(data.subtitle, LEFT, 10.5, f.bold, colors.cyan, 15)
+  for (const line of data.contact) w.text(line, LEFT, 7.35, f.regular, colors.muted, 10)
+  w.page.drawLine({ start: { x: LEFT, y: w.y + 2 }, end: { x: RIGHT, y: w.y + 2 }, thickness: 1.8, color: colors.cyan })
+  w.y -= 14
 
-  let y = 724
-  y = section(page, data.labels.profile, y, bold)
-  y = drawWrapped(page, data.profile, 42, y, 511, regular, 7.85, 10.1) - 7
+  w.section(data.labels.profile)
+  w.para(data.profile, LEFT, RIGHT - LEFT, 7.85, 10.1); w.y -= 4
 
-  y = section(page, data.labels.experience, y, bold)
-  for (const item of data.experience) y = experience(page, y, item, regular, bold)
-
-  y = section(page, data.labels.education, y, bold)
-  for (const item of data.education) y = education(page, y, item, regular, bold)
-
-  y = section(page, data.labels.skills, y, bold)
-  for (const [label, value] of data.skills) {
-    page.drawText(label, { x: 42, y, size: 7.4, font: bold, color: colors.navy })
-    y = drawWrapped(page, value, 148, y, 405, regular, 7.05, 8.8) - 3
+  w.section(data.labels.experience)
+  for (const item of data.experience) {
+    w.need(60)
+    w.text(item.role, LEFT, 9, f.bold, colors.navy); w.right(item.dates, 7.7, f.regular, colors.muted); w.y -= 11
+    w.text(item.company, LEFT, 7.6, f.bold, colors.cyan, 12)
+    for (const b of item.bullets) w.bullet(b)
+    w.y -= 3
   }
 
-  y = section(page, data.labels.languages, y, bold)
-  y = drawWrapped(page, data.languages, 42, y, 511, regular, 7.25, 9.0)
-  y -= 4
-  drawWrapped(page, data.interests, 42, y, 511, regular, 7.25, 9.0, colors.muted)
+  w.section(data.labels.education)
+  for (const item of data.education) {
+    w.need(40)
+    w.text(item.degree, LEFT, 8.4, f.bold, colors.navy); w.right(item.dates, 7.6, f.regular, colors.muted); w.y -= 11
+    w.text(item.school, LEFT, 7.6, f.bold, colors.cyan, 11)
+    w.para(item.detail, LEFT, RIGHT - LEFT, 7.1, 8.6, f.regular, colors.muted); w.y -= 2
+  }
 
+  w.section(data.labels.projects)
+  for (const p of data.projects) w.bullet(p)
+
+  w.section(data.labels.skills)
+  for (const [label, value] of data.skills) {
+    const lines = wrap(value, f.regular, 7.05, RIGHT - 148)
+    w.need(lines.length * 8.8 + 3)
+    w.text(label, LEFT, 7.4, f.bold, colors.navy)
+    for (const line of lines) { w.page.drawText(line, { x: 148, y: w.y, size: 7.05, font: f.regular, color: colors.text }); w.y -= 8.8 }
+    w.y -= 3
+  }
+
+  w.section(data.labels.languages)
+  for (const line of data.languages) w.para(line, LEFT, RIGHT - LEFT, 7.25, 9.4)
+  w.y -= 2
+  w.para(data.interests, LEFT, RIGHT - LEFT, 7.25, 9.4, f.regular, colors.muted)
+  w.y -= 4
+  w.para(data.references, LEFT, RIGHT - LEFT, 7.25, 9.4, f.bold, colors.navy)
+
+  w.finish()
   mkdirSync(OUT, { recursive: true })
   writeFileSync(`${OUT}/${fileName}`, await doc.save())
 }
 
 const fr = {
-  title: 'CV Erwhan Le Coueffec - FR',
-  subtitle: 'Ingenieur R&D generaliste - Photonique & systemes optiques',
-  contact: 'Mulhouse area, France | +33 6 22 29 11 29 | erwhan43@gmail.com | Permis B',
-  labels: { profile: 'Profil', experience: 'Experience', education: 'Formation', skills: 'Competences', languages: 'Langues & interets' },
-  profile: "Eleve-ingenieur a CentraleSupelec, specialise en photonique, avec une experience terrain en metrologie optique, calibrage, instrumentation et demarche experimentale. Recherche un poste R&D en Suisse avec une forte composante manipulation.",
+  title: 'CV Erwhan Le Couëffec - FR',
+  subtitle: 'Ingénieur R&D — Photonique, métrologie optique & instrumentation',
+  contact: [
+    'Riedisheim (FR), à 30 min de Bâle  |  +33 6 22 29 11 29  |  erwhan43@gmail.com  |  erwhan-le-coueffec.github.io',
+    'Nationalité française (UE, libre circulation des personnes)  |  Permis B  |  Disponibilité immédiate',
+  ],
+  labels: { profile: 'Profil', experience: 'Expérience professionnelle', education: 'Formation', projects: 'Projets académiques (sélection)', skills: 'Compétences', languages: 'Langues & centres d’intérêt' },
+  profile: 'Ingénieur généraliste CentraleSupélec spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
   experience: [
-    { company: 'Holo3', role: 'Ingenieur R&D en apprentissage', dates: 'Oct. 2025 - Sept. 2026', bullets: [
-      "Evaluation du protocole de calibrage du systeme 3D HoloScan (projection de franges, 2 cameras + 1 projecteur) : theorie, propagation d'incertitudes et 5 etudes comparatives ; validation avec une barre a boules certifiee de 250,1097 mm (critere de +/-120 um respecte pour 108 mesures sur 110, +/-60 um atteint dans une partie des cas, fidelite < 2 um).",
-      "Introduction des plans d'experience dans l'equipe (216 -> 27 puis 432 -> 32 configurations) : couleur d'eclairage, exposition, ouverture et angle, tous lies au contraste noir/blanc, identifies comme facteurs influents.",
-      "Mise en evidence de la caracterisation de la mire comme levier principal : mesure sur machines de vision Mitutoyo et Hexagon (courbure de 93 a 155 um).",
+    { role: 'Ingénieur R&D en apprentissage', company: 'Holo3 — Saint-Louis (FR), région de Bâle · métrologie optique', dates: '10.2025 – 09.2026', bullets: [
+      'Évaluation du protocole de calibrage du système de mesure 3D HoloScan (projection de franges, 2 caméras + 1 projecteur) : modèle caméra/projecteur, triangulation et propagation des incertitudes.',
+      '5 études comparatives sur les mêmes acquisitions, validées sur une barre à boules certifiée de 250,1097 mm : critère de ±120 µm respecté pour 108 mesures sur 110, ±60 µm atteint dans une partie des cas, fidélité inférieure à 2 µm.',
+      'Mise en évidence de la caractérisation de la mire comme levier principal : mesure sur machines de vision Mitutoyo et Hexagon (courbure de 93 à 155 µm).',
+      'Introduction des plans d’expérience dans l’équipe (216 → 27, puis 432 → 32 configurations) : couleur d’éclairage, exposition, ouverture et angle, tous liés au contraste noir/blanc, identifiés comme facteurs influents.',
     ]},
-    { company: 'Placoplatre', role: 'Ingenieur WCM / amelioration continue en apprentissage', dates: 'Oct. 2023 - Juin 2025', bullets: [
-      "Maintenance autonome, 5S, identification de risques industriels et creation d'un support visuel OK/NOK pour simplifier le controle de viscosite du platre.",
+    { role: 'Ingénieur WCM / amélioration continue en apprentissage', company: 'Placoplatre (groupe Saint-Gobain) — Chambéry (FR) · production de plaques de plâtre', dates: '10.2023 – 06.2025', bullets: [
+      'Déploiement de standards World Class Manufacturing : maintenance autonome et 5S.',
+      'Identification et analyse de risques industriels sur les lignes de production.',
+      'Conception d’un support visuel OK/NOK simplifiant le contrôle de viscosité du plâtre par les opérateurs.',
+      'Travail transverse avec les équipes production, maintenance et qualité.',
     ]},
-    { company: 'Wilo France', role: 'Apprenti mesures / industrialisation', dates: 'Sept. 2021 - Aout 2022', bullets: [
-      "Reduction de 16 modeles HomeBooster a 3 programmes de test d'etancheite ATEQ, avec parametrage direct des programmes.",
-      "Definition, mesure et deploiement d'une zone EPA certifiee sur la ligne Plavis.",
+    { role: 'Apprenti mesures / industrialisation', company: 'Wilo France — Laval (FR) · pompes pour systèmes sanitaires et incendie', dates: '09.2021 – 08.2022', bullets: [
+      'Rationalisation des tests d’étanchéité de 16 modèles de surpresseurs HomeBooster en 3 programmes ATEQ paramétrés (test de 1 min 30, critère de fuite ≤ 6 cm³/min), soit un gain d’environ 30 s par test.',
+      'Définition, mesure et déploiement d’une zone EPA certifiée (protection contre les décharges électrostatiques) sur la ligne Plavis.',
     ]},
   ],
   education: [
-    { school: 'CentraleSupelec - Metz', dates: '2023 - 2026', degree: 'Formation ingenieur generaliste par apprentissage (FISA)', detail: "3e annee : Physique & Nanotechnologies - Photonics and Nano-systems Engineering. Validation des exigences du diplome attendue d'ici janvier 2027." },
-    { school: 'Lycee Joliot-Curie - Rennes', dates: '2022 - 2023', degree: 'Classe preparatoire ATS', detail: '' },
-    { school: 'Universite du Mans', dates: '2020 - 2022', degree: 'DUT Mesures Physiques', detail: 'Deuxieme annee en apprentissage chez Wilo France ; parcours mixte materiaux et systemes de mesure.' },
+    { degree: 'Ingénieur CentraleSupélec — formation généraliste par apprentissage (FISA)', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: 'Grade de Master (niveau 7 du cadre européen). 3e année : Photonics and Nano-systems Engineering. Mémoire : amélioration du calibrage du système HoloScan. Diplôme en cours de validation administrative (janvier 2027).' },
+    { degree: 'Classe préparatoire ATS', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Année intensive en mathématiques et physique. Classé dans les 10 premiers de la promotion.' },
+    { degree: 'DUT Mesures Physiques', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: '120 ECTS, matériaux et systèmes de mesure ; 2e année en apprentissage chez Wilo France. Classé dans les 15 premiers de la promotion.' },
+  ],
+  projects: [
+    'Diode laser DFB à 1550 nm : courbe L-I, spectre optique (suppression des modes secondaires de 53 dB), oscillations de relaxation jusqu’à 8,5 GHz et réinjection optique.',
+    'Spectroscopie Raman en espace libre : montage en rétrodiffusion construit de A à Z, identification de 8 plastiques inconnus.',
+    'Holographie : enregistrement et reconstruction de l’hologramme 3D d’une pièce métallique à 532 nm.',
+    'Simulation photonique : propagation d’un faisceau dans un cristal photoréfractif (modèle de Kukhtarev, méthode BPM), reservoir computing optoélectronique, Monte-Carlo.',
   ],
   skills: [
-    ['Metrologie / R&D', "Metrologie optique, instrumentation, plan d'experience, analyse d'incertitudes, cameras industrielles"],
-    ['Optique / labo', 'Bancs optiques, lasers, objectifs, polariseurs, lames demi/quart d onde, spectrometre, oscilloscope, generateur de fonctions'],
-    ['Donnees / logiciels', 'MATLAB, Excel avance (Solver, regression, formules), LTspice, LabVIEW (experience anterieure), Python/VBA (notions), SolidWorks (experience anterieure)'],
+    ['Métrologie & R&D', 'Métrologie optique, mesure 3D par projection de franges, calibrage, plans d’expérience, analyse d’incertitudes, caractérisation (justesse, fidélité), caméras industrielles'],
+    ['Optique & laboratoire', 'Bancs optiques, lasers (DFB, He-Ne, Nd:YAG), spectroscopie Raman, analyseurs de spectre optique et RF, polariseurs, lames demi et quart d’onde, oscilloscope'],
+    ['Industrie & qualité', 'Tests d’étanchéité (ATEQ), zones EPA, 5S, maintenance autonome, analyse de risques'],
+    ['Logiciels', 'MATLAB, Python (NumPy, SciPy, Matplotlib), Excel avancé, LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
   ],
-  languages: 'Francais - langue maternelle | Anglais - B1/B2 | Allemand - debutant',
-  interests: 'Handball - 5 ans, niveau amateur/departemental | Escalade de bloc - 5C a 6A',
+  languages: ['Français : langue maternelle  |  Anglais : intermédiaire (B1/B2)  |  Allemand : débutant (A1), en cours d’apprentissage'],
+  interests: 'Handball (5 ans en club, niveau départemental)  |  Escalade de bloc (5C à 6A)',
+  references: 'Références professionnelles disponibles sur demande.',
 }
 
 const en = {
-  title: 'CV Erwhan Le Coueffec - EN',
-  subtitle: 'Generalist R&D Engineer - Photonics & Optical Systems',
-  contact: 'Mulhouse area, France | +33 6 22 29 11 29 | erwhan43@gmail.com | Driving licence B',
-  labels: { profile: 'Profile', experience: 'Experience', education: 'Education', skills: 'Technical skills', languages: 'Languages & interests' },
-  profile: 'CentraleSupelec engineering student specializing in photonics, with hands-on experience in optical metrology, calibration, instrumentation and experimental design. Seeking an R&D position in Switzerland with a strong experimental component.',
+  title: 'CV Erwhan Le Couëffec - EN',
+  subtitle: 'R&D Engineer — Photonics, Optical Metrology & Instrumentation',
+  contact: [
+    'Riedisheim (FR), 30 min from Basel  |  +33 6 22 29 11 29  |  erwhan43@gmail.com  |  erwhan-le-coueffec.github.io',
+    'French national (EU free movement, no sponsorship needed)  |  Driving licence B  |  Available immediately',
+  ],
+  labels: { profile: 'Profile', experience: 'Professional experience', education: 'Education', projects: 'Academic projects (selection)', skills: 'Skills', languages: 'Languages & interests' },
+  profile: 'Generalist engineer from CentraleSupélec specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
   experience: [
-    { company: 'Holo3', role: 'R&D Engineer Apprentice', dates: 'Oct. 2025 - Sep. 2026', bullets: [
-      'Assessed the calibration protocol of the HoloScan 3D system (fringe projection, 2 cameras + 1 projector): theory, uncertainty propagation and 5 comparative studies; validated with a certified 250.1097 mm ball bar (+/-120 um criterion met in 108 of 110 measurements, +/-60 um reached in part of the cases, repeatability < 2 um).',
-      'Introduced Design of Experiments to the team (216 -> 27, then 432 -> 32 configurations): light colour, exposure, aperture and angle, all linked to black/white contrast, identified as influential factors.',
-      'Identified target characterisation as the main lever: target measured on Mitutoyo and Hexagon vision machines (93 to 155 um curvature).',
+    { role: 'R&D Engineer (apprenticeship)', company: 'Holo3 — Saint-Louis (FR), Basel area · optical metrology', dates: '10.2025 – 09.2026', bullets: [
+      'Assessed the calibration protocol of the HoloScan 3D measurement system (fringe projection, 2 cameras + 1 projector): camera/projector model, triangulation and uncertainty propagation.',
+      '5 comparative studies on identical acquisitions, validated with a certified 250.1097 mm ball bar: ±120 µm criterion met in 108 of 110 measurements, ±60 µm reached in part of the cases, repeatability below 2 µm.',
+      'Identified target characterisation as the main lever: target measured on Mitutoyo and Hexagon vision machines (93 to 155 µm curvature).',
+      'Introduced Design of Experiments to the team (216 → 27, then 432 → 32 configurations): light colour, exposure, aperture and angle, all linked to black/white contrast, identified as influential factors.',
     ]},
-    { company: 'Placoplatre', role: 'WCM / Continuous Improvement Engineer Apprentice', dates: 'Oct. 2023 - Jun. 2025', bullets: [
-      'Worked on autonomous maintenance, 5S, industrial risk identification and a visual OK/NOK support to simplify plaster-viscosity control.',
+    { role: 'WCM / Continuous Improvement Engineer (apprenticeship)', company: 'Placoplatre (Saint-Gobain group) — Chambéry (FR) · plasterboard manufacturing', dates: '10.2023 – 06.2025', bullets: [
+      'Deployed World Class Manufacturing standards: autonomous maintenance and 5S.',
+      'Identified and analysed industrial risks on the production lines.',
+      'Designed a visual OK/NOK aid simplifying plaster viscosity checks for operators.',
+      'Cross-functional work with production, maintenance and quality teams.',
     ]},
-    { company: 'Wilo France', role: 'Measurement / Industrialization Apprentice', dates: 'Sep. 2021 - Aug. 2022', bullets: [
-      'Reduced leak-test complexity for 16 HomeBooster pump models to 3 ATEQ test programs and configured the programs directly.',
-      'Defined, measured and deployed a certified Electrostatic Protected Area (EPA) on the Plavis production line.',
+    { role: 'Measurement / Industrialisation Apprentice', company: 'Wilo France — Laval (FR) · pumps for sanitary and fire-protection systems', dates: '09.2021 – 08.2022', bullets: [
+      'Streamlined leak testing of 16 HomeBooster booster-pump models into 3 parameterised ATEQ programs (1 min 30 s test, leak criterion ≤ 6 cm³/min), saving about 30 s per test.',
+      'Defined, measured and deployed a certified EPA (Electrostatic Protected Area) on the Plavis production line.',
     ]},
   ],
   education: [
-    { school: 'CentraleSupelec - Metz', dates: '2023 - 2026', degree: 'Generalist Engineering Program - Apprenticeship (FISA)', detail: 'Third-year focus: Physics & Nanotechnology - Photonics and Nano-systems Engineering. Engineering degree requirements expected to be completed by January 2027.' },
-    { school: 'Lycee Joliot-Curie - Rennes', dates: '2022 - 2023', degree: 'Classe preparatoire ATS', detail: 'Post-technical-degree preparation for engineering-school admission.' },
-    { school: 'Universite du Mans', dates: '2020 - 2022', degree: 'DUT Mesures Physiques', detail: 'Second year completed as an apprentice at Wilo France; mixed focus on materials and measurement systems.' },
+    { degree: 'CentraleSupélec Engineering Degree — generalist programme, apprenticeship track', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: 'Master’s level (EQF level 7). Final year: Photonics and Nano-systems Engineering. Thesis: improving the calibration of the HoloScan system. Degree being formally awarded (January 2027).' },
+    { degree: 'Classe préparatoire ATS (intensive maths & physics year)', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Preparation for engineering-school entrance exams. Ranked in the top 10 of the class.' },
+    { degree: 'DUT Mesures Physiques (2-year technical degree, 120 ECTS)', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: 'Materials and measurement systems; second year as an apprentice at Wilo France. Ranked in the top 15 of the class.' },
+  ],
+  projects: [
+    '1550 nm DFB laser diode: L-I curve, optical spectrum (53 dB side-mode suppression), relaxation oscillations up to 8.5 GHz and optical feedback.',
+    'Free-space Raman spectroscopy: backscattering setup built from scratch, identification of 8 unknown plastics.',
+    'Holography: recording and reconstructing the 3D hologram of a metal part at 532 nm.',
+    'Photonics simulation: beam propagation in a photorefractive crystal (Kukhtarev model, BPM), optoelectronic reservoir computing, Monte Carlo methods.',
   ],
   skills: [
-    ['Metrology / R&D', 'Optical metrology, instrumentation, experimental design, uncertainty analysis, industrial cameras'],
-    ['Optics / lab', 'Optical benches, lasers, objectives, polarizers, half/quarter-wave plates, spectrometer, oscilloscope, function generator'],
-    ['Data / software', 'MATLAB, advanced Excel (Solver, regression, formulas), LTspice, LabVIEW (previous experience), Python/VBA (basic), SolidWorks (previous experience)'],
+    ['Metrology & R&D', 'Optical metrology, fringe-projection 3D measurement, calibration, design of experiments, uncertainty analysis, characterisation (trueness, precision), industrial cameras'],
+    ['Optics & lab', 'Optical benches, lasers (DFB, He-Ne, Nd:YAG), Raman spectroscopy, optical and RF spectrum analysers, polarisers, half- and quarter-wave plates, oscilloscope'],
+    ['Industry & quality', 'Leak testing (ATEQ), EPA zones, 5S, autonomous maintenance, risk analysis'],
+    ['Software', 'MATLAB, Python (NumPy, SciPy, Matplotlib), advanced Excel, LTspice, GOM Inspect, SensorPhase, CalibTool; previously LabVIEW, SolidWorks'],
   ],
-  languages: 'French - Native | English - B1/B2 | German - Beginner',
-  interests: 'Handball - 5 years, amateur/departmental level | Bouldering - 5C to 6A',
+  languages: ['French: native  |  English: intermediate (B1/B2)  |  German: beginner (A1), currently learning'],
+  interests: 'Handball (5 years in a club, regional level)  |  Bouldering (5C to 6A)',
+  references: 'Professional references available on request.',
 }
 
 await buildCv(fr, 'Erwhan_Le_Coueffec_CV_FR.pdf')
 await buildCv(en, 'Erwhan_Le_Coueffec_CV_EN.pdf')
-console.log('Generated CV PDFs in public/cv')

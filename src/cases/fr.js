@@ -4,11 +4,12 @@ const P = 'Position'
 const K = 'Facteur k'
 
 export const fr = {
-  ui: { toc: 'Sommaire', facts: 'Chiffres clés', limit60: 'objectif ±60 µm', limit120: 'critère ±120 µm', unit: 'Écart à la référence (µm)', source: 'Sources : rapport de fin d’études, rapport de mission projet, compte rendu d’essais et supports de soutenance (Holo3 · CentraleSupélec, 2025–2026).' },
+  ui: { brief: 'En bref', briefHeads: ['Le problème', 'Ce que j’ai fait', 'Le résultat'], toc: 'Sommaire', facts: 'Chiffres clés', limit60: 'objectif ±60 µm', limit120: 'critère ±120 µm', unit: 'Écart à la référence (µm)', source: 'Sources : rapport de fin d’études, rapport de mission projet, compte rendu d’essais et supports de soutenance (Holo3 · CentraleSupélec, 2025–2026).' },
 
   holo: {
     kicker: 'Holo3 · Mission de fin d’études · 2026',
     title: 'Évaluer et améliorer le calibrage de HoloScan',
+    brief: ['Holo3 voulait savoir si son protocole de calibrage HoloScan était robuste, et s’il pouvait réduire l’incertitude de mesure.', 'J’ai modélisé toute la chaîne (caméra, projecteur, triangulation, incertitudes), puis comparé 5 variantes de protocole sur les mêmes acquisitions, validées sur une barre à boules certifiée.', 'Protocole confirmé solide : 108 mesures sur 110 dans le critère de ±120 µm, fidélité < 2 µm. La caractérisation de la mire ressort comme le principal levier d’amélioration.'],
     lead: 'Un système industriel de mesure 3D par projection de franges : j’ai repris toute la chaîne de calibrage, de la théorie optique à la propagation des incertitudes, puis comparé cinq variantes de protocole sur les mêmes acquisitions, validées sur une barre à boules certifiée.',
     meta: [
       ['Période', 'Oct. 2025 – sept. 2026 · soutenance le 17/09/2026'],
@@ -150,6 +151,7 @@ export const fr = {
   doe: {
     kicker: 'Holo3 · Mission projet · oct. 2025 – avr. 2026',
     title: 'Quels paramètres influencent la détection d’une mire ?',
+    brief: ['La détection des intersections de mire, première étape de tout calibrage, dépend de nombreux paramètres couplés, jusque-là testés un ou deux à la fois.', 'Étude préliminaire sur 3 mires (~1 300 mesures), puis introduction de deux plans d’expérience dans l’équipe (216 → 27 et 432 → 32 configurations).', 'Couleur d’éclairage → justesse (~0,1 px) ; exposition, ouverture et angle → fidélité (~0,01 px), tous liés au contraste noir/blanc. Calibrer une partie du champ suffit.'],
     lead: 'Avant tout calibrage, une caméra doit détecter précisément les intersections d’une mire. J’ai mené une étude préliminaire sur trois mires, puis introduit dans l’équipe deux plans d’expérience pour quantifier l’effet de l’éclairage, de l’exposition et de l’ouverture.',
     meta: [
       ['Période', 'Oct. 2025 – avr. 2026 · présentation le 28/04/2026'],

@@ -4,11 +4,12 @@ const P = 'Position'
 const K = 'Faktor k'
 
 export const de = {
-  ui: { toc: 'Inhalt', facts: 'Kennzahlen', limit60: 'Ziel ±60 µm', limit120: 'Kriterium ±120 µm', unit: 'Abweichung zur Referenz (µm)', source: 'Quellen: Abschlussarbeit, Projektbericht, Versuchsbericht und Präsentationsfolien (Holo3 · CentraleSupélec, 2025–2026).' },
+  ui: { brief: 'Auf einen Blick', briefHeads: ['Das Problem', 'Was ich gemacht habe', 'Das Ergebnis'], toc: 'Inhalt', facts: 'Kennzahlen', limit60: 'Ziel ±60 µm', limit120: 'Kriterium ±120 µm', unit: 'Abweichung zur Referenz (µm)', source: 'Quellen: Abschlussarbeit, Projektbericht, Versuchsbericht und Präsentationsfolien (Holo3 · CentraleSupélec, 2025–2026).' },
 
   holo: {
     kicker: 'Holo3 · Abschlussarbeit · 2026',
     title: 'Die Kalibrierung von HoloScan bewerten und verbessern',
+    brief: ['Holo3 wollte wissen, ob das Kalibrierprotokoll von HoloScan robust ist und ob sich die Messunsicherheit verringern lässt.', 'Ich habe die gesamte Kette modelliert (Kamera, Projektor, Triangulation, Unsicherheiten) und 5 Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.', 'Protokoll als solide bestätigt: 108 von 110 Messungen innerhalb des Kriteriums von ±120 µm, Wiederholpräzision < 2 µm. Die Charakterisierung des Kalibrierziels ist der wichtigste Hebel.'],
     lead: 'Ein industrielles 3D-Messsystem mit Streifenprojektion. Ich habe die gesamte Kalibrierkette aufgearbeitet, von der optischen Theorie bis zur Unsicherheitsfortpflanzung, und anschließend fünf Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.',
     meta: [
       ['Zeitraum', 'Okt. 2025 – Sep. 2026 · Verteidigung am 17.09.2026'],
@@ -150,6 +151,7 @@ export const de = {
   doe: {
     kicker: 'Holo3 · Ingenieurprojekt · Okt. 2025 – Apr. 2026',
     title: 'Welche Parameter beeinflussen die Erkennung eines Kalibrierziels?',
+    brief: ['Die Erkennung der Zielkreuzungen, erster Schritt jeder Kalibrierung, hängt von vielen gekoppelten Parametern ab, die bisher einzeln getestet wurden.', 'Vorstudie an 3 Kalibrierzielen (~1 300 Messungen), dann Einführung von zwei Versuchsplänen im Team (216 → 27 und 432 → 32 Konfigurationen).', 'Lichtfarbe → Richtigkeit (~0,1 px); Belichtung, Blende und Winkel → Präzision (~0,01 px), alle mit dem Schwarz-Weiß-Kontrast verknüpft. Ein Teil des Feldes reicht zur Kalibrierung.'],
     lead: 'Vor jeder Kalibrierung muss eine Kamera die Kreuzungen eines Kalibrierziels präzise erkennen. Ich habe eine Vorstudie an drei Zielen durchgeführt und dann zwei Versuchspläne im Team eingeführt, um den Einfluss von Beleuchtung, Belichtung und Blende zu quantifizieren.',
     meta: [
       ['Zeitraum', 'Okt. 2025 – Apr. 2026 · präsentiert am 28.04.2026'],

@@ -4,11 +4,12 @@ const P = 'Position'
 const K = 'k factor'
 
 export const en = {
-  ui: { toc: 'Contents', facts: 'Key figures', limit60: '±60 µm target', limit120: '±120 µm criterion', unit: 'Deviation from reference (µm)', source: 'Sources: master’s thesis, project report, test report and defence slides (Holo3 · CentraleSupélec, 2025–2026).' },
+  ui: { brief: 'At a glance', briefHeads: ['The problem', 'What I did', 'The result'], toc: 'Contents', facts: 'Key figures', limit60: '±60 µm target', limit120: '±120 µm criterion', unit: 'Deviation from reference (µm)', source: 'Sources: master’s thesis, project report, test report and defence slides (Holo3 · CentraleSupélec, 2025–2026).' },
 
   holo: {
     kicker: 'Holo3 · Master’s thesis project · 2026',
     title: 'Assessing and improving the calibration of HoloScan',
+    brief: ['Holo3 wanted to know whether its HoloScan calibration protocol was robust, and whether measurement uncertainty could be reduced.', 'I modelled the full chain (camera, projector, triangulation, uncertainties), then compared 5 protocol variants on identical acquisitions, validated on a certified ball bar.', 'Protocol confirmed as solid: 108 of 110 measurements within the ±120 µm criterion, repeatability < 2 µm. Target characterisation emerged as the main lever for improvement.'],
     lead: 'An industrial fringe-projection 3D measurement system. I worked through the full calibration chain, from optical theory to uncertainty propagation, then compared five protocol variants on identical acquisitions, validated on a certified ball bar.',
     meta: [
       ['Period', 'Oct. 2025 – Sep. 2026 · defended on 17 Sep. 2026'],
@@ -150,6 +151,7 @@ export const en = {
   doe: {
     kicker: 'Holo3 · Engineering project · Oct. 2025 – Apr. 2026',
     title: 'Which parameters affect calibration-target detection?',
+    brief: ['Detecting calibration-target intersections, the first step of any calibration, depends on many coupled parameters, previously tested one or two at a time.', 'Preliminary study on 3 targets (~1,300 measurements), then introduced two Designs of Experiments to the team (216 → 27 and 432 → 32 configurations).', 'Light colour → trueness (~0.1 px); exposure, aperture and angle → precision (~0.01 px), all linked to black/white contrast. Calibrating part of the field is enough.'],
     lead: 'Before any calibration, a camera must precisely detect the intersections of a target. I ran a preliminary study on three targets, then introduced two Designs of Experiments to the team to quantify the effect of lighting, exposure and aperture.',
     meta: [
       ['Period', 'Oct. 2025 – Apr. 2026 · presented on 28 Apr. 2026'],

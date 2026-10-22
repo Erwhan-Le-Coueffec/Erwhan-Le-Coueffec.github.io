@@ -1,4 +1,6 @@
 export const EMAIL = 'erwhan43@gmail.com'
+// Paste the LinkedIn profile URL here to show the button.
+export const LINKEDIN = ''
 
 const shared = {
   stats: { holo: '< 2 µm', doe: '216 → 27' },
@@ -8,12 +10,12 @@ const shared = {
 export const copy = {
   en: {
     nav: ['About','Projects','Experience','Skills','Contact'],
-    hero: ['Available now · Open to relocation in Switzerland','Generalist R&D Engineer','specialized in photonics & optical systems','CentraleSupélec engineering student focused on experimental R&D, optical metrology, instrumentation and hands-on problem solving.','View my projects','Contact me','Mulhouse area, France'],
+    hero: ['Available now · Open to relocation in Switzerland','Generalist R&D Engineer','specialized in photonics & optical systems','CentraleSupélec engineer (degree being formally awarded) focused on experimental R&D, optical metrology, instrumentation and hands-on problem solving.','View my projects','Contact me','Riedisheim (FR) · 30 min from Basel · EU citizen (free movement, no sponsorship needed)'],
     about: ['About','I like understanding systems, testing ideas and turning uncertainty into measurements.','My path combines physical measurements, industrial experience and a generalist engineering education at CentraleSupélec, followed by a third-year specialization in Photonics and Nano-systems.','R&D appeals to me because it brings together innovation, problem solving and the need to understand how things work. I am looking for roles combining experimental work and analysis, ideally with at least as much hands-on work as computer work.','How I work','I start by learning the theory and asking for feedback when needed. Then I test, iterate and learn from the result — including when an experiment does not behave as expected.'],
     looking: ['Currently looking for','R&D','Photonics','Optical systems','Instrumentation','Switzerland'],
     projects: ['Selected projects','Research and engineering work built around measurement.','Two R&D projects carried out at Holo3: assessing the calibration of a fringe-projection 3D measurement system, and experimentally characterising the parameters that affect calibration-target detection.'],
-    holo: ['Optical metrology · Holo3','Assessing and improving HoloScan calibration','Objective assessment of the calibration protocol of a fringe-projection 3D system (2 cameras + 1 projector): theory, uncertainty propagation and 5 comparative studies validated on a certified ball bar.',shared.stats.holo,'measured repeatability on a certified ball bar','Read case study'],
-    doe: ['Experimental design · Holo3','Calibration-target detection — Design of Experiments','A preliminary study on 3 targets, then two Designs of Experiments to quantify how lighting, exposure and aperture affect intersection detection.',shared.stats.doe,'configurations with the first Design of Experiments','Read case study'],
+    holo: ['Optical metrology · Holo3','Assessing and improving HoloScan calibration','Objective assessment of the calibration protocol of a fringe-projection 3D system (2 cameras + 1 projector): theory, uncertainty propagation and 5 comparative studies validated on a certified ball bar.',shared.stats.holo,'measured repeatability on a certified ball bar','Read case study','Ball-bar deviations of the 110 calibration measurements against the ±120 µm criterion'],
+    doe: ['Experimental design · Holo3','Calibration-target detection — Design of Experiments','A preliminary study on 3 targets, then two Designs of Experiments to quantify how lighting, exposure and aperture affect intersection detection.',shared.stats.doe,'configurations with the first Design of Experiments','Read case study','Number of configurations: full factorial versus Design of Experiments'],
     academic: ['Lab work & academic projects',['DFB laser diode dynamics','L-I curve, optical spectrum, relaxation oscillations up to 8.5 GHz and optical feedback on a 1550 nm telecom laser.'],['Free-space Raman spectroscopy','Backscattering setup built from scratch and identification of 8 unknown plastics.'],['Optical holography','Recording and reconstructing the 3D hologram of a metal part at 532 nm.']],
     academicLink: 'See all 8 lab projects',
     expTitle: ['Experience','From industrial measurement to experimental R&D.'],
@@ -24,13 +26,13 @@ export const copy = {
     ],
     eduTitle: ['Education','A generalist engineering path anchored in physical measurement.'],
     edu: [
-      ['CentraleSupélec · Metz','2023 — 2026','Generalist Engineering Program — Apprenticeship (FISA)','Third-year focus: Physics & Nanotechnology · Photonics and Nano-systems Engineering.','Engineering degree requirements expected to be completed by January 2027.'],
+      ['CentraleSupélec · Metz','2023 — 2026','Generalist Engineering Program — Apprenticeship (FISA)','Third-year focus: Physics & Nanotechnology · Photonics and Nano-systems Engineering.','Degree being formally awarded (January 2027). Master’s level (EQF 7).'],
       ['Lycée Joliot-Curie · Rennes','2022 — 2023','Classe préparatoire ATS','Engineering-school preparation after a technical university degree.',''],
       ['Université du Mans','2020 — 2022','DUT Mesures Physiques','Mixed curriculum between materials and measurement systems; second year completed as an apprentice at Wilo France.',''],
     ],
     skillsTitle: ['Technical skills','Measurement first. Tools second.'],
     skills: [['Core','Optical metrology · Instrumentation · Experimental design · Uncertainty analysis · Industrial cameras'],['Optics & lab','Optical benches · Lasers · Objectives · Polarizers · λ/2 & λ/4 waveplates · Spectrometer · Oscilloscope · Function generator'],['Data & software','MATLAB · Advanced Excel · LTspice · LabVIEW (previous experience) · Python/VBA (basic) · SolidWorks (previous experience)']],
-    language: ['Languages','French — Native','English — B1/B2','German — Beginner'],
+    language: ['Languages','French — Native','English — B1/B2','German — Beginner (A1), currently learning'],
     interests: ['Outside engineering','Handball — 5 years, amateur / departmental level · Bouldering — 5C to 6A'],
     contact: ['Contact','Interested in building and improving real systems.','Available now and open to relocation anywhere in Switzerland for an R&D role with a strong experimental component.','Email me','LinkedIn','CV FR','CV EN'],
     back: 'Back to portfolio',
@@ -38,12 +40,12 @@ export const copy = {
   },
   fr: {
     nav: ['À propos','Projets','Expérience','Compétences','Contact'],
-    hero: ['Disponible immédiatement · Mobile partout en Suisse','Ingénieur R&D généraliste','spécialisé en photonique & systèmes optiques','Élève-ingénieur à CentraleSupélec orienté R&D expérimentale, métrologie optique, instrumentation et résolution de problèmes sur systèmes réels.','Voir mes projets','Me contacter','Région de Mulhouse, France'],
+    hero: ['Disponible immédiatement · Mobile partout en Suisse','Ingénieur R&D généraliste','spécialisé en photonique & systèmes optiques','Ingénieur CentraleSupélec (diplôme en cours de validation) orienté R&D expérimentale, métrologie optique, instrumentation et résolution de problèmes sur systèmes réels.','Voir mes projets','Me contacter','Riedisheim (FR) · à 30 min de Bâle · citoyen UE (libre circulation)'],
     about: ['À propos','J’aime comprendre les systèmes, tester des idées et transformer l’incertitude en mesure.','Mon parcours associe mesures physiques, expérience industrielle et formation d’ingénieur généraliste à CentraleSupélec, complétée en troisième année par une spécialisation en photonique et nano-systèmes.','La R&D m’attire pour l’innovation, la recherche de solutions et la compréhension du fonctionnement réel des systèmes. Je recherche des postes mêlant expérimentation et analyse, avec une préférence pour une part de manipulation au moins aussi importante que le travail sur ordinateur.','Ma façon de travailler','Je commence par comprendre la théorie et je demande de l’aide ou des retours lorsque c’est utile. Ensuite, je teste, j’itère et j’apprends du résultat — y compris lorsqu’un essai ne donne pas ce qui était attendu.'],
     looking: ['Ce que je recherche','R&D','Photonique','Systèmes optiques','Instrumentation','Suisse'],
     projects: ['Projets sélectionnés','Des travaux de recherche et d’ingénierie centrés sur la mesure.','Deux projets R&D menés chez Holo3 : l’évaluation du calibrage d’un système de mesure 3D par projection de franges, et la caractérisation expérimentale des paramètres qui influencent la détection de mires.'],
-    holo: ['Métrologie optique · Holo3','Évaluer et améliorer le calibrage HoloScan','Évaluation objective du protocole de calibrage d’un système 3D par projection de franges (2 caméras + 1 projecteur) : théorie, propagation d’incertitudes et 5 études comparatives validées sur barre à boules certifiée.',shared.stats.holo,'fidélité mesurée sur barre à boules certifiée','Voir l’étude de cas'],
-    doe: ['Plan d’expérience · Holo3','Détection de mire — plans d’expérience','Une étude préliminaire sur 3 mires, puis deux plans d’expérience pour quantifier l’influence de l’éclairage, de l’exposition et de l’ouverture sur la détection des intersections.',shared.stats.doe,'configurations grâce au premier plan d’expérience','Voir l’étude de cas'],
+    holo: ['Métrologie optique · Holo3','Évaluer et améliorer le calibrage HoloScan','Évaluation objective du protocole de calibrage d’un système 3D par projection de franges (2 caméras + 1 projecteur) : théorie, propagation d’incertitudes et 5 études comparatives validées sur barre à boules certifiée.',shared.stats.holo,'fidélité mesurée sur barre à boules certifiée','Voir l’étude de cas','Écarts à la barre à boules des 110 mesures de calibrage face au critère de ±120 µm'],
+    doe: ['Plan d’expérience · Holo3','Détection de mire — plans d’expérience','Une étude préliminaire sur 3 mires, puis deux plans d’expérience pour quantifier l’influence de l’éclairage, de l’exposition et de l’ouverture sur la détection des intersections.',shared.stats.doe,'configurations grâce au premier plan d’expérience','Voir l’étude de cas','Nombre de configurations : plan complet contre plan d’expérience'],
     academic: ['TP & projets académiques',['Dynamique d’une diode laser DFB','Courbe L-I, spectre optique, oscillations de relaxation jusqu’à 8,5 GHz et réinjection optique sur un laser télécom à 1550 nm.'],['Spectroscopie Raman en espace libre','Montage en rétrodiffusion construit de A à Z et identification de 8 plastiques inconnus.'],['Holographie optique','Enregistrement et reconstruction de l’hologramme 3D d’une pièce métallique à 532 nm.']],
     academicLink: 'Voir les 8 TP détaillés',
     expTitle: ['Expérience','De la mesure industrielle à la R&D expérimentale.'],
@@ -53,10 +55,10 @@ export const copy = {
       ['Wilo France','Apprenti mesures / industrialisation','Sept. 2021 — Août 2022',['Réduction de 16 modèles HomeBooster à 3 programmes de test d’étanchéité ATEQ, avec paramétrage des programmes.','Définition, mesure et déploiement d’une zone EPA certifiée sur la ligne Plavis.']],
     ],
     eduTitle: ['Formation','Un parcours d’ingénieur généraliste ancré dans la mesure physique.'],
-    edu: [['CentraleSupélec · Metz','2023 — 2026','Formation ingénieur généraliste par apprentissage (FISA)','3e année : Physique & Nanotechnologies · Photonics and Nano-systems Engineering.','Validation des exigences du diplôme attendue d’ici janvier 2027.'],['Lycée Joliot-Curie · Rennes','2022 — 2023','Classe préparatoire ATS','Préparation aux écoles d’ingénieurs après formation technologique.',''],['Université du Mans','2020 — 2022','DUT Mesures Physiques','Parcours mêlant matériaux et systèmes de mesure ; deuxième année en apprentissage chez Wilo France.','']],
+    edu: [['CentraleSupélec · Metz','2023 — 2026','Formation ingénieur généraliste par apprentissage (FISA)','3e année : Physique & Nanotechnologies · Photonics and Nano-systems Engineering.','Diplôme en cours de validation administrative (janvier 2027). Grade de Master (niveau 7 du cadre européen).'],['Lycée Joliot-Curie · Rennes','2022 — 2023','Classe préparatoire ATS','Préparation aux écoles d’ingénieurs après formation technologique.',''],['Université du Mans','2020 — 2022','DUT Mesures Physiques','Parcours mêlant matériaux et systèmes de mesure ; deuxième année en apprentissage chez Wilo France.','']],
     skillsTitle: ['Compétences techniques','La mesure d’abord. Les outils ensuite.'],
     skills: [['Cœur de métier','Métrologie optique · Instrumentation · Plan d’expérience · Analyse d’incertitudes · Caméras industrielles'],['Optique & laboratoire','Bancs optiques · Lasers · Objectifs · Polariseurs · Lames λ/2 & λ/4 · Spectromètre · Oscilloscope · Générateur de fonctions'],['Données & logiciels','MATLAB · Excel avancé · LTspice · LabVIEW (expérience antérieure) · Python/VBA (notions) · SolidWorks (expérience antérieure)']],
-    language: ['Langues','Français — langue maternelle','Anglais — B1/B2','Allemand — débutant'],
+    language: ['Langues','Français — langue maternelle','Anglais — B1/B2','Allemand — débutant (A1), en cours d’apprentissage'],
     interests: ['En dehors de l’ingénierie','Handball — 5 ans, niveau amateur / départemental · Escalade de bloc — 5C à 6A'],
     contact: ['Contact','Envie de concevoir et d’améliorer des systèmes réels.','Disponible immédiatement et mobile partout en Suisse pour un poste R&D avec une forte composante expérimentale.','M’écrire','LinkedIn','CV FR','CV EN'],
     back: 'Retour au portfolio',
@@ -66,12 +68,12 @@ export const copy = {
 
 copy.de = {
   nav: ['Über mich','Projekte','Erfahrung','Kompetenzen','Kontakt'],
-  hero: ['Ab sofort verfügbar · Umzugsbereit innerhalb der Schweiz','Generalistischer F&E-Ingenieur','mit Spezialisierung auf Photonik & optische Systeme','Ingenieurstudent an der CentraleSupélec mit Schwerpunkt auf experimenteller F&E, optischer Messtechnik, Instrumentierung und praxisnaher Problemlösung.','Projekte ansehen','Kontakt aufnehmen','Region Mulhouse, Frankreich'],
+  hero: ['Ab sofort verfügbar · Umzugsbereit innerhalb der Schweiz','Generalistischer F&E-Ingenieur','mit Spezialisierung auf Photonik & optische Systeme','Ingenieur der CentraleSupélec (Diplom in der formalen Verleihung) mit Schwerpunkt auf experimenteller F&E, optischer Messtechnik, Instrumentierung und praxisnaher Problemlösung.','Projekte ansehen','Kontakt aufnehmen','Riedisheim (FR) · 30 Min. von Basel · EU-Bürger (Personenfreizügigkeit)'],
   about: ['Über mich','Ich möchte Systeme verstehen, Ideen testen und Unsicherheit in messbare Ergebnisse übersetzen.','Mein Werdegang verbindet physikalische Messtechnik, Industrieerfahrung und eine generalistische Ingenieurausbildung an der CentraleSupélec mit einer Spezialisierung auf Photonik und Nano-Systeme.','Forschung und Entwicklung interessiert mich, weil Innovation, Problemlösung und technisches Verständnis zusammenkommen. Ich suche Aufgaben, die Experiment und Analyse verbinden, idealerweise mit mindestens ebenso viel praktischer Arbeit wie Computerarbeit.','Meine Arbeitsweise','Ich beginne damit, die Theorie zu verstehen, hole mir bei Bedarf Feedback und teste anschließend selbstständig. Aus jedem Ergebnis lässt sich etwas lernen — auch wenn ein Versuch anders ausfällt als erwartet.'],
   looking: ['Gesucht','F&E','Photonik','Optische Systeme','Instrumentierung','Schweiz'],
   projects: ['Ausgewählte Projekte','Forschungs- und Ingenieurarbeit mit Fokus auf Messtechnik.','Zwei F&E-Projekte bei Holo3: die Bewertung der Kalibrierung eines 3D-Messsystems mit Streifenprojektion und die experimentelle Charakterisierung der Parameter, die die Erkennung von Kalibrierzielen beeinflussen.'],
-  holo: ['Optische Messtechnik · Holo3','HoloScan-Kalibrierung bewerten und verbessern','Objektive Bewertung des Kalibrierprotokolls eines 3D-Systems mit Streifenprojektion (2 Kameras + 1 Projektor): Theorie, Unsicherheitsfortpflanzung und 5 Vergleichsstudien, validiert mit einer zertifizierten Kugelstange.',shared.stats.holo,'gemessene Wiederholpräzision an einer zertifizierten Kugelstange','Fallstudie lesen'],
-  doe: ['Versuchsplanung · Holo3','Kalibrierziel-Erkennung — Versuchsplanung','Eine Vorstudie an 3 Kalibrierzielen, dann zwei Versuchspläne zur Quantifizierung des Einflusses von Beleuchtung, Belichtung und Blende auf die Kreuzungserkennung.',shared.stats.doe,'Konfigurationen dank des ersten Versuchsplans','Fallstudie lesen'],
+  holo: ['Optische Messtechnik · Holo3','HoloScan-Kalibrierung bewerten und verbessern','Objektive Bewertung des Kalibrierprotokolls eines 3D-Systems mit Streifenprojektion (2 Kameras + 1 Projektor): Theorie, Unsicherheitsfortpflanzung und 5 Vergleichsstudien, validiert mit einer zertifizierten Kugelstange.',shared.stats.holo,'gemessene Wiederholpräzision an einer zertifizierten Kugelstange','Fallstudie lesen','Abweichungen der 110 Kalibriermessungen an der Kugelstange gegenüber dem Kriterium ±120 µm'],
+  doe: ['Versuchsplanung · Holo3','Kalibrierziel-Erkennung — Versuchsplanung','Eine Vorstudie an 3 Kalibrierzielen, dann zwei Versuchspläne zur Quantifizierung des Einflusses von Beleuchtung, Belichtung und Blende auf die Kreuzungserkennung.',shared.stats.doe,'Konfigurationen dank des ersten Versuchsplans','Fallstudie lesen','Anzahl der Konfigurationen: vollfaktorieller Plan gegenüber Versuchsplan'],
   academic: ['Laborpraktika & Studienprojekte',['Dynamik einer DFB-Laserdiode','L-I-Kennlinie, optisches Spektrum, Relaxationsoszillationen bis 8,5 GHz und optische Rückkopplung an einem 1550-nm-Telekomlaser.'],['Raman-Spektroskopie im Freistrahl','Rückstreuaufbau von Grund auf aufgebaut und Identifizierung von 8 unbekannten Kunststoffen.'],['Optische Holografie','Aufnahme und Rekonstruktion des 3D-Hologramms eines Metallteils bei 532 nm.']],
   academicLink: 'Alle 8 Laborprojekte ansehen',
   expTitle: ['Erfahrung','Von industrieller Messtechnik zu experimenteller F&E.'],
@@ -82,7 +84,7 @@ copy.de = {
   ],
   eduTitle: ['Ausbildung','Ein generalistischer Ingenieurweg mit starkem Bezug zur physikalischen Messtechnik.'],
   edu: [
-    ['CentraleSupélec · Metz','2023 — 2026','Generalistisches Ingenieurstudium im dualen Modell (FISA)','3. Studienjahr: Physik & Nanotechnologie · Photonics and Nano-systems Engineering.','Abschlussvoraussetzungen voraussichtlich bis Januar 2027 vollständig erfüllt.'],
+    ['CentraleSupélec · Metz','2023 — 2026','Generalistisches Ingenieurstudium im dualen Modell (FISA)','3. Studienjahr: Physik & Nanotechnologie · Photonics and Nano-systems Engineering.','Diplom in der formalen Verleihung (Januar 2027). Master-Niveau (EQR 7).'],
     ['Lycée Joliot-Curie · Rennes','2022 — 2023','Classe préparatoire ATS','Vorbereitung auf die Aufnahme an einer Ingenieurhochschule nach einem technischen Hochschulabschluss.',''],
     ['Université du Mans','2020 — 2022','DUT Mesures Physiques','Kombination aus Werkstoffkunde und Messsystemen; zweites Jahr als dualer Student bei Wilo France.',''],
   ],
@@ -92,7 +94,7 @@ copy.de = {
     ['Optik & Labor','Optische Bänke · Laser · Objektive · Polarisatoren · λ/2- & λ/4-Platten · Spektrometer · Oszilloskop · Funktionsgenerator'],
     ['Daten & Software','MATLAB · Fortgeschrittenes Excel · LTspice · LabVIEW (frühere Erfahrung) · Python/VBA (Grundkenntnisse) · SolidWorks (frühere Erfahrung)'],
   ],
-  language: ['Sprachen','Französisch — Muttersprache','Englisch — B1/B2','Deutsch — Anfänger'],
+  language: ['Sprachen','Französisch — Muttersprache','Englisch — B1/B2','Deutsch — Anfänger (A1), lerne aktiv'],
   interests: ['Außerhalb der Technik','Handball — 5 Jahre, Amateur-/Département-Niveau · Bouldern — 5C bis 6A'],
   contact: ['Kontakt','Interesse daran, reale Systeme zu entwickeln und zu verbessern.','Ab sofort verfügbar und für eine F&E-Stelle mit starkem experimentellem Anteil umzugsbereit innerhalb der Schweiz.','E-Mail senden','LinkedIn','CV FR','CV EN'],
   back: 'Zurück zum Portfolio',
