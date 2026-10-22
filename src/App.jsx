@@ -3,6 +3,7 @@ import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { motion as Motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Download, Languages, Mail, MapPin, Menu, Microscope, MoveRight, Ruler, Sparkles, X } from 'lucide-react'
 import { copy, EMAIL } from './copy'
+import { cases } from './cases'
 
 const ids = ['about','projects','experience','skills','contact']
 const card = 'border border-cyan-100/10 bg-white/[.025] rounded-2xl'
@@ -51,13 +52,76 @@ function Home({t}) {
   </main>
 }
 
-function CasePage({t,type}) {
-  const data=type==='holo'?t.holoCase:t.doeCase; useEffect(()=>window.scrollTo(0,0),[type])
-  return <main className={`${shell} min-h-screen pb-24 pt-28`}><Link className="inline-flex items-center gap-2 text-sm text-slate-400" to="/"><ArrowLeft size={16}/>{t.back}</Link><div className="max-w-4xl py-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{data[0]}</p><h1 className="mt-3 text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-none tracking-[-.055em]">{data[1]}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">{data[2]}</p></div><div className="grid h-64 place-items-center rounded-2xl border border-cyan-100/10 bg-[radial-gradient(circle_at_70%_30%,rgba(66,205,248,.15),transparent_30%),repeating-linear-gradient(90deg,rgba(84,214,255,.04)_0_1px,transparent_1px_28px),#08141c] text-sm text-slate-600">Project visual · final photo / graph to add</div><div className="mt-10 border-t border-cyan-100/10">{data.slice(3).map((body,i)=><article className={`grid gap-3 border-b border-cyan-100/10 py-7 md:grid-cols-[4rem_1fr] ${i===4?'text-cyan-100':''}`} key={t.caseLabels[i]}><span className="text-xs text-slate-600">0{i+1}</span><div className="max-w-4xl"><h2 className="font-semibold">{t.caseLabels[i]}</h2><p className="mt-3 leading-8 text-slate-400">{body}</p></div></article>)}</div></main>
+const locales = { fr: 'fr-FR', en: 'en-US', de: 'de-DE' }
+function fmt(v, lang, minFrac = 0) {
+  if (typeof v === 'number') return v.toLocaleString(locales[lang] || 'en-US', { minimumFractionDigits: Number.isInteger(v) && !minFrac ? 0 : minFrac, maximumFractionDigits: 5, useGrouping: false }).replace('-', '−')
+  if (typeof v === 'string' && lang !== 'en' && /^-?\d+\.\d+(e-?\d+)?$/.test(v)) return v.replace('.', ',').replace('-', '−')
+  return v
+}
+
+const seriesColors = ['#54d6ff', '#a5f3fc', '#fbbf24', '#fb7185']
+function DeviationChart({ chart, ui, lang }) {
+  const W = 640, H = 300, L = 52, R = 12, T = 14, B = 34, max = 140
+  const y = v => T + (max - Math.max(-max, Math.min(max, v))) / (2 * max) * (H - T - B)
+  const group = (W - L - R) / 5
+  const n = chart.series.length
+  return <figure className={`${card} my-6 p-4`}>
+    <figcaption className="mb-3 text-sm font-semibold text-slate-200">{chart.c}</figcaption>
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={chart.c} className="h-auto w-full">
+      <rect x={L} y={y(60)} width={W - L - R} height={y(-60) - y(60)} fill="rgba(84,214,255,.08)" />
+      {[120, -120].map(v => <line key={v} x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="#f87171" strokeDasharray="5 5" strokeOpacity=".7" />)}
+      {[-120, -60, 0, 60, 120].map(v => <g key={v}><line x1={L - 4} x2={W - R} y1={y(v)} y2={y(v)} stroke="rgba(255,255,255,.08)" /><text x={L - 8} y={y(v) + 4} textAnchor="end" fontSize="11" fill="#94a3b8">{fmt(v, lang)}</text></g>)}
+      {[0, 1, 2, 3, 4].map(i => <text key={i} x={L + group * (i + .5)} y={H - 10} textAnchor="middle" fontSize="11" fill="#94a3b8">P{i + 1}</text>)}
+      {chart.series.map(([name, vals], s) => vals.map((v, i) => { const cx = L + group * i + group * (s + 1) / (n + 1); return <g key={name + i}><line x1={cx} x2={cx} y1={y(0)} y2={y(v)} stroke={seriesColors[s]} strokeOpacity=".35" strokeWidth="2" /><circle cx={cx} cy={y(v)} r="5" fill={seriesColors[s]}><title>{`${name} · P${i + 1} : ${fmt(v, lang)} µm`}</title></circle></g> }))}
+      <text x="14" y={H / 2} transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle" fontSize="11" fill="#94a3b8">µm</text>
+    </svg>
+    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-400">
+      {chart.series.map(([name], s) => <span key={name} className="inline-flex items-center gap-2"><i className="h-2.5 w-2.5 rounded-full" style={{ background: seriesColors[s] }} />{name}</span>)}
+      <span className="inline-flex items-center gap-2"><i className="h-2.5 w-4 rounded-sm bg-cyan-300/20" />{ui.limit60}</span>
+      <span className="inline-flex items-center gap-2"><i className="w-4 border-t border-dashed border-red-400" />{ui.limit120}</span>
+    </div>
+  </figure>
+}
+
+function Block({ b, ui, lang }) {
+  if (typeof b === 'string') return <p className="mt-4 leading-8 text-slate-400">{b}</p>
+  if (b.ul) return <ul className="mt-4 list-disc space-y-2 pl-5 leading-7 text-slate-400 marker:text-cyan-300">{b.ul.map(x => <li key={x}>{x}</li>)}</ul>
+  if (b.eq) return <div className="mt-4 overflow-x-auto rounded-xl border border-cyan-100/10 bg-[#08141c] px-4 py-3 font-mono text-sm leading-7 whitespace-pre text-cyan-100">{b.eq}</div>
+  if (b.note) return <p className="mt-5 rounded-xl border-l-2 border-cyan-300 bg-cyan-300/5 px-4 py-3 leading-7 text-cyan-50">{b.note}</p>
+  if (b.chart) return <DeviationChart chart={b.chart} ui={ui} lang={lang} />
+  if (b.table) return <figure className="mt-5">
+    <figcaption className="mb-2 text-xs font-semibold tracking-[.04em] text-slate-500">{b.table.c}</figcaption>
+    <div className="overflow-x-auto rounded-xl border border-cyan-100/10">
+      <table className="w-full min-w-max border-collapse text-left text-sm">
+        <thead className="bg-white/[.03] text-xs text-slate-300"><tr>{b.table.h.map((h, i) => <th key={i} scope="col" className="px-3 py-2 font-semibold">{h}</th>)}</tr></thead>
+        <tbody>{b.table.r.map((row, i) => <tr key={i} className="border-t border-cyan-100/5">{row.map((cell, j) => j === 0 ? <th key={j} scope="row" className="px-3 py-2 font-medium text-slate-300">{cell}</th> : <td key={j} className={`px-3 py-2 tabular-nums ${typeof cell === 'number' && Math.abs(cell) > 60 && b.table.c.includes('µm') && !String(row[0]).startsWith('σ') ? 'text-amber-300' : 'text-slate-400'}`}>{fmt(cell, lang, /^(Position|σ|u\()/.test(String(row[0])) ? 1 : 0)}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+  </figure>
+  return null
+}
+
+function CasePage({t,lang,type}) {
+  const c = cases[lang] || cases.en; const data = c[type]; const ui = c.ui
+  useEffect(()=>window.scrollTo(0,0),[type])
+  return <main className={`${shell} min-h-screen pb-24 pt-28`}>
+    <Link className="inline-flex items-center gap-2 text-sm text-slate-400" to="/"><ArrowLeft size={16}/>{t.back}</Link>
+    <div className="max-w-4xl py-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{data.kicker}</p><h1 className="mt-3 text-[clamp(2.3rem,7vw,4.6rem)] font-semibold leading-none tracking-[-.055em]">{data.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">{data.lead}</p>
+      <dl className="mt-8 grid gap-4 md:grid-cols-3">{data.meta.map(([k,v])=><div key={k} className="border-t border-cyan-100/10 pt-3"><dt className="text-xs font-bold uppercase tracking-[.14em] text-slate-500">{k}</dt><dd className="mt-2 text-sm leading-6 text-slate-300">{v}</dd></div>)}</dl>
+    </div>
+    <section aria-label={ui.facts} className="grid grid-cols-2 gap-3 md:grid-cols-5">{data.facts.map(([v,l])=><div key={l} className={`${card} p-4`}><strong className="block text-2xl tracking-[-.03em] text-cyan-100">{v}</strong><span className="mt-2 block text-xs leading-5 text-slate-400">{l}</span></div>)}</section>
+    <div className="mt-12 grid gap-10 lg:grid-cols-[15rem_1fr]">
+      <nav aria-label={ui.toc} className="lg:sticky lg:top-24 lg:self-start"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{ui.toc}</p><ol className="mt-3 flex flex-wrap gap-2 lg:block lg:space-y-1">{data.sections.map((s,i)=><li key={s.title}><a href={`#s-${i}`} className="block rounded-lg border border-cyan-100/10 px-3 py-1.5 text-xs text-slate-400 hover:text-white lg:border-0 lg:px-0 lg:py-1 lg:text-sm">{s.title}</a></li>)}</ol></nav>
+      <div className="min-w-0 border-t border-cyan-100/10">
+        {data.sections.map((s,i)=><article id={`s-${i}`} key={s.title} className="scroll-mt-24 border-b border-cyan-100/10 py-8"><span className="text-xs text-slate-600">{String(i+1).padStart(2,'0')}</span><h2 className="mt-1 text-xl font-semibold md:text-2xl">{s.title}</h2><div className="max-w-4xl">{s.body.map((b,j)=><Block key={j} b={b} ui={ui} lang={lang}/>)}</div></article>)}
+        <p className="mt-6 text-xs leading-5 text-slate-600">{ui.source}</p>
+      </div>
+    </div>
+  </main>
 }
 
 export default function App(){
   const [lang,setLang]=useState(()=>localStorage.getItem('portfolio-language')||'en'); const t=copy[lang]||copy.en
   useEffect(()=>{localStorage.setItem('portfolio-language',lang);document.documentElement.lang=lang},[lang])
-  return <div className="min-h-screen overflow-hidden bg-[#061018] text-slate-50"><a href="#main-content" className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-cyan-100 px-3 py-2 text-sm font-bold text-[#041019] focus:translate-y-0">Skip to content</a><Header lang={lang} setLang={setLang} t={t}/><div id="main-content"><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes></div><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
+  return <div className="min-h-screen overflow-x-clip bg-[#061018] text-slate-50"><a href="#main-content" className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-cyan-100 px-3 py-2 text-sm font-bold text-[#041019] focus:translate-y-0">Skip to content</a><Header lang={lang} setLang={setLang} t={t}/><div id="main-content"><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes></div><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
 }

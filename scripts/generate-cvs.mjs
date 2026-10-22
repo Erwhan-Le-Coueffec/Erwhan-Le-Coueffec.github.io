@@ -120,9 +120,9 @@ const fr = {
   profile: "Eleve-ingenieur a CentraleSupelec, specialise en photonique, avec une experience terrain en metrologie optique, calibrage, instrumentation et demarche experimentale. Recherche un poste R&D en Suisse avec une forte composante manipulation.",
   experience: [
     { company: 'Holo3', role: 'Ingenieur R&D en apprentissage', dates: 'Oct. 2025 - Sept. 2026', bullets: [
-      "Amelioration du calibrage de HoloScan : comparaison de calibrages sur les memes acquisitions et validation avec une barre a boules certifiee de 250,1097 mm ; erreur maximale inferieure a 60 um sur toutes les positions testees, contre environ 120 um auparavant.",
-      "Introduction d'un plan d'experience d'environ 30 essais couvrant 7-8 facteurs camera/eclairage ; analyse par regression lineaire multiple et identification du contraste noir/blanc comme facteur dominant.",
-      "Caracterisation d'une machine de vision interne : justesse, repetabilite et incertitude.",
+      "Evaluation du protocole de calibrage du systeme 3D HoloScan (projection de franges, 2 cameras + 1 projecteur) : theorie, propagation d'incertitudes et 5 etudes comparatives ; validation avec une barre a boules certifiee de 250,1097 mm (critere de +/-120 um respecte pour 108 mesures sur 110, +/-60 um atteint dans une partie des cas, fidelite < 2 um).",
+      "Introduction des plans d'experience dans l'equipe (216 -> 27 puis 432 -> 32 configurations) : couleur d'eclairage, exposition, ouverture et angle, tous lies au contraste noir/blanc, identifies comme facteurs influents.",
+      "Mise en evidence de la caracterisation de la mire comme levier principal : mesure sur machines de vision Mitutoyo et Hexagon (courbure de 93 a 155 um).",
     ]},
     { company: 'Placoplatre', role: 'Ingenieur WCM / amelioration continue en apprentissage', dates: 'Oct. 2023 - Juin 2025', bullets: [
       "Maintenance autonome, 5S, identification de risques industriels et creation d'un support visuel OK/NOK pour simplifier le controle de viscosite du platre.",
@@ -154,9 +154,9 @@ const en = {
   profile: 'CentraleSupelec engineering student specializing in photonics, with hands-on experience in optical metrology, calibration, instrumentation and experimental design. Seeking an R&D position in Switzerland with a strong experimental component.',
   experience: [
     { company: 'Holo3', role: 'R&D Engineer Apprentice', dates: 'Oct. 2025 - Sep. 2026', bullets: [
-      'Improved HoloScan calibration by comparing calibration strategies on identical acquisitions and validating with a certified 250.1097 mm ball bar; maximum error remained below 60 um at every tested position, versus roughly 120 um previously.',
-      'Introduced a Design of Experiments approach with around 30 trials across 7-8 camera/lighting factors; used multiple linear regression and identified black/white target contrast as the dominant factor.',
-      'Characterized an internal vision measurement machine for accuracy, repeatability and uncertainty.',
+      'Assessed the calibration protocol of the HoloScan 3D system (fringe projection, 2 cameras + 1 projector): theory, uncertainty propagation and 5 comparative studies; validated with a certified 250.1097 mm ball bar (+/-120 um criterion met in 108 of 110 measurements, +/-60 um reached in part of the cases, repeatability < 2 um).',
+      'Introduced Design of Experiments to the team (216 -> 27, then 432 -> 32 configurations): light colour, exposure, aperture and angle, all linked to black/white contrast, identified as influential factors.',
+      'Identified target characterisation as the main lever: target measured on Mitutoyo and Hexagon vision machines (93 to 155 um curvature).',
     ]},
     { company: 'Placoplatre', role: 'WCM / Continuous Improvement Engineer Apprentice', dates: 'Oct. 2023 - Jun. 2025', bullets: [
       'Worked on autonomous maintenance, 5S, industrial risk identification and a visual OK/NOK support to simplify plaster-viscosity control.',
