@@ -120,7 +120,7 @@ async function buildCv(data, fileName) {
 
 const fr = {
   title: 'CV Erwhan Le Couëffec - FR',
-  subtitle: 'Ingénieur R&D — Photonique, métrologie optique & instrumentation',
+  subtitle: 'Ingénieur R&D spécialisé en photonique — je confronte toujours la théorie à la mesure',
   contact: [
     'Riedisheim (FR), à 30 min de Bâle  |  +33 6 22 29 11 29  |  erwhan43@gmail.com  |  erwhan-le-coueffec.github.io',
     'Nationalité française (UE, libre circulation des personnes)  |  Permis B  |  Disponibilité immédiate',
@@ -169,7 +169,7 @@ const fr = {
 
 const en = {
   title: 'CV Erwhan Le Couëffec - EN',
-  subtitle: 'R&D Engineer — Photonics, Optical Metrology & Instrumentation',
+  subtitle: 'R&D Engineer specialised in photonics — I always test theory against measurement',
   contact: [
     'Riedisheim (FR), 30 min from Basel  |  +33 6 22 29 11 29  |  erwhan43@gmail.com  |  erwhan-le-coueffec.github.io',
     'French national (EU free movement, no sponsorship needed)  |  Driving licence B  |  Available immediately',
