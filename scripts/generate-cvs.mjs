@@ -160,9 +160,9 @@ const fr = {
     ['Métrologie & R&D', 'Métrologie optique, mesure 3D par projection de franges, calibrage, plans d’expérience, analyse d’incertitudes, caractérisation (justesse, fidélité), caméras industrielles'],
     ['Optique & laboratoire', 'Bancs optiques, lasers (DFB, He-Ne, Nd:YAG), spectroscopie Raman, analyseurs de spectre optique et RF, polariseurs, lames demi et quart d’onde, oscilloscope'],
     ['Industrie & qualité', 'Tests d’étanchéité (ATEQ), zones EPA, 5S, maintenance autonome, analyse de risques'],
-    ['Logiciels', 'MATLAB, Python (NumPy, SciPy, Matplotlib), Excel avancé, LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
+    ['Logiciels', 'MATLAB, Excel avancé, Python (notions : scripts de simulation et de traitement de données), LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
   ],
-  languages: ['Français : langue maternelle  |  Anglais : B1/B2  |  Allemand : débutant (A1), en cours d’apprentissage  |  Handball, escalade de bloc  |  Références sur demande'],
+  languages: ['Français : langue maternelle  |  Anglais : B1/B2  |  Allemand : débutant (A1), cours prévus  |  Handball, escalade de bloc  |  Références sur demande'],
   interests: '',
   references: '',
 }
@@ -209,9 +209,9 @@ const en = {
     ['Metrology & R&D', 'Optical metrology, fringe-projection 3D measurement, calibration, design of experiments, uncertainty analysis, characterisation (trueness, precision), industrial cameras'],
     ['Optics & lab', 'Optical benches, lasers (DFB, He-Ne, Nd:YAG), Raman spectroscopy, optical and RF spectrum analysers, polarisers, half- and quarter-wave plates, oscilloscope'],
     ['Industry & quality', 'Leak testing (ATEQ), EPA zones, 5S, autonomous maintenance, risk analysis'],
-    ['Software', 'MATLAB, Python (NumPy, SciPy, Matplotlib), advanced Excel, LTspice, GOM Inspect, SensorPhase, CalibTool; previously LabVIEW, SolidWorks'],
+    ['Software', 'MATLAB, advanced Excel, Python (basic: simulation and data-processing scripts), LTspice, GOM Inspect, SensorPhase, CalibTool; previously LabVIEW, SolidWorks'],
   ],
-  languages: ['French: native  |  English: intermediate (B1/B2)  |  German: beginner (A1), currently learning'],
+  languages: ['French: native  |  English: intermediate (B1/B2)  |  German: beginner (A1), lessons planned'],
   interests: 'Handball (5 years in a club, regional level)  |  Bouldering (5C to 6A)  |  Professional references available on request',
   references: '',
 }
