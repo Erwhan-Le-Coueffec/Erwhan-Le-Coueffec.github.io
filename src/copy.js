@@ -10,7 +10,7 @@ const shared = {
 export const copy = {
   en: {
     nav: ['About','Projects','Experience','Skills','Contact'],
-    hero: ['Available now · Open to relocation in Switzerland','Generalist R&D Engineer','specialized in photonics & optical systems','Trained at CentraleSupélec (engineering programme completed in 2026), focused on experimental R&D, optical metrology, instrumentation and hands-on problem solving.','View my projects','Contact me','Riedisheim (FR) · 30 min from Basel · EU citizen (free movement, no sponsorship needed)'],
+    hero: ['Available now · Switzerland first, open worldwide','Generalist R&D Engineer','specialized in photonics & optical systems','Trained at CentraleSupélec (engineering programme completed in 2026), focused on experimental R&D, optical metrology, instrumentation and hands-on problem solving.','View my projects','Contact me','Riedisheim (FR) · 30 min from Basel · EU citizen (free movement, no sponsorship needed)'],
     about: ['About','I like understanding systems, testing ideas and turning uncertainty into measurements.','My path combines physical measurements, industrial experience and a generalist engineering education at CentraleSupélec, followed by a third-year specialization in Photonics and Nano-systems.','R&D appeals to me because it brings together innovation, problem solving and the need to understand how things work. I am looking for roles combining experimental work and analysis, ideally with at least as much hands-on work as computer work.','How I work','I start by learning the theory and asking for feedback when needed. Then I test, iterate and learn from the result — including when an experiment does not behave as expected.'],
     looking: ['Currently looking for','R&D','Photonics','Optical systems','Instrumentation','Switzerland'],
     projects: ['Selected projects','Research and engineering work built around measurement.','Three R&D projects carried out at Holo3: assessing the calibration of a fringe-projection 3D measurement system, characterising two vision measuring machines, and experimentally identifying the parameters that affect calibration-target detection.'],
@@ -35,13 +35,13 @@ export const copy = {
     skills: [['Core','Optical metrology · Instrumentation · Experimental design · Uncertainty analysis · Industrial cameras'],['Optics & lab','Optical benches · Lasers · Objectives · Polarizers · λ/2 & λ/4 waveplates · Spectrometer · Oscilloscope · Function generator'],['Data & software','MATLAB · Advanced Excel · LTspice · LabVIEW (previous experience) · Python/VBA (basic) · SolidWorks (previous experience)']],
     language: ['Languages','French — Native','English — B1/B2','German — Beginner (A1), lessons planned'],
     interests: ['Outside engineering','Handball — 5 years, amateur / departmental level · Bouldering — 5C to 6A'],
-    contact: ['Contact','Interested in building and improving real systems.','Available now and open to relocation anywhere in Switzerland for an R&D role with a strong experimental component.','Email me','LinkedIn','CV FR','CV EN'],
+    contact: ['Contact','Interested in building and improving real systems.','Available now for an R&D, metrology or quality role with a strong experimental component. Switzerland first, and open to opportunities worldwide.','Email me','LinkedIn','CV FR','CV EN'],
     back: 'Back to portfolio',
-    footer: 'Technical portfolio for R&D opportunities in Switzerland.',
+    footer: 'Technical portfolio · R&D, metrology and quality.',
   },
   fr: {
     nav: ['À propos','Projets','Expérience','Compétences','Contact'],
-    hero: ['Disponible immédiatement · Mobile partout en Suisse','Ingénieur R&D généraliste','spécialisé en photonique & systèmes optiques','Formé à CentraleSupélec (cursus ingénieur achevé en 2026), orienté R&D expérimentale, métrologie optique, instrumentation et résolution de problèmes sur systèmes réels.','Voir mes projets','Me contacter','Riedisheim (FR) · à 30 min de Bâle · citoyen UE (libre circulation)'],
+    hero: ['Disponible immédiatement · Priorité Suisse, ouvert à l’international','Ingénieur R&D généraliste','spécialisé en photonique & systèmes optiques','Formé à CentraleSupélec (cursus ingénieur achevé en 2026), orienté R&D expérimentale, métrologie optique, instrumentation et résolution de problèmes sur systèmes réels.','Voir mes projets','Me contacter','Riedisheim (FR) · à 30 min de Bâle · citoyen UE (libre circulation)'],
     about: ['À propos','J’aime comprendre les systèmes, tester des idées et transformer l’incertitude en mesure.','Mon parcours associe mesures physiques, expérience industrielle et formation d’ingénieur généraliste à CentraleSupélec, complétée en troisième année par une spécialisation en photonique et nano-systèmes.','La R&D m’attire pour l’innovation, la recherche de solutions et la compréhension du fonctionnement réel des systèmes. Je recherche des postes mêlant expérimentation et analyse, avec une préférence pour une part de manipulation au moins aussi importante que le travail sur ordinateur.','Ma façon de travailler','Je commence par comprendre la théorie et je demande de l’aide ou des retours lorsque c’est utile. Ensuite, je teste, j’itère et j’apprends du résultat — y compris lorsqu’un essai ne donne pas ce qui était attendu.'],
     looking: ['Ce que je recherche','R&D','Photonique','Systèmes optiques','Instrumentation','Suisse'],
     projects: ['Projets sélectionnés','Des travaux de recherche et d’ingénierie centrés sur la mesure.','Trois missions R&D menées chez Holo3 : l’évaluation du calibrage d’un système de mesure 3D par projection de franges, la caractérisation de deux machines de mesure par vision, et l’identification expérimentale des paramètres qui influencent la détection de mires.'],
@@ -62,15 +62,15 @@ export const copy = {
     skills: [['Cœur de métier','Métrologie optique · Instrumentation · Plan d’expérience · Analyse d’incertitudes · Caméras industrielles'],['Optique & laboratoire','Bancs optiques · Lasers · Objectifs · Polariseurs · Lames λ/2 & λ/4 · Spectromètre · Oscilloscope · Générateur de fonctions'],['Données & logiciels','MATLAB · Excel avancé · LTspice · LabVIEW (expérience antérieure) · Python/VBA (notions) · SolidWorks (expérience antérieure)']],
     language: ['Langues','Français — langue maternelle','Anglais — B1/B2','Allemand — débutant (A1), cours prévus'],
     interests: ['En dehors de l’ingénierie','Handball — 5 ans, niveau amateur / départemental · Escalade de bloc — 5C à 6A'],
-    contact: ['Contact','Envie de concevoir et d’améliorer des systèmes réels.','Disponible immédiatement et mobile partout en Suisse pour un poste R&D avec une forte composante expérimentale.','M’écrire','LinkedIn','CV FR','CV EN'],
+    contact: ['Contact','Envie de concevoir et d’améliorer des systèmes réels.','Disponible immédiatement pour un poste en R&D, métrologie ou contrôle qualité avec une forte composante expérimentale. Priorité à la Suisse, ouvert aux opportunités à l’international.','M’écrire','LinkedIn','CV FR','CV EN'],
     back: 'Retour au portfolio',
-    footer: 'Portfolio technique orienté opportunités R&D en Suisse.',
+    footer: 'Portfolio technique · R&D, métrologie et qualité.',
   },
 }
 
 copy.de = {
   nav: ['Über mich','Projekte','Erfahrung','Kompetenzen','Kontakt'],
-  hero: ['Ab sofort verfügbar · Umzugsbereit innerhalb der Schweiz','Generalistischer F&E-Ingenieur','mit Spezialisierung auf Photonik & optische Systeme','Ausgebildet an der CentraleSupélec (Ingenieurstudium 2026 abgeschlossen), mit Schwerpunkt auf experimenteller F&E, optischer Messtechnik, Instrumentierung und praxisnaher Problemlösung.','Projekte ansehen','Kontakt aufnehmen','Riedisheim (FR) · 30 Min. von Basel · EU-Bürger (Personenfreizügigkeit)'],
+  hero: ['Ab sofort verfügbar · Schweiz bevorzugt, international offen','Generalistischer F&E-Ingenieur','mit Spezialisierung auf Photonik & optische Systeme','Ausgebildet an der CentraleSupélec (Ingenieurstudium 2026 abgeschlossen), mit Schwerpunkt auf experimenteller F&E, optischer Messtechnik, Instrumentierung und praxisnaher Problemlösung.','Projekte ansehen','Kontakt aufnehmen','Riedisheim (FR) · 30 Min. von Basel · EU-Bürger (Personenfreizügigkeit)'],
   about: ['Über mich','Ich möchte Systeme verstehen, Ideen testen und Unsicherheit in messbare Ergebnisse übersetzen.','Mein Werdegang verbindet physikalische Messtechnik, Industrieerfahrung und eine generalistische Ingenieurausbildung an der CentraleSupélec mit einer Spezialisierung auf Photonik und Nano-Systeme.','Forschung und Entwicklung interessiert mich, weil Innovation, Problemlösung und technisches Verständnis zusammenkommen. Ich suche Aufgaben, die Experiment und Analyse verbinden, idealerweise mit mindestens ebenso viel praktischer Arbeit wie Computerarbeit.','Meine Arbeitsweise','Ich beginne damit, die Theorie zu verstehen, hole mir bei Bedarf Feedback und teste anschließend selbstständig. Aus jedem Ergebnis lässt sich etwas lernen — auch wenn ein Versuch anders ausfällt als erwartet.'],
   looking: ['Gesucht','F&E','Photonik','Optische Systeme','Instrumentierung','Schweiz'],
   projects: ['Ausgewählte Projekte','Forschungs- und Ingenieurarbeit mit Fokus auf Messtechnik.','Drei F&E-Projekte bei Holo3: die Bewertung der Kalibrierung eines 3D-Messsystems mit Streifenprojektion, die Charakterisierung zweier Bildmessgeräte und die experimentelle Bestimmung der Parameter, die die Erkennung von Kalibrierzielen beeinflussen.'],
@@ -99,8 +99,8 @@ copy.de = {
   ],
   language: ['Sprachen','Französisch — Muttersprache','Englisch — B1/B2','Deutsch — Anfänger (A1), Kurs geplant'],
   interests: ['Außerhalb der Technik','Handball — 5 Jahre, Amateur-/Département-Niveau · Bouldern — 5C bis 6A'],
-  contact: ['Kontakt','Interesse daran, reale Systeme zu entwickeln und zu verbessern.','Ab sofort verfügbar und für eine F&E-Stelle mit starkem experimentellem Anteil umzugsbereit innerhalb der Schweiz.','E-Mail senden','LinkedIn','CV FR','CV EN'],
+  contact: ['Kontakt','Interesse daran, reale Systeme zu entwickeln und zu verbessern.','Ab sofort verfügbar für eine Stelle in F&E, Messtechnik oder Qualitätssicherung mit starkem experimentellem Anteil. Schweiz bevorzugt, offen für internationale Möglichkeiten.','E-Mail senden','LinkedIn','CV FR','CV EN'],
   back: 'Zurück zum Portfolio',
-  footer: 'Technisches Portfolio für F&E-Möglichkeiten in der Schweiz.',
+  footer: 'Technisches Portfolio · F&E, Messtechnik und Qualität.',
 }
 
