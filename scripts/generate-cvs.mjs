@@ -5,7 +5,7 @@ const A4 = [595.28, 841.89]
 const OUT = 'public/cv'
 const LEFT = 42
 const RIGHT = 553
-const BOTTOM = 40
+const BOTTOM = 36
 
 const colors = {
   navy: rgb(0.043, 0.102, 0.141),
@@ -50,8 +50,8 @@ class Writer {
     const lines = wrap(t, this.f.regular, 7.55, RIGHT - 54)
     this.need(lines.length * 9.1)
     this.page.drawCircle({ x: 46, y: this.y + 2.2, size: 1.4, color: colors.cyan })
-    for (const line of lines) { this.page.drawText(line, { x: 54, y: this.y, size: 7.55, font: this.f.regular, color: colors.text }); this.y -= 9.1 }
-    this.y -= 1.8
+    for (const line of lines) { this.page.drawText(line, { x: 54, y: this.y, size: 7.55, font: this.f.regular, color: colors.text }); this.y -= 9 }
+    this.y -= 1.5
   }
   finish() {
     const n = this.pages.length
@@ -141,8 +141,9 @@ const fr = {
       'Travail transverse avec les équipes production, maintenance et qualité.',
     ]},
     { role: 'Apprenti mesures / industrialisation', company: 'Wilo France — Laval (FR) · pompes pour systèmes sanitaires et incendie', dates: '09.2021 – 08.2022', bullets: [
-      'Rationalisation des tests d’étanchéité de 16 modèles de surpresseurs HomeBooster en 3 programmes ATEQ paramétrés (test de 1 min 30, critère de fuite ≤ 6 cm³/min), soit un gain d’environ 30 s par test.',
-      'Définition, mesure et déploiement d’une zone EPA certifiée (protection contre les décharges électrostatiques) sur la ligne Plavis.',
+      'Création des tests d’étanchéité, jusque-là inexistants, pour 16 modèles de surpresseurs HomeBooster, regroupés en 3 programmes ATEQ paramétrés (test de 1 min 30, critère de fuite ≤ 6 cm³/min) : choix simplifié pour les opérateurs, environ 30 s gagnées par test.',
+      'Zone EPA (protection contre les décharges électrostatiques) sur la ligne Plavis : définition de la zone, mesure de la résistivité et de la mise à la terre des éléments ; ligne inspectée par un organisme externe dans le cadre de la certification du site.',
+      'Protocole de contrôle du sertissage des câbles électriques ; récapitulatif des paramètres de soudage de toutes les machines.',
     ]},
   ],
   education: [
@@ -153,8 +154,8 @@ const fr = {
   projects: [
     'Diode laser DFB à 1550 nm : courbe L-I, spectre optique (suppression des modes secondaires de 53 dB), oscillations de relaxation jusqu’à 8,5 GHz et réinjection optique.',
     'Spectroscopie Raman en espace libre : montage en rétrodiffusion construit de A à Z, identification de 8 plastiques inconnus.',
-    'Holographie : enregistrement et reconstruction de l’hologramme 3D d’une pièce métallique à 532 nm.',
-    'Simulation photonique : propagation d’un faisceau dans un cristal photoréfractif (modèle de Kukhtarev, méthode BPM), reservoir computing optoélectronique, Monte-Carlo.',
+    'Holographie : hologramme 3D d’une pièce métallique à 532 nm, du montage à la reconstruction.',
+    'Simulation : propagation dans un cristal photoréfractif (Kukhtarev, BPM), reservoir computing optoélectronique, Monte-Carlo.',
   ],
   skills: [
     ['Métrologie & R&D', 'Métrologie optique, mesure 3D par projection de franges, calibrage, plans d’expérience, analyse d’incertitudes, caractérisation (justesse, fidélité), caméras industrielles'],
@@ -190,8 +191,9 @@ const en = {
       'Cross-functional work with production, maintenance and quality teams.',
     ]},
     { role: 'Measurement / Industrialisation Apprentice', company: 'Wilo France — Laval (FR) · pumps for sanitary and fire-protection systems', dates: '09.2021 – 08.2022', bullets: [
-      'Streamlined leak testing of 16 HomeBooster booster-pump models into 3 parameterised ATEQ programs (1 min 30 s test, leak criterion ≤ 6 cm³/min), saving about 30 s per test.',
-      'Defined, measured and deployed a certified EPA (Electrostatic Protected Area) on the Plavis production line.',
+      'Created leak testing, previously non-existent, for 16 HomeBooster booster-pump models, grouped into 3 parameterised ATEQ programs (1 min 30 s test, leak criterion ≤ 6 cm³/min): simpler choice for operators, about 30 s saved per test.',
+      'EPA zone (Electrostatic Protected Area) on the Plavis line: defined the zone, measured the resistivity and grounding of its elements; line inspected by an external body as part of the site certification.',
+      'Inspection protocol for electrical cable crimping; compiled the welding parameters of all machines.',
     ]},
   ],
   education: [
