@@ -41,7 +41,7 @@ class Writer {
     for (const line of wrap(t, font, size, width)) { this.need(leading); this.page.drawText(line, { x, y: this.y, size, font, color }); this.y -= leading }
   }
   section(title) {
-    this.need(40); this.y -= 3
+    this.need(34); this.y -= 3
     this.text(title.toUpperCase(), LEFT, 8.4, this.f.bold, colors.cyan)
     this.page.drawLine({ start: { x: LEFT, y: this.y - 5 }, end: { x: RIGHT, y: this.y - 5 }, thickness: 0.7, color: colors.light })
     this.y -= 16
@@ -109,7 +109,7 @@ async function buildCv(data, fileName) {
   w.section(data.labels.languages)
   for (const line of data.languages) w.para(line, LEFT, RIGHT - LEFT, 7.25, 9.4)
   w.y -= 2
-  w.para(data.interests, LEFT, RIGHT - LEFT, 7.25, 9.4, f.regular, colors.muted)
+  if (data.interests) w.para(data.interests, LEFT, RIGHT - LEFT, 7.25, 9.4, f.regular, colors.muted)
   w.y -= 4
   if (data.references) w.para(data.references, LEFT, RIGHT - LEFT, 7.25, 9.4, f.bold, colors.navy)
 
@@ -126,7 +126,7 @@ const fr = {
     'Nationalité française (UE, libre circulation des personnes)  |  Permis B  |  Disponibilité immédiate',
   ],
   labels: { profile: 'Profil', experience: 'Expérience professionnelle', education: 'Formation', projects: 'Projets académiques (sélection)', skills: 'Compétences', languages: 'Langues & centres d’intérêt' },
-  profile: 'Ingénieur généraliste CentraleSupélec spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
+  profile: 'Formé à CentraleSupélec (cursus ingénieur généraliste achevé en 2026), spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
   experience: [
     { role: 'Ingénieur R&D en apprentissage', company: 'Holo3 — Saint-Louis (FR), région de Bâle · métrologie optique', dates: '10.2025 – 09.2026', bullets: [
       'Mission 1 · Détection des intersections de mire : étude préliminaire sur 3 mires (~1 300 mesures), puis introduction des plans d’expérience dans l’équipe, à mon initiative (216 → 27, puis 432 → 32 configurations) : couleur d’éclairage, exposition, ouverture et angle identifiés comme facteurs influents.',
@@ -137,19 +137,18 @@ const fr = {
       'Contrôle de viscosité du plâtre : conception d’un support OK/NOK qui fixe la position du mètre pour mesurer la tache d’étalement. Une mesure jusque-là aléatoire selon l’opérateur devient reproductible.',
       'Maintenance autonome sur toute la chaîne plaque : cartographie de toutes les machines avec une note de zone à risque (criticité de la machine × propreté de la zone × facilité d’accès) pour prioriser les actions.',
       'Analyse des risques industriels : cotation risque × probabilité d’accident, évaluée sans puis avec EPI, pour chiffrer le gain de chaque amélioration (par exemple une barrière de sécurité rehaussée contre le basculement).',
-      'Chantier 5S dans la zone de rangement des outils de production.',
-      'Travail transverse avec les équipes production, maintenance et qualité.',
+      'Chantier 5S dans la zone de rangement des outils de production ; travail transverse avec la production, la maintenance et la qualité.',
     ]},
     { role: 'Apprenti mesures / industrialisation', company: 'Wilo France — Laval (FR) · pompes pour systèmes sanitaires et incendie', dates: '09.2021 – 08.2022', bullets: [
-      'Création des tests d’étanchéité, jusque-là inexistants, pour 16 modèles de surpresseurs HomeBooster, regroupés en 3 programmes ATEQ paramétrés (test de 1 min 30, critère de fuite ≤ 6 cm³/min) : choix simplifié pour les opérateurs, environ 30 s gagnées par test.',
-      'Zone EPA (protection contre les décharges électrostatiques) sur la ligne Plavis : définition de la zone, mesure de la résistivité et de la mise à la terre des éléments ; ligne inspectée par un organisme externe dans le cadre de la certification du site.',
+      'Création des tests d’étanchéité de la nouvelle ligne HomeBooster (16 modèles) en 3 programmes ATEQ paramétrés (1 min 30, fuite ≤ 6 cm³/min) : choix simplifié pour les opérateurs, ~30 s gagnées par test.',
+      'Zone EPA (décharges électrostatiques) sur la ligne Plavis : définition, mesure de la résistivité et de la mise à la terre ; ligne inspectée par un organisme externe pour la certification du site.',
       'Protocole de contrôle du sertissage des câbles électriques ; récapitulatif des paramètres de soudage de toutes les machines.',
     ]},
   ],
   education: [
-    { degree: 'Ingénieur CentraleSupélec — formation généraliste par apprentissage (FISA)', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: 'Grade de Master (niveau 7 du cadre européen). 3e année : Photonics and Nano-systems Engineering. Mémoire : amélioration du calibrage du système HoloScan. Diplôme en cours de validation administrative (janvier 2027).' },
-    { degree: 'Classe préparatoire ATS', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Année intensive en mathématiques et physique. Classé dans les 10 premiers de la promotion.' },
-    { degree: 'DUT Mesures Physiques', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: '120 ECTS, matériaux et systèmes de mesure ; 2e année en apprentissage chez Wilo France. Classé dans les 15 premiers de la promotion.' },
+    { degree: 'Cursus ingénieur généraliste CentraleSupélec, par apprentissage (FISA)', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: '3e année : Photonics and Nano-systems Engineering. Mémoire : calibrage du système HoloScan. Cursus achevé ; diplôme (grade de Master, niveau 7 européen) délivré après validation de la certification d’anglais C1 exigée.' },
+    { degree: 'Classe préparatoire ATS', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Année intensive en mathématiques et physique (~30 élèves) : 2e au 1er semestre, 1er en mathématiques et en physique ; dans les 10 premiers sur l’année.' },
+    { degree: 'DUT Mesures Physiques', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: '120 ECTS, matériaux et systèmes de mesure. 1re année : dans les 15 premiers sur ~80. 2e année en apprentissage chez Wilo France : dans les 3 premiers des ~12 alternants.' },
   ],
   projects: [
     'Diode laser DFB à 1550 nm : courbe L-I, spectre optique (suppression des modes secondaires de 53 dB), oscillations de relaxation jusqu’à 8,5 GHz et réinjection optique.',
@@ -163,8 +162,8 @@ const fr = {
     ['Industrie & qualité', 'Tests d’étanchéité (ATEQ), zones EPA, 5S, maintenance autonome, analyse de risques'],
     ['Logiciels', 'MATLAB, Python (NumPy, SciPy, Matplotlib), Excel avancé, LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
   ],
-  languages: ['Français : langue maternelle  |  Anglais : intermédiaire (B1/B2)  |  Allemand : débutant (A1), en cours d’apprentissage'],
-  interests: 'Handball (5 ans en club, niveau départemental)  |  Escalade de bloc (5C à 6A)  |  Références professionnelles disponibles sur demande',
+  languages: ['Français : langue maternelle  |  Anglais : B1/B2  |  Allemand : débutant (A1), en cours d’apprentissage  |  Handball, escalade de bloc  |  Références sur demande'],
+  interests: '',
   references: '',
 }
 
@@ -176,7 +175,7 @@ const en = {
     'French national (EU free movement, no sponsorship needed)  |  Driving licence B  |  Available immediately',
   ],
   labels: { profile: 'Profile', experience: 'Professional experience', education: 'Education', projects: 'Academic projects (selection)', skills: 'Skills', languages: 'Languages & interests' },
-  profile: 'Generalist engineer from CentraleSupélec specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
+  profile: 'Trained at CentraleSupélec (generalist engineering programme completed in 2026), specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
   experience: [
     { role: 'R&D Engineer (apprenticeship)', company: 'Holo3 — Saint-Louis (FR), Basel area · optical metrology', dates: '10.2025 – 09.2026', bullets: [
       'Mission 1 · Calibration-target detection: preliminary study on 3 targets (~1,300 measurements), then introduced Design of Experiments to the team on my own initiative (216 → 27, then 432 → 32 configurations): light colour, exposure, aperture and angle identified as influential factors.',
@@ -187,8 +186,7 @@ const en = {
       'Plaster viscosity check: designed an OK/NOK fixture that sets the position of the ruler used to measure the spread diameter, turning an operator-dependent measurement into a repeatable one.',
       'Autonomous maintenance across the whole plasterboard line: mapped every machine with a risk-zone score (machine criticality × area cleanliness × ease of access) to prioritise actions.',
       'Industrial risk analysis: risk × accident-probability scoring, assessed without and with PPE, to quantify the gain of each improvement (e.g. a raised safety barrier preventing tipping).',
-      '5S project in the production tool storage area.',
-      'Cross-functional work with production, maintenance and quality teams.',
+      '5S project in the production tool storage area; cross-functional work with production, maintenance and quality.',
     ]},
     { role: 'Measurement / Industrialisation Apprentice', company: 'Wilo France — Laval (FR) · pumps for sanitary and fire-protection systems', dates: '09.2021 – 08.2022', bullets: [
       'Created leak testing, previously non-existent, for 16 HomeBooster booster-pump models, grouped into 3 parameterised ATEQ programs (1 min 30 s test, leak criterion ≤ 6 cm³/min): simpler choice for operators, about 30 s saved per test.',
@@ -197,9 +195,9 @@ const en = {
     ]},
   ],
   education: [
-    { degree: 'CentraleSupélec Engineering Degree — generalist programme, apprenticeship track', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: 'Master’s level (EQF level 7). Final year: Photonics and Nano-systems Engineering. Thesis: improving the calibration of the HoloScan system. Degree being formally awarded (January 2027).' },
-    { degree: 'Classe préparatoire ATS (intensive maths & physics year)', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Preparation for engineering-school entrance exams. Ranked in the top 10 of the class.' },
-    { degree: 'DUT Mesures Physiques (2-year technical degree, 120 ECTS)', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: 'Materials and measurement systems; second year as an apprentice at Wilo France. Ranked in the top 15 of the class.' },
+    { degree: 'CentraleSupélec generalist engineering programme, apprenticeship track', school: 'CentraleSupélec, Metz (FR)', dates: '2023 – 2026', detail: 'Final year: Photonics and Nano-systems Engineering. Thesis: HoloScan system calibration. Programme completed; the degree (Master’s level, EQF 7) is awarded once the required C1 English certification is validated.' },
+    { degree: 'Classe préparatoire ATS (intensive maths & physics year)', school: 'Lycée Joliot-Curie, Rennes (FR)', dates: '2022 – 2023', detail: 'Intensive maths & physics year (~30 students): 2nd in the first semester, 1st in maths and physics; top 10 over the year.' },
+    { degree: 'DUT Mesures Physiques (2-year technical degree, 120 ECTS)', school: 'Université du Mans (FR)', dates: '2020 – 2022', detail: 'Materials and measurement systems. Year 1: top 15 of ~80. Year 2 as an apprentice at Wilo France: top 3 of ~12 apprentices.' },
   ],
   projects: [
     '1550 nm DFB laser diode: L-I curve, optical spectrum (53 dB side-mode suppression), relaxation oscillations up to 8.5 GHz and optical feedback.',
