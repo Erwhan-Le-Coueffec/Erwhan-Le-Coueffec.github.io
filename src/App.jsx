@@ -4,6 +4,7 @@ import { motion as Motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Download, Languages, Mail, MapPin, Menu, Microscope, MoveRight, Ruler, Sparkles, X } from 'lucide-react'
 import { copy, EMAIL } from './copy'
 import { cases } from './cases'
+import { academic } from './academic'
 
 const ids = ['about','projects','experience','skills','contact']
 const card = 'border border-cyan-100/10 bg-white/[.025] rounded-2xl'
@@ -40,7 +41,7 @@ function Home({t}) {
 
     <section id="about" className={`${shell} scroll-mt-24 py-24`}><Motion.div {...reveal}><Heading data={t.about}/><div className="grid gap-5 md:grid-cols-[1.2fr_.8fr]"><div className="space-y-4 leading-8 text-slate-400"><p>{t.about[2]}</p><p>{t.about[3]}</p></div><div className={`${card} p-5`}><Microscope className="text-cyan-300"/><h3 className="mt-4 font-semibold">{t.about[4]}</h3><p className="mt-2 leading-7 text-slate-400">{t.about[5]}</p></div></div><div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-slate-500"><span>{t.looking[0]}</span>{t.looking.slice(1).map(x=><span className="rounded-full border border-cyan-100/10 px-3 py-2 text-slate-300" key={x}>{x}</span>)}</div></Motion.div></section>
 
-    <section id="projects" className={`${shell} scroll-mt-24 py-24`}><Motion.div {...reveal}><Heading data={t.projects}/><div className="grid gap-5 md:grid-cols-2"><ProjectCard p={t.holo} to="/projects/holoscan" icon={<Ruler/>}/><ProjectCard p={t.doe} to="/projects/camera-doe" icon={<Microscope/>}/></div><h3 className="mt-12 font-semibold text-slate-300">{t.academic[0]}</h3><div className="mt-4 grid gap-4 md:grid-cols-3">{t.academic.slice(1).map((x,i)=><article className="border-t border-cyan-100/10 pt-4" key={x[0]}><span className="text-xs text-slate-600">0{i+1}</span><h4 className="mt-2 font-semibold">{x[0]}</h4><p className="mt-2 text-sm leading-6 text-slate-500">{x[1]}</p></article>)}</div></Motion.div></section>
+    <section id="projects" className={`${shell} scroll-mt-24 py-24`}><Motion.div {...reveal}><Heading data={t.projects}/><div className="grid gap-5 md:grid-cols-2"><ProjectCard p={t.holo} to="/projects/holoscan" icon={<Ruler/>}/><ProjectCard p={t.doe} to="/projects/camera-doe" icon={<Microscope/>}/></div><div className="mt-12 flex flex-wrap items-baseline justify-between gap-3"><h3 className="font-semibold text-slate-300">{t.academic[0]}</h3><Link to="/academic" className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 hover:text-white">{t.academicLink}<MoveRight size={16}/></Link></div><div className="mt-4 grid gap-4 md:grid-cols-3">{t.academic.slice(1).map((x,i)=><article className="border-t border-cyan-100/10 pt-4" key={x[0]}><span className="text-xs text-slate-600">0{i+1}</span><h4 className="mt-2 font-semibold">{x[0]}</h4><p className="mt-2 text-sm leading-6 text-slate-500">{x[1]}</p></article>)}</div></Motion.div></section>
 
     <section id="experience" className={`${shell} scroll-mt-24 py-24`}><Motion.div {...reveal}><Heading data={t.expTitle}/><div className="border-t border-cyan-100/10">{t.exp.map(x=><article className="grid gap-3 border-b border-cyan-100/10 py-6 md:grid-cols-[10rem_1fr]" key={x[0]}><div className="text-xs text-slate-500">{x[2]}</div><div><h3 className="font-semibold">{x[1]}</h3><p className="mt-1 text-sm text-cyan-200">{x[0]}</p><ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-6 text-slate-400">{x[3].map(y=><li key={y}>{y}</li>)}</ul></div></article>)}</div></Motion.div></section>
 
@@ -120,8 +121,37 @@ function CasePage({t,lang,type}) {
   </main>
 }
 
+function AcademicPage({t,lang}) {
+  const a = academic[lang] || academic.en; const ui = (cases[lang] || cases.en).ui
+  useEffect(()=>window.scrollTo(0,0),[])
+  const teamLabel = k => k === 'solo' ? a.solo : k === 'group' ? a.group : a.groupN
+  return <main className={`${shell} min-h-screen pb-24 pt-28`}>
+    <Link className="inline-flex items-center gap-2 text-sm text-slate-400" to="/"><ArrowLeft size={16}/>{t.back}</Link>
+    <div className="max-w-4xl py-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{a.kicker}</p><h1 className="mt-3 text-[clamp(2.3rem,7vw,4.6rem)] font-semibold leading-none tracking-[-.055em]">{a.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">{a.lead}</p></div>
+    {['lab','sim'].map(kind => <section key={kind} className="mt-6">
+      <h2 className="border-b border-cyan-100/10 pb-3 text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{a.groups[kind]}</h2>
+      <nav className="mt-4 flex flex-wrap gap-2">{a.items.filter(i=>i.kind===kind).map(i=><a key={i.id} href={`#${i.id}`} className="rounded-lg border border-cyan-100/10 px-3 py-1.5 text-xs text-slate-400 hover:text-white">{i.title}</a>)}</nav>
+      {a.items.filter(i=>i.kind===kind).map(i=><article id={i.id} key={i.id} className={`${card} mt-6 scroll-mt-24 overflow-hidden`}>
+        {i.figures && i.figures.length===1 && <figure><img src={i.figures[0].src} alt={i.figures[0].alt} loading="lazy" className="max-h-[26rem] w-full object-cover"/><figcaption className="border-b border-cyan-100/10 bg-[#08141c] px-5 py-2 text-xs leading-5 text-slate-400 md:px-8">{i.figures[0].cap}</figcaption></figure>}
+        <div className="p-5 md:p-8">
+          <h3 className="text-xl font-semibold md:text-2xl">{i.title}</h3>
+          <p className="mt-3 max-w-3xl leading-7 text-slate-300">{i.summary}</p>
+          <dl className="mt-5 grid gap-3 text-sm md:grid-cols-[10rem_1fr]">
+            <dt className="text-xs font-bold uppercase tracking-[.14em] text-slate-500">{a.labels.date}</dt><dd className="text-slate-300">{i.date}</dd>
+            <dt className="text-xs font-bold uppercase tracking-[.14em] text-slate-500">{a.labels.team}</dt><dd className="text-slate-300">{teamLabel(i.team)}</dd>
+            <dt className="text-xs font-bold uppercase tracking-[.14em] text-slate-500">{a.labels.tools}</dt><dd className="text-slate-400">{i.tools}</dd>
+          </dl>
+          <div className="max-w-4xl">{i.body.map((b,j)=><Block key={j} b={b} ui={ui} lang={lang}/>)}</div>
+          {i.figures && i.figures.length>1 && <div className="mt-6 grid gap-4 md:grid-cols-2">{i.figures.map(f=><figure key={f.alt} className="overflow-hidden rounded-xl border border-cyan-100/10 bg-white"><img src={f.src} alt={f.alt} loading="lazy" className="h-56 w-full object-contain"/><figcaption className="bg-[#08141c] px-3 py-2 text-xs leading-5 text-slate-400">{f.cap}</figcaption></figure>)}</div>}
+          
+        </div>
+      </article>)}
+    </section>)}
+  </main>
+}
+
 export default function App(){
   const [lang,setLang]=useState(()=>localStorage.getItem('portfolio-language')||'en'); const t=copy[lang]||copy.en
   useEffect(()=>{localStorage.setItem('portfolio-language',lang);document.documentElement.lang=lang},[lang])
-  return <div className="min-h-screen overflow-x-clip bg-[#061018] text-slate-50"><a href="#main-content" className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-cyan-100 px-3 py-2 text-sm font-bold text-[#041019] focus:translate-y-0">Skip to content</a><Header lang={lang} setLang={setLang} t={t}/><div id="main-content"><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="holo"/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes></div><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
+  return <div className="min-h-screen overflow-x-clip bg-[#061018] text-slate-50"><a href="#main-content" className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-cyan-100 px-3 py-2 text-sm font-bold text-[#041019] focus:translate-y-0">Skip to content</a><Header lang={lang} setLang={setLang} t={t}/><div id="main-content"><Routes><Route path="/" element={<Home t={t}/>}/><Route path="/projects/holoscan" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="holo"/>}/><Route path="/academic" element={<AcademicPage t={t} lang={copy[lang]?lang:'en'}/>}/><Route path="/projects/camera-doe" element={<CasePage t={t} lang={copy[lang]?lang:'en'} type="doe"/>}/><Route path="*" element={<Home t={t}/>}/></Routes></div><footer className={`${shell} flex flex-col gap-3 border-t border-cyan-100/10 py-6 text-xs text-slate-600 md:flex-row md:justify-between`}><span>{t.footer}</span><a className="inline-flex items-center gap-2 text-slate-400" href="https://github.com/Erwhan-Le-Coueffec" target="_blank" rel="noreferrer">GitHub</a></footer></div>
 }
