@@ -111,7 +111,7 @@ async function buildCv(data, fileName) {
   w.y -= 2
   w.para(data.interests, LEFT, RIGHT - LEFT, 7.25, 9.4, f.regular, colors.muted)
   w.y -= 4
-  w.para(data.references, LEFT, RIGHT - LEFT, 7.25, 9.4, f.bold, colors.navy)
+  if (data.references) w.para(data.references, LEFT, RIGHT - LEFT, 7.25, 9.4, f.bold, colors.navy)
 
   w.finish()
   mkdirSync(OUT, { recursive: true })
@@ -134,9 +134,10 @@ const fr = {
       'Mission 3 · Machines de mesure par vision, en parallèle : qualification de la Mitutoyo sur mire étalon (répétabilité ~1 µm), comparaison avec une Hexagon (courbure de mire de 93 vs 155 µm) ; caractérisation de la mire identifiée comme principal levier de qualité du calibrage.',
     ]},
     { role: 'Ingénieur WCM / amélioration continue en apprentissage', company: 'Placoplatre (groupe Saint-Gobain) — Chambéry (FR) · production de plaques de plâtre', dates: '10.2023 – 06.2025', bullets: [
-      'Déploiement de standards World Class Manufacturing : maintenance autonome et 5S.',
-      'Identification et analyse de risques industriels sur les lignes de production.',
-      'Conception d’un support visuel OK/NOK simplifiant le contrôle de viscosité du plâtre par les opérateurs.',
+      'Contrôle de viscosité du plâtre : conception d’un support OK/NOK qui fixe la position du mètre pour mesurer la tache d’étalement. Une mesure jusque-là aléatoire selon l’opérateur devient reproductible.',
+      'Maintenance autonome sur toute la chaîne plaque : cartographie de toutes les machines avec une note de zone à risque (criticité de la machine × propreté de la zone × facilité d’accès) pour prioriser les actions.',
+      'Analyse des risques industriels : cotation risque × probabilité d’accident, évaluée sans puis avec EPI, pour chiffrer le gain de chaque amélioration (par exemple une barrière de sécurité rehaussée contre le basculement).',
+      'Chantier 5S dans la zone de rangement des outils de production.',
       'Travail transverse avec les équipes production, maintenance et qualité.',
     ]},
     { role: 'Apprenti mesures / industrialisation', company: 'Wilo France — Laval (FR) · pompes pour systèmes sanitaires et incendie', dates: '09.2021 – 08.2022', bullets: [
@@ -162,8 +163,8 @@ const fr = {
     ['Logiciels', 'MATLAB, Python (NumPy, SciPy, Matplotlib), Excel avancé, LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
   ],
   languages: ['Français : langue maternelle  |  Anglais : intermédiaire (B1/B2)  |  Allemand : débutant (A1), en cours d’apprentissage'],
-  interests: 'Handball (5 ans en club, niveau départemental)  |  Escalade de bloc (5C à 6A)',
-  references: 'Références professionnelles disponibles sur demande.',
+  interests: 'Handball (5 ans en club, niveau départemental)  |  Escalade de bloc (5C à 6A)  |  Références professionnelles disponibles sur demande',
+  references: '',
 }
 
 const en = {
@@ -182,9 +183,10 @@ const en = {
       'Mission 3 · Vision measuring machines, in parallel: Mitutoyo qualified on a reference target (repeatability ~1 µm), compared with a Hexagon (target curvature 93 vs 155 µm); target characterisation identified as the main lever for calibration quality.',
     ]},
     { role: 'WCM / Continuous Improvement Engineer (apprenticeship)', company: 'Placoplatre (Saint-Gobain group) — Chambéry (FR) · plasterboard manufacturing', dates: '10.2023 – 06.2025', bullets: [
-      'Deployed World Class Manufacturing standards: autonomous maintenance and 5S.',
-      'Identified and analysed industrial risks on the production lines.',
-      'Designed a visual OK/NOK aid simplifying plaster viscosity checks for operators.',
+      'Plaster viscosity check: designed an OK/NOK fixture that sets the position of the ruler used to measure the spread diameter, turning an operator-dependent measurement into a repeatable one.',
+      'Autonomous maintenance across the whole plasterboard line: mapped every machine with a risk-zone score (machine criticality × area cleanliness × ease of access) to prioritise actions.',
+      'Industrial risk analysis: risk × accident-probability scoring, assessed without and with PPE, to quantify the gain of each improvement (e.g. a raised safety barrier preventing tipping).',
+      '5S project in the production tool storage area.',
       'Cross-functional work with production, maintenance and quality teams.',
     ]},
     { role: 'Measurement / Industrialisation Apprentice', company: 'Wilo France — Laval (FR) · pumps for sanitary and fire-protection systems', dates: '09.2021 – 08.2022', bullets: [
@@ -210,8 +212,8 @@ const en = {
     ['Software', 'MATLAB, Python (NumPy, SciPy, Matplotlib), advanced Excel, LTspice, GOM Inspect, SensorPhase, CalibTool; previously LabVIEW, SolidWorks'],
   ],
   languages: ['French: native  |  English: intermediate (B1/B2)  |  German: beginner (A1), currently learning'],
-  interests: 'Handball (5 years in a club, regional level)  |  Bouldering (5C to 6A)',
-  references: 'Professional references available on request.',
+  interests: 'Handball (5 years in a club, regional level)  |  Bouldering (5C to 6A)  |  Professional references available on request',
+  references: '',
 }
 
 await buildCv(fr, 'Erwhan_Le_Coueffec_CV_FR.pdf')
