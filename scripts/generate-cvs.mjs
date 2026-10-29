@@ -126,7 +126,7 @@ const fr = {
     'Nationalité française (UE, libre circulation des personnes)  |  Permis B  |  Disponibilité immédiate',
   ],
   labels: { profile: 'Profil', experience: 'Expérience professionnelle', education: 'Formation', projects: 'Projets académiques (sélection)', skills: 'Compétences', languages: 'Langues & centres d’intérêt' },
-  profile: 'Formé à CentraleSupélec (cursus ingénieur généraliste achevé en 2026), spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
+  profile: 'Ingénieur généraliste formé à CentraleSupélec (cursus achevé en 2026), spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
   experience: [
     { role: 'Ingénieur R&D en apprentissage', company: 'Holo3 — Saint-Louis (FR), région de Bâle · métrologie optique', dates: '10.2025 – 09.2026', bullets: [
       'Mission 1 · Détection des intersections de mire : étude préliminaire sur 3 mires (~1 300 mesures), puis introduction des plans d’expérience dans l’équipe, à mon initiative (216 → 27, puis 432 → 32 configurations), pour réduire le nombre d’essais et quantifier l’influence de chaque paramètre : tous agissent sur le contraste noir/blanc.',
@@ -175,7 +175,7 @@ const en = {
     'French national (EU free movement, no sponsorship needed)  |  Driving licence B  |  Available immediately',
   ],
   labels: { profile: 'Profile', experience: 'Professional experience', education: 'Education', projects: 'Academic projects (selection)', skills: 'Skills', languages: 'Languages & interests' },
-  profile: 'Trained at CentraleSupélec (generalist engineering programme completed in 2026), specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
+  profile: 'Generalist engineer trained at CentraleSupélec (programme completed in 2026), specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
   experience: [
     { role: 'R&D Engineer (apprenticeship)', company: 'Holo3 — Saint-Louis (FR), Basel area · optical metrology', dates: '10.2025 – 09.2026', bullets: [
       'Mission 1 · Calibration-target detection: preliminary study on 3 targets (~1,300 measurements), then introduced Design of Experiments to the team on my own initiative (216 → 27, then 432 → 32 configurations), cutting the number of trials and quantifying each parameter’s influence: all act on black/white contrast.',
