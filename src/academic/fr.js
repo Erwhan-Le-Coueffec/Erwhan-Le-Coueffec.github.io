@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const fr = {
   kicker: 'CentraleSupélec · 3e année Photonique & Nano-systèmes · 2025–2026',
   title: 'Travaux pratiques et bureaux d’études',
-  lead: 'Ce que j’ai monté, mesuré et simulé pendant mon année de spécialisation : quatre manipulations sur banc optique et cinq bureaux d’études de simulation numérique. Les travaux de groupe sont signalés comme tels.',
+  lead: 'Ce que j’ai monté, mesuré et simulé pendant mon année de spécialisation : quatre manipulations sur banc optique et quatre projets de simulation numérique. Les travaux de groupe sont signalés comme tels.',
   groups: { lab: 'Manipulations sur banc optique', sim: 'Simulation numérique' },
   labels: { date: 'Date', team: 'Équipe', tools: 'Matériel & outils' },
   solo: 'Individuel',
@@ -62,7 +62,7 @@ export const fr = {
           'Travail en salle noire, sans vibration ni mouvement pendant la pose ; développement (révélateur, arrêt, fixateur, rinçage, séchage).',
           'Reconstruction en rééclairant la plaque avec le même laser, dans la même orientation : l’image 3D de la pièce est restituée avec ses détails.',
         ]},
-        'Protocole expérimental rédigé en binôme, de l’expansion du faisceau à la reconstruction.',
+        'Protocole expérimental rédigé en groupe, de l’expansion du faisceau à la reconstruction.',
       ],
     },
     {

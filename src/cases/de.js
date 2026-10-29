@@ -9,8 +9,8 @@ export const de = {
   holo: {
     kicker: 'Holo3 · Abschlussarbeit · 2026',
     title: 'Die Kalibrierung von HoloScan bewerten und verbessern',
-    brief: ['Holo3 wollte wissen, ob das Kalibrierprotokoll von HoloScan robust ist und ob sich die Messunsicherheit verringern lässt.', 'Ich habe die gesamte Kette modelliert (Kamera, Projektor, Triangulation, Unsicherheiten) und 5 Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.', 'Protokoll als solide bestätigt: 108 von 110 Messungen innerhalb des Kriteriums von ±120 µm, Wiederholpräzision < 2 µm. Die Charakterisierung des Kalibrierziels ist der wichtigste Hebel.'],
-    lead: 'Ein industrielles 3D-Messsystem mit Streifenprojektion. Ich habe die gesamte Kalibrierkette aufgearbeitet, von der optischen Theorie bis zur Unsicherheitsfortpflanzung, und anschließend fünf Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einer zertifizierten Kugelstange.',
+    brief: ['Holo3 wollte wissen, ob das Kalibrierprotokoll von HoloScan robust ist und ob sich die Messunsicherheit verringern lässt.', 'Ich habe die gesamte Kette modelliert (Kamera, Projektor, Triangulation, Unsicherheiten) und 5 Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einem zertifizierten Kugelstab.', 'Protokoll als solide bestätigt: 108 von 110 Messungen innerhalb des Kriteriums von ±120 µm, Wiederholpräzision < 2 µm. Die Charakterisierung des Kalibrierziels ist der wichtigste Hebel.'],
+    lead: 'Ein industrielles 3D-Messsystem mit Streifenprojektion. Ich habe die gesamte Kalibrierkette aufgearbeitet, von der optischen Theorie bis zur Unsicherheitsfortpflanzung, und anschließend fünf Protokollvarianten an identischen Aufnahmen verglichen, validiert mit einem zertifizierten Kugelstab.',
     meta: [
       ['Zeitraum', '2026, nach dem Projekt zu den Erkennungsparametern · Verteidigung am 17.09.2026'],
       ['Rolle', 'F&E-Ingenieur im dualen Studium, mit großer Eigenständigkeit'],
@@ -19,7 +19,7 @@ export const de = {
     facts: [
       ['2 + 1', 'Kameras + Projektor in HoloScan'],
       ['~2,3 Mio.', '3D-Punkte pro Messung, in ~1 s'],
-      ['< 2 µm', 'gemessene Wiederholpräzision an der Kugelstange'],
+      ['< 2 µm', 'gemessene Wiederholpräzision am Kugelstab'],
       ['108 / 110', 'Messungen innerhalb des Kriteriums von ±120 µm, mit aktuellem Kalibrierziel'],
       ['93–155 µm', 'reale Krümmung des Kalibrierziels, von einem idealen Raster ignoriert'],
     ],
@@ -31,7 +31,7 @@ export const de = {
       ]},
       { title: 'Ziel und Abnahmekriterium', body: [
         'Eine Messung ist genau, wenn sie sowohl richtig (nahe am wahren Wert) als auch präzise (gleicher Wert bei Wiederholung) ist. Beides wurde getrennt bewertet.',
-        'Referenz ist eine zertifizierte Kugelstange: 250,1097 mm zwischen den Mittelpunkten der beiden Kugeln. Das Abnahmekriterium von Holo3 hängt von der Diagonale d des gemeinsamen Sichtfelds ab (etwa 600 mm):',
+        'Referenz ist ein zertifizierter Kugelstab: 250,1097 mm zwischen den Mittelpunkten der beiden Kugeln. Das Abnahmekriterium von Holo3 hängt von der Diagonale d des gemeinsamen Sichtfelds ab (etwa 600 mm):',
         { eq: 'aktuelles Kriterium: d / 5000 = 600 mm / 5000 = ±120 µm      untersuchtes Ziel: d / 10000 = ±60 µm' },
       ]},
       { title: 'Eine Kamera kalibrieren: vom 3D-Punkt zum Pixel', body: [
@@ -75,7 +75,7 @@ export const de = {
         'Für einen realen Punkt in etwa 1,06 m Entfernung liefert das Modell eine erweiterte Unsicherheit (k = 2) von ±0,81 mm in X, ±0,75 mm in Y und ±0,14 mm in Z für ein einzelnes Pixel. Ein Kugelmittelpunkt wird jedoch aus 16 000 bis 18 500 Punkten geschätzt, sodass sich die Unsicherheit um √N verringert, auf etwa 3 µm. Diese Vorhersage wird unten mit der Messung verglichen.',
       ]},
       { title: 'Experimentelle Methode', body: [
-        'Ein zentraler Vorteil der Streifenprojektion: Die 3D-Messung wird nach der Aufnahme berechnet. Ich habe die Kugelstange daher nur einmal in 5 Positionen aufgenommen (2 leicht geneigt, 2 stark geneigt, 1 beliebig) und genau dieselben Bilder mit jeder Kalibriervariante neu ausgewertet. So ändert sich jeweils nur eine Variable.',
+        'Ein zentraler Vorteil der Streifenprojektion: Die 3D-Messung wird nach der Aufnahme berechnet. Ich habe den Kugelstab daher nur einmal in 5 Positionen aufgenommen (2 leicht geneigt, 2 stark geneigt, 1 beliebig) und genau dieselben Bilder mit jeder Kalibriervariante neu ausgewertet. So ändert sich jeweils nur eine Variable.',
         { ul: [
           'Kugelmittelpunkte per Kugel-Fitting in der 3D-Inspektionssoftware GOM.',
           'Maßstabskorrektur über einen Faktor k (Mittelwert der Verhältnisse Referenz/Messung), stets gleich 1 auf 10⁻⁴ genau (0,9990 bis 1,0006).',
@@ -85,7 +85,7 @@ export const de = {
       ]},
       { title: 'Studie 1 · Wo kalibrieren?', body: [
         'Zwei Ansätze wurden verglichen. Beim ersten wird nur im gemeinsamen Sichtfeld beider Kameras und des Projektors kalibriert, dieselben 15 Zielpositionen dienen beiden Kameras. Beim zweiten wird jedes Kamera-Projektor-Paar separat kalibriert (2 × 15 = 30 Aufnahmen).',
-        { chart: { c: 'Abweichung an der Kugelstange je nach kalibriertem Feld', series: [['Gemeinsames Feld · Kam. 1', B.commonField.cam1], ['Gemeinsames Feld · Kam. 2', B.commonField.cam2], ['Getrennte Felder · Kam. 1', B.pairFields.cam1], ['Getrennte Felder · Kam. 2', B.pairFields.cam2]] } },
+        { chart: { c: 'Abweichung am Kugelstab je nach kalibriertem Feld', series: [['Gemeinsames Feld · Kam. 1', B.commonField.cam1], ['Gemeinsames Feld · Kam. 2', B.commonField.cam2], ['Getrennte Felder · Kam. 1', B.pairFields.cam1], ['Getrennte Felder · Kam. 2', B.pairFields.cam2]] } },
         { table: { c: 'Abweichung zur Referenz (µm)', h: ['', 'Gemeinsames Feld · Kam. 1', 'Gemeinsames Feld · Kam. 2', 'Getrennte Felder · Kam. 1', 'Getrennte Felder · Kam. 2'], r: positionRows(P, K, [['commonField', 'cam1'], ['commonField', 'cam2'], ['pairFields', 'cam1'], ['pairFields', 'cam2']]) } },
         'Die Ergebnisse sind ähnlich. Mit einer Ausnahme (−126,2 µm, getrennte Felder, Kamera 1, Position 4) bleiben alle Messungen innerhalb von ±60 µm. Diese Messung überschreitet sogar leicht das Kriterium von ±120 µm. Die Kalibrierung im gemeinsamen Feld ist die einzige Konfiguration, in der alle zehn Messungen innerhalb von ±50 µm bleiben. Fazit: Eine einzige Serie von Zielpositionen kann beide Kameras kalibrieren.',
       ]},
@@ -109,18 +109,18 @@ export const de = {
         'Die drei Ansätze unterscheiden sich um weniger als 8 µm, eine Umstellung lohnt sich also nicht. Die insgesamt größeren Abweichungen (bis −217,6 µm an Position 3) stammen von einer veralteten Zieldatei bei dieser Kalibrierung, was Studie 2 bestätigt.',
       ]},
       { title: 'Studie 5 · Nur einen Teil des Feldes kalibrieren', body: [
-        'An manchen Standorten lässt sich nicht das ganze Feld kalibrieren. Ich habe daher in 1 Ecke (12 Positionen, das theoretische Minimum), 2 Ecken (24 Positionen) oder 4 Ecken (48 Positionen) kalibriert. Da die Kugelstange außerhalb des kalibrierten Bereichs liegt, dient die mittlere Standardabweichung der Zielkreuzungen als Kennwert.',
+        'An manchen Standorten lässt sich nicht das ganze Feld kalibrieren. Ich habe daher in 1 Ecke (12 Positionen, das theoretische Minimum), 2 Ecken (24 Positionen) oder 4 Ecken (48 Positionen) kalibriert. Da der Kugelstab außerhalb des kalibrierten Bereichs liegt, dient die mittlere Standardabweichung der Kreuzungspunkte als Kennwert.',
         { table: { c: 'Mittlere Standardabweichung je Kreuzung (µm)', h: ['', '1 Ecke · K1', '2 Ecken · K1', '4 Ecken · K1', '1 Ecke · K2', '2 Ecken · K2', '4 Ecken · K2'], r: cornerSigma } },
         'Abgesehen vom Fall „2 Ecken“ bei Kamera 1 liegen die Ergebnisse nahe beieinander. Der Fall mit 1 Ecke ist schwächer, weil er nur das theoretische Minimum an Positionen nutzt, weniger als bei Holo3 üblich. Es genügt, nur den Bereich zu kalibrieren, in dem das Objekt gemessen wird.',
       ]},
       { title: 'Theorie gegen Praxis', body: [
-        'Die Kugelstange wird fünfmal in derselben Position gemessen (Position 5, gemeinsames Feld, Kamera 1). Die Unsicherheit Typ A, u = σ/√n, wird mit der vom Modell vorhergesagten Unsicherheit Typ B verglichen.',
+        'Der Kugelstab wird fünfmal in derselben Position gemessen (Position 5, gemeinsames Feld, Kamera 1). Die Unsicherheit Typ A, u = σ/√n, wird mit der vom Modell vorhergesagten Unsicherheit Typ B verglichen.',
         { table: { c: 'Unsicherheit der Kugelmittelpunkte (µm)', h: ['', 'Kugel 1 · Typ A', 'Kugel 1 · Typ B', 'Verhältnis B/A', 'Kugel 2 · Typ A', 'Kugel 2 · Typ B', 'Verhältnis B/A'], r: typeAB } },
         'In X und Y ist die reale Wiederholpräzision 2- bis 3-mal besser als vorhergesagt. In Z ist die Messung etwas schlechter als das Modell (Verhältnis 0,4 bis 0,7). Die Größenordnungen stimmen überein: Das Unsicherheitsmodell ist geeignet, und die Wiederholpräzision von HoloScan liegt unter 2 µm.',
       ]},
       { title: 'Fazit', body: [
         { ul: [
-          'Das Kalibrierprotokoll von Holo3 ist solide: Mit aktuellem Kalibrierziel erfüllen 108 von 110 Kugelstangenmessungen das Kriterium von ±120 µm (Überschreitungen: −126,2 und −120,4 µm).',
+          'Das Kalibrierprotokoll von Holo3 ist solide: Mit aktuellem Kalibrierziel erfüllen 108 von 110 Kugelstabmessungen das Kriterium von ±120 µm (Überschreitungen: −126,2 und −120,4 µm).',
           'Keine aufwendigere Variante (mehr Bilder, Mittelung, Wiederholungen) verbessert die Kalibrierung. Die aktuelle Kalibrierdauer ist die richtige.',
           'Die Charakterisierung des Kalibrierziels ist der wichtigste Hebel: Ein schlecht beschriebenes Ziel verursacht die größten Abweichungen.',
           'Beide Kameras lassen sich mit denselben Positionen im gemeinsamen Feld kalibrieren, und es genügt, nur den Nutzbereich zu kalibrieren.',
@@ -130,7 +130,7 @@ export const de = {
       { title: 'Empfehlungen und Ausblick', body: [
         { ul: [
           'Kalibrierziele einmal pro Jahr überprüfen.',
-          'Jede Kalibrierung mit einer Kugelstangenmessung kontrollieren: schlechte Kalibrierungen erkennen und ±60 µm anstreben.',
+          'Jede Kalibrierung mit einer Kugelstabmessung kontrollieren: schlechte Kalibrierungen erkennen und ±60 µm anstreben.',
           'Den Einfluss von Temperatur und Alterung auf das Kalibrierziel untersuchen.',
           'Diese Tests auf die Kalibrierung von Deflektometriesystemen übertragen, die wesentlich empfindlicher sind.',
           'Eine einfache Offset-Korrektur funktioniert nicht, da das Messobjekt in vielen Positionen liegen kann.',
@@ -138,7 +138,7 @@ export const de = {
       ]},
       { title: 'Was ich gelernt habe', body: [
         'Die gesamte optische und mathematische Kette verstehen, bevor man misst. Vergleiche so planen, dass sich nur eine Variable ändert. Ein Ergebnis „keine Verbesserung“ akzeptieren, wenn die Daten es zeigen: Auch das ist für das Unternehmen eine wertvolle Information.',
-        'Zur Ethik: Eine Messung nie anpassen, um das gewünschte Ergebnis zu erhalten. Ein Kunde muss ein System erhalten, das dem Versprochenen entspricht, und eine Kontrolle mit der Kugelstange unterstützt das.',
+        'Zur Ethik: Eine Messung nie anpassen, um das gewünschte Ergebnis zu erhalten. Ein Kunde muss ein System erhalten, das dem Versprochenen entspricht, und eine Kontrolle mit dem Kugelstab unterstützt das.',
         'Außerdem habe ich die Arbeitsweise eines kleinen Unternehmens kennengelernt, ganz anders als in einem Großkonzern wie Saint-Gobain, mit großer Nähe zwischen den Teams.',
       ]},
     ],
@@ -147,7 +147,7 @@ export const de = {
   doe: {
     kicker: 'Holo3 · Ingenieurprojekt · Okt. 2025 – Apr. 2026',
     title: 'Welche Parameter beeinflussen die Erkennung eines Kalibrierziels?',
-    brief: ['Die Erkennung der Zielkreuzungen, erster Schritt jeder Kalibrierung, hängt von vielen gekoppelten Parametern ab, die bisher einzeln getestet wurden.', 'Vorstudie an 3 Kalibrierzielen (~1 300 Messungen), dann Einführung von zwei Versuchsplänen im Team (216 → 27 und 432 → 32 Konfigurationen).', 'Die Versuchsplanung reduzierte die Zahl der Versuche und quantifizierte den Einfluss jedes Parameters: Lichtfarbe, Belichtung, Blende und Winkel. Fazit: Alle wirken auf den Schwarz-Weiß-Kontrast des Ziels.'],
+    brief: ['Die Erkennung der Kreuzungspunkte, erster Schritt jeder Kalibrierung, hängt von vielen gekoppelten Parametern ab, die bisher einzeln getestet wurden.', 'Vorstudie an 3 Kalibrierzielen (~1 300 Messungen), dann Einführung von zwei Versuchsplänen im Team (216 → 27 und 432 → 32 Konfigurationen).', 'Die Versuchsplanung reduzierte die Zahl der Versuche und quantifizierte den Einfluss jedes Parameters: Lichtfarbe, Belichtung, Blende und Winkel. Fazit: Alle wirken auf den Schwarz-Weiß-Kontrast des Ziels. Das Team hatte dies vermutet; jetzt ist es mit einer rigorosen wissenschaftlichen Methode belegt.'],
     lead: 'Vor jeder Kalibrierung muss eine Kamera die Kreuzungen eines Kalibrierziels präzise erkennen. Ich habe eine Vorstudie an drei Zielen durchgeführt und dann zwei Versuchspläne im Team eingeführt, um den Einfluss von Beleuchtung, Belichtung und Blende zu quantifizieren.',
     meta: [
       ['Zeitraum', 'Okt. 2025 – Apr. 2026 · präsentiert am 28.04.2026'],
@@ -258,7 +258,7 @@ export const de = {
     ],
     sections: [
       { title: 'Kontext und Fragestellung', body: [
-        'Die Kalibrierung von HoloScan stützt sich auf eine Datei mit der tatsächlichen Position jeder Zielkreuzung. Diese Datei stammt aus einer Messung auf einem Bildmessgerät. Dasselbe Ziel lieferte jedoch auf zwei Geräten (Mitutoyo und Hexagon) unterschiedliche Ergebnisse.',
+        'Die Kalibrierung von HoloScan stützt sich auf eine Datei mit der tatsächlichen Position jedes Kreuzungspunkts. Diese Datei stammt aus einer Messung auf einem Bildmessgerät. Dasselbe Ziel lieferte jedoch auf zwei Geräten (Mitutoyo und Hexagon) unterschiedliche Ergebnisse.',
         'Die Frage: Sind die beiden Geräte gleichwertig, und welche Messung des Ziels sollte verwendet werden?',
       ]},
       { title: 'Schritt 1 · Qualifizierung des Mitutoyo-Geräts', body: [
@@ -279,8 +279,8 @@ export const de = {
         'In der Ebene sind die Geräte also gleichwertig; den Unterschied macht die Messung der Krümmung.',
       ]},
       { title: 'Schritt 3 · Auswirkung auf die Kalibrierung', body: [
-        'Um zu prüfen, ob diese Abweichung in der Praxis zählt, habe ich HoloScan mit beiden Dateien auf denselben Aufnahmen kalibriert und das Ergebnis an der zertifizierten Kugelstange überprüft.',
-        'Ein Wechsel der Datei verschiebt die Messung der Kugelstange um bis zu etwa 40 µm. Beide Kalibrierungen bleiben innerhalb des Kriteriums von ±120 µm: Die Abweichung ist real, für die Streifenprojektion aber kein Ausschlusskriterium. Die Detailergebnisse stehen in Studie 2 des HoloScan-Projekts.',
+        'Um zu prüfen, ob diese Abweichung in der Praxis zählt, habe ich HoloScan mit beiden Dateien auf denselben Aufnahmen kalibriert und das Ergebnis an dem zertifizierten Kugelstab überprüft.',
+        'Ein Wechsel der Datei verschiebt die Messung des Kugelstabs um bis zu etwa 40 µm. Beide Kalibrierungen bleiben innerhalb des Kriteriums von ±120 µm: Die Abweichung ist real, für die Streifenprojektion aber kein Ausschlusskriterium. Die Detailergebnisse stehen in Studie 2 des HoloScan-Projekts.',
       ]},
       { title: 'Fazit und Empfehlungen', body: [
         { ul: [

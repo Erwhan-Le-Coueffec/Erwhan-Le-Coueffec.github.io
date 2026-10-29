@@ -147,7 +147,7 @@ export const en = {
   doe: {
     kicker: 'Holo3 · Engineering project · Oct. 2025 – Apr. 2026',
     title: 'Which parameters affect calibration-target detection?',
-    brief: ['Detecting calibration-target intersections, the first step of any calibration, depends on many coupled parameters, previously tested one or two at a time.', 'Preliminary study on 3 targets (~1,300 measurements), then introduced two Designs of Experiments to the team (216 → 27 and 432 → 32 configurations).', 'Design of Experiments cut the number of trials and quantified the influence of each parameter: light colour, exposure, aperture and angle. The conclusion: they all act on the target’s black/white contrast.'],
+    brief: ['Detecting calibration-target intersections, the first step of any calibration, depends on many coupled parameters, previously tested one or two at a time.', 'Preliminary study on 3 targets (~1,300 measurements), then introduced two Designs of Experiments to the team (216 → 27 and 432 → 32 configurations).', 'Design of Experiments cut the number of trials and quantified the influence of each parameter: light colour, exposure, aperture and angle. The conclusion: they all act on the target’s black/white contrast. The team suspected this; it is now backed by a rigorous scientific method.'],
     lead: 'Before any calibration, a camera must precisely detect the intersections of a target. I ran a preliminary study on three targets, then introduced two Designs of Experiments to the team to quantify the effect of lighting, exposure and aperture.',
     meta: [
       ['Period', 'Oct. 2025 – Apr. 2026 · presented on 28 Apr. 2026'],

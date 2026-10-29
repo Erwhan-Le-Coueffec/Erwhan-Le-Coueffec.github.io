@@ -147,7 +147,7 @@ export const fr = {
   doe: {
     kicker: 'Holo3 · Mission projet · oct. 2025 – avr. 2026',
     title: 'Quels paramètres influencent la détection d’une mire ?',
-    brief: ['La détection des intersections de mire, première étape de tout calibrage, dépend de nombreux paramètres couplés, jusque-là testés un ou deux à la fois.', 'Étude préliminaire sur 3 mires (~1 300 mesures), puis introduction de deux plans d’expérience dans l’équipe (216 → 27 et 432 → 32 configurations).', 'Le plan d’expérience a permis de réduire le nombre d’essais et de quantifier l’influence de chaque paramètre : couleur d’éclairage, exposition, ouverture et angle. On en déduit qu’ils agissent tous sur le contraste noir/blanc de la mire.'],
+    brief: ['La détection des intersections de mire, première étape de tout calibrage, dépend de nombreux paramètres couplés, jusque-là testés un ou deux à la fois.', 'Étude préliminaire sur 3 mires (~1 300 mesures), puis introduction de deux plans d’expérience dans l’équipe (216 → 27 et 432 → 32 configurations).', 'Le plan d’expérience a permis de réduire le nombre d’essais et de quantifier l’influence de chaque paramètre : couleur d’éclairage, exposition, ouverture et angle. On en déduit qu’ils agissent tous sur le contraste noir/blanc de la mire. L’équipe pressentait cette conclusion ; elle repose désormais sur une méthode scientifique rigoureuse.'],
     lead: 'Avant tout calibrage, une caméra doit détecter précisément les intersections d’une mire. J’ai mené une étude préliminaire sur trois mires, puis introduit dans l’équipe deux plans d’expérience pour quantifier l’effet de l’éclairage, de l’exposition et de l’ouverture.',
     meta: [
       ['Période', 'Oct. 2025 – avr. 2026 · présentation le 28/04/2026'],

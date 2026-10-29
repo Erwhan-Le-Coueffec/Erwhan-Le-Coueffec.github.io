@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const en = {
   kicker: 'CentraleSupélec · Final year, Photonics & Nano-systems · 2025–2026',
   title: 'Lab work and design projects',
-  lead: 'What I built, measured and simulated during my specialisation year: four optical-bench experiments and five numerical-simulation projects. Group work is marked as such.',
+  lead: 'What I built, measured and simulated during my specialisation year: four optical-bench experiments and four numerical-simulation projects. Group work is marked as such.',
   groups: { lab: 'Optical-bench experiments', sim: 'Numerical simulation' },
   labels: { date: 'Date', team: 'Team', tools: 'Equipment & tools' },
   solo: 'Individual',
@@ -62,7 +62,7 @@ export const en = {
           'Darkroom work, no vibration or movement during exposure; development (developer, stop bath, fixer, rinse, drying).',
           'Reconstruction by re-illuminating the plate with the same laser, in the same orientation: the 3D image of the part is restored with its details.',
         ]},
-        'Experimental protocol co-written in a pair, from beam expansion to reconstruction.',
+        'Experimental protocol written as a group, from beam expansion to reconstruction.',
       ],
     },
     {

@@ -3,7 +3,7 @@ import { media as M } from './media'
 export const de = {
   kicker: 'CentraleSupélec · Abschlussjahr Photonik & Nanosysteme · 2025–2026',
   title: 'Laborpraktika und Simulationsprojekte',
-  lead: 'Was ich in meinem Spezialisierungsjahr aufgebaut, gemessen und simuliert habe: vier Versuche am optischen Tisch und fünf Projekte zur numerischen Simulation. Gruppenarbeiten sind entsprechend gekennzeichnet.',
+  lead: 'Was ich in meinem Spezialisierungsjahr aufgebaut, gemessen und simuliert habe: vier Versuche am optischen Tisch und vier Projekte zur numerischen Simulation. Gruppenarbeiten sind entsprechend gekennzeichnet.',
   groups: { lab: 'Versuche am optischen Tisch', sim: 'Numerische Simulation' },
   labels: { date: 'Datum', team: 'Team', tools: 'Ausrüstung & Werkzeuge' },
   solo: 'Einzelarbeit',
@@ -62,7 +62,7 @@ export const de = {
           'Arbeit in der Dunkelkammer, ohne Vibration oder Bewegung während der Belichtung; Entwicklung (Entwickler, Stoppbad, Fixierer, Spülen, Trocknen).',
           'Rekonstruktion durch erneute Beleuchtung der Platte mit demselben Laser in derselben Ausrichtung: Das 3D-Bild des Teils erscheint mit seinen Details.',
         ]},
-        'Versuchsprotokoll zu zweit verfasst, von der Strahlaufweitung bis zur Rekonstruktion.',
+        'Versuchsprotokoll in der Gruppe verfasst, von der Strahlaufweitung bis zur Rekonstruktion.',
       ],
     },
     {
