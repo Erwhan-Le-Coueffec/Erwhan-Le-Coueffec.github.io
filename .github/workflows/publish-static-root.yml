@@ -26,10 +26,22 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: |
+          if ! npm install --no-audit --no-fund > npm.log 2>&1; then
+            grep -E "npm (error|ERR)" npm.log | head -8 | sed 's/^/::warning::/'
+            echo "Retrying with --legacy-peer-deps"
+            if ! npm install --no-audit --no-fund --legacy-peer-deps > npm2.log 2>&1; then
+              grep -E "npm (error|ERR)" npm2.log | head -9 | sed 's/^/::error::/'
+              exit 1
+            fi
+          fi
 
       - name: Build
-        run: npm run build
+        run: |
+          if ! npm run build > build.log 2>&1; then
+            tail -n 9 build.log | sed 's/^/::error::/'
+            exit 1
+          fi
 
       - name: Copy compiled site to repository root
         run: |
