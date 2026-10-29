@@ -37,7 +37,10 @@ function Visual() { const reduced=useReducedMotion(); return <div className="poi
 
 function ProjectCard({p,to,img}) { return <Link to={to} className={`${card} overflow-hidden transition hover:-translate-y-1 hover:border-cyan-300/25`}><div className="relative h-52 overflow-hidden border-b border-cyan-100/10 bg-[#08141c]"><img src={img} alt={p[6]} loading="lazy" className="h-full w-full object-contain"/></div><div className="p-5"><p className="text-xs font-bold uppercase tracking-[.15em] text-cyan-300">{p[0]}</p><h3 className="mt-2 text-xl font-semibold">{p[1]}</h3><p className="mt-3 leading-7 text-slate-400">{p[2]}</p><div className="mt-5 flex items-baseline gap-3 border-t border-white/5 pt-4"><strong className="text-2xl text-cyan-100">{p[3]}</strong><span className="text-xs text-slate-500">{p[4]}</span></div><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">{p[5]}<MoveRight size={16}/></span></div></Link> }
 
+function BackLink({t,bottom=false}) { return <a href="/#projects" className={`inline-flex min-h-11 items-center gap-2 rounded-xl border border-cyan-100/10 px-4 text-sm font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-cyan-300/30 hover:text-white ${bottom?'mt-12':''}`}><ArrowLeft size={16}/>{t.back}</a> }
+
 function Home({t}) {
+  useEffect(()=>{ const h=window.location.hash; if(h&&h.length>1){ const id=setTimeout(()=>document.getElementById(h.slice(1))?.scrollIntoView(),60); return ()=>clearTimeout(id) } },[])
   const reduced=useReducedMotion(); const reveal=reduced?{}:{initial:{opacity:0,y:18},whileInView:{opacity:1,y:0},viewport:{once:true,amount:.15},transition:{duration:.5}}
   return <main>
     <section className={`${shell} relative flex min-h-svh items-center pt-28`}><Visual/><Motion.div className="relative z-10 max-w-4xl" initial={reduced?false:{opacity:0,y:18}} animate={{opacity:1,y:0}}><div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/5 px-3 py-2 text-xs font-semibold text-cyan-100"><Sparkles size={14}/>{t.hero[0]}</div><h1 className="mt-6 text-[clamp(3rem,10vw,6.4rem)] font-semibold leading-[.93] tracking-[-.06em]">{t.hero[1]}<span className="mt-2 block text-[.48em] font-normal leading-tight text-cyan-100">{t.hero[2]}</span></h1><p className="mt-6 max-w-2xl text-xl font-medium leading-8 text-white md:text-2xl">{t.tagline}</p><p className="mt-4 max-w-2xl text-lg leading-8 text-slate-400">{t.hero[3]}</p><div className="mt-7 flex flex-wrap gap-3"><Button href="#projects">{t.hero[4]}<ArrowRight size={17}/></Button><Button href={`mailto:${EMAIL}`} primary={false}>{t.hero[5]}<Mail size={16}/></Button></div><p className="mt-5 flex items-center gap-2 text-sm text-slate-500"><MapPin size={15}/>{t.hero[6]}</p><div className="mt-8 grid max-w-4xl gap-4 md:grid-cols-2">{t.strengths.map(([h,p])=><div key={h} className={`${card} p-5`}><h2 className="font-semibold text-cyan-100">{h}</h2><p className="mt-2 text-sm leading-6 text-slate-400">{p}</p></div>)}</div></Motion.div></section>
@@ -109,7 +112,7 @@ function CasePage({t,lang,type}) {
   const c = cases[lang] || cases.en; const data = c[type]; const ui = c.ui
   useEffect(()=>window.scrollTo(0,0),[type])
   return <main className={`${shell} min-h-screen pb-24 pt-28`}>
-    <Link className="inline-flex items-center gap-2 text-sm text-slate-400" to="/"><ArrowLeft size={16}/>{t.back}</Link>
+    <BackLink t={t}/>
     <div className="max-w-4xl py-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{data.kicker}</p><h1 className="mt-3 text-[clamp(2.3rem,7vw,4.6rem)] font-semibold leading-none tracking-[-.055em]">{data.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">{data.lead}</p>
       <dl className="mt-8 grid gap-4 md:grid-cols-3">{data.meta.map(([k,v])=><div key={k} className="border-t border-cyan-100/10 pt-3"><dt className="text-xs font-bold uppercase tracking-[.14em] text-slate-500">{k}</dt><dd className="mt-2 text-sm leading-6 text-slate-300">{v}</dd></div>)}</dl>
     </div>
@@ -120,6 +123,7 @@ function CasePage({t,lang,type}) {
       <div className="min-w-0 border-t border-cyan-100/10">
         {data.sections.map((s,i)=><article id={`s-${i}`} key={s.title} className="scroll-mt-24 border-b border-cyan-100/10 py-8"><span className="text-xs text-slate-600">{String(i+1).padStart(2,'0')}</span><h2 className="mt-1 text-xl font-semibold md:text-2xl">{s.title}</h2><div className="max-w-4xl">{s.body.map((b,j)=><Block key={j} b={b} ui={ui} lang={lang}/>)}</div></article>)}
         <p className="mt-6 text-xs leading-5 text-slate-600">{ui.source}</p>
+        <BackLink t={t} bottom/>
       </div>
     </div>
   </main>
@@ -130,7 +134,7 @@ function AcademicPage({t,lang}) {
   useEffect(()=>window.scrollTo(0,0),[])
   const teamLabel = k => k === 'solo' ? a.solo : k === 'group' ? a.group : a.groupN
   return <main className={`${shell} min-h-screen pb-24 pt-28`}>
-    <Link className="inline-flex items-center gap-2 text-sm text-slate-400" to="/"><ArrowLeft size={16}/>{t.back}</Link>
+    <BackLink t={t}/>
     <div className="max-w-4xl py-12"><p className="text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{a.kicker}</p><h1 className="mt-3 text-[clamp(2.3rem,7vw,4.6rem)] font-semibold leading-none tracking-[-.055em]">{a.title}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">{a.lead}</p></div>
     {['lab','sim'].map(kind => <section key={kind} className="mt-6">
       <h2 className="border-b border-cyan-100/10 pb-3 text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{a.groups[kind]}</h2>
@@ -151,6 +155,7 @@ function AcademicPage({t,lang}) {
         </div>
       </article>)}
     </section>)}
+    <BackLink t={t} bottom/>
   </main>
 }
 
