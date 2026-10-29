@@ -139,7 +139,7 @@ function AcademicPage({t,lang}) {
     {['lab','sim'].map(kind => <section key={kind} className="mt-6">
       <h2 className="border-b border-cyan-100/10 pb-3 text-xs font-bold uppercase tracking-[.18em] text-cyan-300">{a.groups[kind]}</h2>
       <nav className="mt-4 flex flex-wrap gap-2">{a.items.filter(i=>i.kind===kind).map(i=><a key={i.id} href={`#${i.id}`} className="rounded-lg border border-cyan-100/10 px-3 py-1.5 text-xs text-slate-400 hover:text-white">{i.title}</a>)}</nav>
-      {a.items.filter(i=>i.kind===kind).map(i=><article id={i.id} key={i.id} className={`${card} mt-6 scroll-mt-24 overflow-hidden`}>
+      {a.items.filter(i=>i.kind===kind).map(i=><article id={i.id} key={i.id} className="mt-12 scroll-mt-24 overflow-hidden rounded-2xl border-2 border-cyan-200/30 border-t-4 border-t-cyan-300 bg-[#0b1824] shadow-[0_10px_40px_-10px_rgba(0,0,0,.8)] first-of-type:mt-6">
         {i.figures && i.figures.length===1 && <figure><img src={i.figures[0].src} alt={i.figures[0].alt} loading="lazy" className="max-h-[26rem] w-full object-cover"/><figcaption className="border-b border-cyan-100/10 bg-[#08141c] px-5 py-2 text-xs leading-5 text-slate-400 md:px-8">{i.figures[0].cap}</figcaption></figure>}
         <div className="p-5 md:p-8">
           <h3 className="text-xl font-semibold md:text-2xl">{i.title}</h3>
