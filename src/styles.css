@@ -21,3 +21,6 @@ button,select { font:inherit; color:inherit; }
 .primary-cta svg {
   color: #041019 !important;
 }
+
+/* Justified body text (headings, labels and single lines are unaffected) */
+main p:not(.text-sm):not(.text-xs), main li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }

@@ -147,7 +147,7 @@ export const de = {
   doe: {
     kicker: 'Holo3 · Ingenieurprojekt · Okt. 2025 – Apr. 2026',
     title: 'Welche Parameter beeinflussen die Erkennung eines Kalibrierziels?',
-    brief: ['Die Erkennung der Zielkreuzungen, erster Schritt jeder Kalibrierung, hängt von vielen gekoppelten Parametern ab, die bisher einzeln getestet wurden.', 'Vorstudie an 3 Kalibrierzielen (~1 300 Messungen), dann Einführung von zwei Versuchsplänen im Team (216 → 27 und 432 → 32 Konfigurationen).', 'Lichtfarbe → Richtigkeit (~0,1 px); Belichtung, Blende und Winkel → Präzision (~0,01 px), alle mit dem Schwarz-Weiß-Kontrast verknüpft. Ein Teil des Feldes reicht zur Kalibrierung.'],
+    brief: ['Die Erkennung der Zielkreuzungen, erster Schritt jeder Kalibrierung, hängt von vielen gekoppelten Parametern ab, die bisher einzeln getestet wurden.', 'Vorstudie an 3 Kalibrierzielen (~1 300 Messungen), dann Einführung von zwei Versuchsplänen im Team (216 → 27 und 432 → 32 Konfigurationen).', 'Die Versuchsplanung reduzierte die Zahl der Versuche und quantifizierte den Einfluss jedes Parameters: Lichtfarbe, Belichtung, Blende und Winkel. Fazit: Alle wirken auf den Schwarz-Weiß-Kontrast des Ziels.'],
     lead: 'Vor jeder Kalibrierung muss eine Kamera die Kreuzungen eines Kalibrierziels präzise erkennen. Ich habe eine Vorstudie an drei Zielen durchgeführt und dann zwei Versuchspläne im Team eingeführt, um den Einfluss von Beleuchtung, Belichtung und Blende zu quantifizieren.',
     meta: [
       ['Zeitraum', 'Okt. 2025 – Apr. 2026 · präsentiert am 28.04.2026'],

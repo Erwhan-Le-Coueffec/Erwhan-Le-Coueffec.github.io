@@ -129,7 +129,7 @@ const fr = {
   profile: 'Formé à CentraleSupélec (cursus ingénieur généraliste achevé en 2026), spécialisé en photonique, avec 4 ans d’apprentissage dans l’industrie et la R&D : métrologie optique, mesure 3D, calibrage et instrumentation. J’aime comprendre un système en profondeur, le mesurer et l’améliorer par une démarche expérimentale rigoureuse. Je recherche un poste d’ingénieur R&D à forte composante expérimentale, en priorité dans la région de Bâle.',
   experience: [
     { role: 'Ingénieur R&D en apprentissage', company: 'Holo3 — Saint-Louis (FR), région de Bâle · métrologie optique', dates: '10.2025 – 09.2026', bullets: [
-      'Mission 1 · Détection des intersections de mire : étude préliminaire sur 3 mires (~1 300 mesures), puis introduction des plans d’expérience dans l’équipe, à mon initiative (216 → 27, puis 432 → 32 configurations) : couleur d’éclairage, exposition, ouverture et angle identifiés comme facteurs influents.',
+      'Mission 1 · Détection des intersections de mire : étude préliminaire sur 3 mires (~1 300 mesures), puis introduction des plans d’expérience dans l’équipe, à mon initiative (216 → 27, puis 432 → 32 configurations), pour réduire le nombre d’essais et quantifier l’influence de chaque paramètre : tous agissent sur le contraste noir/blanc.',
       'Mission 2 · Calibrage du système 3D HoloScan (mémoire) : théorie et propagation des incertitudes, puis 5 études comparatives (projection de franges, 2 caméras + 1 projecteur), validées sur barre à boules certifiée de 250,1097 mm : critère de ±120 µm respecté pour 108 mesures sur 110, fidélité < 2 µm.',
       'Mission 3 · Machines de mesure par vision, en parallèle : qualification de la Mitutoyo sur mire étalon (répétabilité ~1 µm), comparaison avec une Hexagon (courbure de mire de 93 vs 155 µm) ; caractérisation de la mire identifiée comme principal levier de qualité du calibrage.',
     ]},
@@ -158,11 +158,11 @@ const fr = {
   ],
   skills: [
     ['Métrologie & R&D', 'Métrologie optique, mesure 3D par projection de franges, calibrage, plans d’expérience, analyse d’incertitudes, caractérisation (justesse, fidélité), caméras industrielles'],
-    ['Optique & laboratoire', 'Bancs optiques, lasers (DFB, He-Ne, Nd:YAG), spectroscopie Raman, analyseurs de spectre optique et RF, polariseurs, lames demi et quart d’onde, oscilloscope'],
+    ['Optique & laboratoire', 'Bancs optiques, caméras et projecteurs, lasers (DFB, He-Ne, Nd:YAG), spectroscopie Raman, analyseurs de spectre optique et RF, polariseurs, lames demi et quart d’onde, oscilloscope'],
     ['Industrie & qualité', 'Tests d’étanchéité (ATEQ), zones EPA, 5S, maintenance autonome, analyse de risques'],
     ['Logiciels', 'MATLAB, Excel avancé, Python (notions : scripts de simulation et de traitement de données), LTspice, GOM Inspect, SensorPhase, CalibTool ; antérieurement LabVIEW, SolidWorks'],
   ],
-  languages: ['Français : langue maternelle  |  Anglais : B1/B2  |  Allemand : débutant (A1), cours prévus  |  Handball, escalade de bloc  |  Références sur demande'],
+  languages: ['Français : maternelle  |  Anglais : B1/B2  |  Allemand : A1, cours prévus  |  Chinois : A1/A2  |  Handball, escalade, basket NBA  |  Références sur demande'],
   interests: '',
   references: '',
 }
@@ -178,7 +178,7 @@ const en = {
   profile: 'Trained at CentraleSupélec (generalist engineering programme completed in 2026), specialised in photonics, with 4 years of apprenticeship experience in industry and R&D: optical metrology, 3D measurement, calibration and instrumentation. I enjoy understanding a system in depth, measuring it and improving it through rigorous experimental work. I am looking for an R&D engineering role with a strong hands-on component, preferably in the Basel area.',
   experience: [
     { role: 'R&D Engineer (apprenticeship)', company: 'Holo3 — Saint-Louis (FR), Basel area · optical metrology', dates: '10.2025 – 09.2026', bullets: [
-      'Mission 1 · Calibration-target detection: preliminary study on 3 targets (~1,300 measurements), then introduced Design of Experiments to the team on my own initiative (216 → 27, then 432 → 32 configurations): light colour, exposure, aperture and angle identified as influential factors.',
+      'Mission 1 · Calibration-target detection: preliminary study on 3 targets (~1,300 measurements), then introduced Design of Experiments to the team on my own initiative (216 → 27, then 432 → 32 configurations), cutting the number of trials and quantifying each parameter’s influence: all act on black/white contrast.',
       'Mission 2 · HoloScan 3D system calibration (thesis): theory and uncertainty propagation, then 5 comparative studies (fringe projection, 2 cameras + 1 projector), validated on a certified 250.1097 mm ball bar: ±120 µm criterion met in 108 of 110 measurements, repeatability < 2 µm.',
       'Mission 3 · Vision measuring machines, in parallel: Mitutoyo qualified on a reference target (repeatability ~1 µm), compared with a Hexagon (target curvature 93 vs 155 µm); target characterisation identified as the main lever for calibration quality.',
     ]},
@@ -207,12 +207,12 @@ const en = {
   ],
   skills: [
     ['Metrology & R&D', 'Optical metrology, fringe-projection 3D measurement, calibration, design of experiments, uncertainty analysis, characterisation (trueness, precision), industrial cameras'],
-    ['Optics & lab', 'Optical benches, lasers (DFB, He-Ne, Nd:YAG), Raman spectroscopy, optical and RF spectrum analysers, polarisers, half- and quarter-wave plates, oscilloscope'],
+    ['Optics & lab', 'Optical benches, cameras and projectors, lasers (DFB, He-Ne, Nd:YAG), Raman spectroscopy, optical and RF spectrum analysers, polarisers, half- and quarter-wave plates, oscilloscope'],
     ['Industry & quality', 'Leak testing (ATEQ), EPA zones, 5S, autonomous maintenance, risk analysis'],
     ['Software', 'MATLAB, advanced Excel, Python (basic: simulation and data-processing scripts), LTspice, GOM Inspect, SensorPhase, CalibTool; previously LabVIEW, SolidWorks'],
   ],
-  languages: ['French: native  |  English: intermediate (B1/B2)  |  German: beginner (A1), lessons planned'],
-  interests: 'Handball (5 years in a club, regional level)  |  Bouldering (5C to 6A)  |  Professional references available on request',
+  languages: ['French: native  |  English: B1/B2  |  German: beginner (A1), lessons planned  |  Chinese: basic (A1/A2)'],
+  interests: 'Handball, bouldering, following sport (especially NBA basketball)  |  References available on request',
   references: '',
 }
 
